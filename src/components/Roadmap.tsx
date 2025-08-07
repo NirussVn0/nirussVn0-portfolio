@@ -55,7 +55,7 @@ export default function Roadmap() {
   const milestones = [
     {
       year: '2024',
-      title: 'Senior Fullstack Developer',
+      title: 'fullstack developer',
       company: 'Tech Innovation Corp',
       description: 'Leading development of scalable web applications using Next.js, TypeScript, and cloud technologies. Mentoring junior developers and architecting microservices solutions.',
       achievements: [

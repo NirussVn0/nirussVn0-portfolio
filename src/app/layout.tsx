@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Niruss Portfolio - Senior Fullstack Developer',
+  title: 'Niruss Portfolio - fullstack developer',
   description: 'A visually stunning, high-performance portfolio website showcasing expertise in modern web technologies, clean code, and innovative solutions.',
   keywords: ['fullstack developer', 'react', 'nextjs', 'typescript', 'portfolio', 'web development'],
   authors: [{ name: 'Niruss', url: 'https://github.com/NirussVn0' }],
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Niruss Portfolio - Senior Fullstack Developer',
+    title: 'Niruss Portfolio - fullstack developer',
     description: 'A visually stunning, high-performance portfolio website showcasing expertise in modern web technologies.',
     url: 'https://portfolio-website-2025.vercel.app',
     siteName: 'Niruss Portfolio',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Niruss Portfolio - Senior Fullstack Developer',
+    title: 'Niruss Portfolio - fullstack developer',
     description: 'A visually stunning, high-performance portfolio website showcasing expertise in modern web technologies.',
     images: ['/og-image.png'],
     creator: '@niruss_dev',
@@ -92,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -101,6 +101,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-white`}
+        suppressHydrationWarning
       >
         <PerformanceProvider>
           {children}

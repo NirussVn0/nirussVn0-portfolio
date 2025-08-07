@@ -4,13 +4,12 @@ export class AnimationController {
   private animations: any[] = [];
 
   fadeIn(target: string | HTMLElement, delay = 0, duration = 1000) {
-    const animation = animate({
-      targets: target,
+    const animation = animate(target, {
       opacity: [0, 1],
       translateY: [30, 0],
       duration,
       delay,
-      easing: 'easeOutExpo',
+      ease: 'outExpo',
     });
     this.animations.push(animation);
     return animation;
@@ -20,26 +19,24 @@ export class AnimationController {
     const translateProperty = direction === 'left' ? 'translateX' : 'translateY';
     const translateValue = direction === 'left' ? [-100, 0] : [100, 0];
 
-    const animation = animate({
-      targets: target,
+    const animation = animate(target, {
       [translateProperty]: translateValue,
       opacity: [0, 1],
       duration: 1200,
       delay,
-      easing: 'easeOutExpo',
+      ease: 'outExpo',
     });
     this.animations.push(animation);
     return animation;
   }
 
   staggeredReveal(target: string | HTMLElement, delay = 0) {
-    const animation = animate({
-      targets: target,
+    const animation = animate(target, {
       opacity: [0, 1],
       translateY: [50, 0],
       duration: 800,
       delay: stagger(100, { start: delay }),
-      easing: 'easeOutExpo',
+      ease: 'outExpo',
     });
     this.animations.push(animation);
     return animation;
@@ -48,18 +45,16 @@ export class AnimationController {
   hoverEffect(target: string | HTMLElement) {
     return {
       enter: () =>
-        animate({
-          targets: target,
+        animate(target, {
           scale: 1.05,
           duration: 300,
-          easing: 'easeOutQuad',
+          ease: 'outQuad',
         }),
       leave: () =>
-        animate({
-          targets: target,
+        animate(target, {
           scale: 1,
           duration: 300,
-          easing: 'easeOutQuad',
+          ease: 'outQuad',
         }),
     };
   }

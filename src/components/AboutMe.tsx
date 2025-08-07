@@ -97,7 +97,7 @@ export default function AboutMe() {
           <div className="space-y-6">
             <div className="about-text opacity-0">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4">
-                Senior Fullstack Developer
+                fullstack developer
               </h3>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 With over 5 years of experience in web development, I specialize in creating 

@@ -32,7 +32,7 @@ describe('AboutMe Component', () => {
   it('renders professional description', () => {
     render(<AboutMe />);
     
-    expect(screen.getByText('Senior Fullstack Developer')).toBeInTheDocument();
+    expect(screen.getByText('fullstack developer')).toBeInTheDocument();
     expect(screen.getByText(/With over 5 years of experience/)).toBeInTheDocument();
   });
 

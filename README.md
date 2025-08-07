@@ -1,4 +1,4 @@
-# 🚀 Portfolio NirussVn0
+# Portfolio NirussVn0
 
 <div align="center">
 

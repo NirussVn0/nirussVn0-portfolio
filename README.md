@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey?style=for-the-badge)](LICENSE)
 
 [![GitHub Stars](https://img.shields.io/github/stars/NirussVn0?style=social)](https://github.com/NirussVn0/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/NirussVn0?style=social)](https://github.com/NirussVn0/network/members)
+[![GitHub Forks](https://img.shields.io/github/forks/NirussVn0/nirussvn0-portfolio?style=social)](https://github.com/NirussVn0/nirussvn0-portfolio/network/members)
 [![GitHub Repo Size](https://img.shields.io/github/repo-size/NirussVn0/nirussvn0-portfolio)](https://github.com/NirussVn0/nirussvn0-portfolio)
 
 </div>

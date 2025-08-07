@@ -18,7 +18,7 @@
 
 Hi, I'm **NirussVn0**, a passionate student, fullstack developer and learning a AI enginering. This is my portfolio website showcasing my journey in web development, featuring modern technologies and clean, performant code.
 
-## > Live Showcase <
+## 🚀 Live Showcase
 
 **🔗 [Visit Portfolio](https://visualniruss.xyz/)**
 

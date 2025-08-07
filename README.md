@@ -2,6 +2,9 @@
 
 about me: hi, i'm nirussvn0, a student and a fullstack developer. This is my portfolio website.
 
+## showcase
+https://visualniruss.xyz/
+
 ## Tech Stack
 - nextjs
 - typescript
@@ -13,11 +16,11 @@ about me: hi, i'm nirussvn0, a student and a fullstack developer. This is my por
 - vercel (deploy)
 
 
-## 🤝 Contributing
+## Contributing
 
 This project is licensed under the [CC BY-NC-ND 4.0](LICENSE) License.This project is licensed under the [CC BY-NC-ND 4.0](LICENSE) License.
 
-## 👨‍💻 Author
+## Author
 
 **NirussVn0** - Senior Fullstack Developer
 

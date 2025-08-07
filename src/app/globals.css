@@ -1,10 +1,23 @@
 @import 'tailwindcss';
 
 :root {
+  /* Light Mode Colors */
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #1e293b;
+  --surface: #f8fafc;
+  --surface-elevated: #ffffff;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
 
-  /* Primary Colors - Modern Blue Gradient */
+  /* Dark Mode Navy/Blue Theme */
+  --dark-background: #0f172a;
+  --dark-foreground: #f8fafc;
+  --dark-surface: #1e293b;
+  --dark-surface-elevated: #334155;
+  --dark-border: #334155;
+  --dark-border-hover: #475569;
+
+  /* Primary Colors - Enhanced Blue System */
   --primary-50: #eff6ff;
   --primary-100: #dbeafe;
   --primary-200: #bfdbfe;
@@ -15,20 +28,22 @@
   --primary-700: #1d4ed8;
   --primary-800: #1e40af;
   --primary-900: #1e3a8a;
+  --primary-950: #172554;
 
-  /* Secondary Colors - Purple Accent */
-  --secondary-50: #faf5ff;
-  --secondary-100: #f3e8ff;
-  --secondary-200: #e9d5ff;
-  --secondary-300: #d8b4fe;
-  --secondary-400: #c084fc;
-  --secondary-500: #a855f7;
-  --secondary-600: #9333ea;
-  --secondary-700: #7c3aed;
-  --secondary-800: #6b21a8;
-  --secondary-900: #581c87;
+  /* Secondary Colors - Refined Purple/Indigo */
+  --secondary-50: #eef2ff;
+  --secondary-100: #e0e7ff;
+  --secondary-200: #c7d2fe;
+  --secondary-300: #a5b4fc;
+  --secondary-400: #818cf8;
+  --secondary-500: #6366f1;
+  --secondary-600: #4f46e5;
+  --secondary-700: #4338ca;
+  --secondary-800: #3730a3;
+  --secondary-900: #312e81;
+  --secondary-950: #1e1b4b;
 
-  /* Accent Colors - Cyan/Teal */
+  /* Accent Colors - Refined Cyan/Teal */
   --accent-50: #ecfeff;
   --accent-100: #cffafe;
   --accent-200: #a5f3fc;
@@ -39,6 +54,20 @@
   --accent-700: #0e7490;
   --accent-800: #155e75;
   --accent-900: #164e63;
+  --accent-950: #083344;
+
+  /* Neutral Colors for Better Contrast */
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-400: #94a3b8;
+  --neutral-500: #64748b;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1e293b;
+  --neutral-900: #0f172a;
+  --neutral-950: #020617;
 
   /* Success Colors */
   --success-50: #ecfdf5;
@@ -120,15 +149,82 @@
   --color-accent-900: var(--accent-900);
 }
 
+/* Dark Mode Implementation */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0f172a;
-    --foreground: #f8fafc;
+    --background: var(--dark-background);
+    --foreground: var(--dark-foreground);
+    --surface: var(--dark-surface);
+    --surface-elevated: var(--dark-surface-elevated);
+    --border: var(--dark-border);
+    --border-hover: var(--dark-border-hover);
   }
+}
+
+/* Manual Dark Mode Toggle Support */
+[data-theme="dark"] {
+  --background: var(--dark-background);
+  --foreground: var(--dark-foreground);
+  --surface: var(--dark-surface);
+  --surface-elevated: var(--dark-surface-elevated);
+  --border: var(--dark-border);
+  --border-hover: var(--dark-border-hover);
+}
+
+[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #1e293b;
+  --surface: #f8fafc;
+  --surface-elevated: #ffffff;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+}
+
+/* Global Styles with Smooth Transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Enhanced Focus Styles for Accessibility */
+:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-500);
 }

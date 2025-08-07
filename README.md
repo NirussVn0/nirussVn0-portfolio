@@ -6,9 +6,9 @@
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://visualniruss.xyz/)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey?style=for-the-badge)](LICENSE)
 
-[![GitHub Stars](https://img.shields.io/github/stars/NirussVn0/portfolio-website-2025?style=social)](https://github.com/NirussVn0/portfolio-website-2025/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/NirussVn0/portfolio-website-2025?style=social)](https://github.com/NirussVn0/portfolio-website-2025/network/members)
-[![GitHub Repo Size](https://img.shields.io/github/repo-size/NirussVn0/portfolio-website-2025)](https://github.com/NirussVn0/portfolio-website-2025)
+[![GitHub Stars](https://img.shields.io/github/stars/NirussVn0?style=social)](https://github.com/NirussVn0/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/NirussVn0?style=social)](https://github.com/NirussVn0/network/members)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/NirussVn0/nirussvn0-portfolio)](https://github.com/NirussVn0/nirussvn0-portfolio)
 
 
 </div>

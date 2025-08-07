@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { AnimationController } from '@/lib/animations';
+import { Icon } from '@/components/icons';
 
 export class TechStackSection {
   private animationController: AnimationController;
@@ -70,50 +71,50 @@ export default function TechStack() {
   const techCategories = [
     {
       title: 'Frontend',
-      icon: '🎨',
+      icon: 'palette',
       technologies: [
-        { name: 'React', icon: '⚛️', color: 'from-blue-400 to-blue-600' },
-        { name: 'Next.js', icon: '▲', color: 'from-gray-700 to-black' },
-        { name: 'TypeScript', icon: '📘', color: 'from-blue-500 to-blue-700' },
-        { name: 'Tailwind CSS', icon: '🎨', color: 'from-cyan-400 to-cyan-600' },
-        { name: 'Vue.js', icon: '💚', color: 'from-green-400 to-green-600' },
-        { name: 'Angular', icon: '🅰️', color: 'from-red-500 to-red-700' },
+        { name: 'React', icon: 'react', color: 'from-primary-400 to-primary-600' },
+        { name: 'Next.js', icon: 'nextjs', color: 'from-gray-700 to-black' },
+        { name: 'TypeScript', icon: 'typescript', color: 'from-primary-500 to-primary-700' },
+        { name: 'Tailwind CSS', icon: 'tailwind', color: 'from-accent-400 to-accent-600' },
+        { name: 'Vue.js', icon: 'vue', color: 'from-success-400 to-success-600' },
+        { name: 'Angular', icon: 'angular', color: 'from-error-500 to-error-700' },
       ],
     },
     {
       title: 'Backend',
-      icon: '⚙️',
+      icon: 'code',
       technologies: [
-        { name: 'Node.js', icon: '🟢', color: 'from-green-500 to-green-700' },
-        { name: 'Python', icon: '🐍', color: 'from-yellow-400 to-yellow-600' },
-        { name: 'Express.js', icon: '🚀', color: 'from-gray-600 to-gray-800' },
-        { name: 'FastAPI', icon: '⚡', color: 'from-teal-400 to-teal-600' },
-        { name: 'GraphQL', icon: '🔗', color: 'from-pink-400 to-pink-600' },
-        { name: 'REST API', icon: '🌐', color: 'from-indigo-400 to-indigo-600' },
+        { name: 'Node.js', icon: 'nodejs', color: 'from-success-500 to-success-700' },
+        { name: 'Python', icon: 'python', color: 'from-warning-400 to-warning-600' },
+        { name: 'Express.js', icon: 'rocket', color: 'from-gray-600 to-gray-800' },
+        { name: 'FastAPI', icon: 'rocket', color: 'from-accent-400 to-accent-600' },
+        { name: 'GraphQL', icon: 'external', color: 'from-secondary-400 to-secondary-600' },
+        { name: 'REST API', icon: 'external', color: 'from-primary-400 to-primary-600' },
       ],
     },
     {
       title: 'Database',
-      icon: '🗄️',
+      icon: 'database',
       technologies: [
-        { name: 'PostgreSQL', icon: '🐘', color: 'from-blue-600 to-blue-800' },
-        { name: 'MongoDB', icon: '🍃', color: 'from-green-600 to-green-800' },
-        { name: 'Redis', icon: '🔴', color: 'from-red-400 to-red-600' },
-        { name: 'MySQL', icon: '🐬', color: 'from-orange-400 to-orange-600' },
-        { name: 'Supabase', icon: '⚡', color: 'from-emerald-400 to-emerald-600' },
-        { name: 'Firebase', icon: '🔥', color: 'from-yellow-500 to-orange-500' },
+        { name: 'PostgreSQL', icon: 'postgresql', color: 'from-primary-600 to-primary-800' },
+        { name: 'MongoDB', icon: 'mongodb', color: 'from-success-600 to-success-800' },
+        { name: 'Redis', icon: 'database', color: 'from-error-400 to-error-600' },
+        { name: 'MySQL', icon: 'database', color: 'from-warning-400 to-warning-600' },
+        { name: 'Supabase', icon: 'database', color: 'from-accent-400 to-accent-600' },
+        { name: 'Firebase', icon: 'database', color: 'from-warning-500 to-warning-600' },
       ],
     },
     {
       title: 'DevOps & Tools',
-      icon: '🛠️',
+      icon: 'code',
       technologies: [
-        { name: 'Docker', icon: '🐳', color: 'from-blue-400 to-blue-600' },
-        { name: 'AWS', icon: '☁️', color: 'from-orange-400 to-orange-600' },
-        { name: 'Vercel', icon: '▲', color: 'from-gray-700 to-black' },
-        { name: 'Git', icon: '📝', color: 'from-orange-500 to-red-500' },
-        { name: 'GitHub Actions', icon: '🤖', color: 'from-gray-600 to-gray-800' },
-        { name: 'Kubernetes', icon: '☸️', color: 'from-blue-500 to-purple-500' },
+        { name: 'Docker', icon: 'docker', color: 'from-primary-400 to-primary-600' },
+        { name: 'AWS', icon: 'aws', color: 'from-warning-400 to-warning-600' },
+        { name: 'Vercel', icon: 'external', color: 'from-gray-700 to-black' },
+        { name: 'Git', icon: 'github', color: 'from-warning-500 to-error-500' },
+        { name: 'GitHub Actions', icon: 'github', color: 'from-gray-600 to-gray-800' },
+        { name: 'Kubernetes', icon: 'code', color: 'from-primary-500 to-secondary-500' },
       ],
     },
   ];
@@ -142,7 +143,15 @@ export default function TechStack() {
             >
               <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                 <div className="flex items-center mb-8">
-                  <div className="text-4xl mr-4">{category.icon}</div>
+                  <div className="mr-4">
+                    <Icon
+                      name={category.icon}
+                      size={32}
+                      className="text-white"
+                      hover={true}
+                      hoverScale={1.1}
+                    />
+                  </div>
                   <h3 className="text-2xl font-bold text-white">{category.title}</h3>
                 </div>
                 
@@ -153,8 +162,15 @@ export default function TechStack() {
                       className="tech-item opacity-0 group cursor-pointer"
                     >
                       <div className={`bg-gradient-to-br ${tech.color} p-4 rounded-xl text-white text-center transition-all duration-300 group-hover:shadow-lg group-hover:shadow-white/20`}>
-                        <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                          {tech.icon}
+                        <div className="mb-2 flex justify-center">
+                          <Icon
+                            name={tech.icon}
+                            size={24}
+                            className="text-white"
+                            hover={true}
+                            hoverScale={1.15}
+                            hoverRotate={5}
+                          />
                         </div>
                         <div className="text-sm font-medium">{tech.name}</div>
                       </div>
@@ -171,20 +187,27 @@ export default function TechStack() {
             <h3 className="text-3xl font-bold text-white mb-8">My Development Workflow</h3>
             <div className="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
               {[
-                { step: '01', title: 'Planning', icon: '📋', description: 'Requirements analysis and architecture design' },
-                { step: '02', title: 'Development', icon: '💻', description: 'Clean code with TDD and best practices' },
-                { step: '03', title: 'Testing', icon: '🧪', description: 'Comprehensive testing and quality assurance' },
-                { step: '04', title: 'Deployment', icon: '🚀', description: 'CI/CD pipeline and production deployment' },
+                { step: '01', title: 'Planning', icon: 'clipboard', description: 'Requirements analysis and architecture design' },
+                { step: '02', title: 'Development', icon: 'laptop', description: 'Clean code with TDD and best practices' },
+                { step: '03', title: 'Testing', icon: 'beaker', description: 'Comprehensive testing and quality assurance' },
+                { step: '04', title: 'Deployment', icon: 'deploy', description: 'CI/CD pipeline and production deployment' },
               ].map((workflow, index) => (
                 <div
                   key={workflow.step}
                   className="tech-item opacity-0 text-center group"
                 >
                   <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 group-hover:bg-white/20 transition-all duration-300">
-                    <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {workflow.icon}
+                    <div className="mb-4 flex justify-center">
+                      <Icon
+                        name={workflow.icon}
+                        size={32}
+                        className="text-white"
+                        hover={true}
+                        hoverScale={1.1}
+                        hoverRotate={3}
+                      />
                     </div>
-                    <div className="text-blue-400 font-bold text-sm mb-2">{workflow.step}</div>
+                    <div className="text-primary-400 font-bold text-sm mb-2">{workflow.step}</div>
                     <h4 className="text-white font-semibold mb-2">{workflow.title}</h4>
                     <p className="text-gray-300 text-sm">{workflow.description}</p>
                   </div>

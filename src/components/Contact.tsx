@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AnimationController } from '@/lib/animations';
+import { Icon } from '@/components/icons';
 
 export class ContactSection {
   private animationController: AnimationController;
@@ -94,25 +95,25 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: '📧',
+      icon: 'email',
       title: 'Email',
       value: 'hello@niruss.dev',
       link: 'mailto:hello@niruss.dev',
     },
     {
-      icon: '📱',
+      icon: 'phone',
       title: 'Phone',
       value: '+1 (555) 123-4567',
       link: 'tel:+15551234567',
     },
     {
-      icon: '📍',
+      icon: 'location',
       title: 'Location',
       value: 'San Francisco, CA',
       link: '#',
     },
     {
-      icon: '💼',
+      icon: 'linkedin',
       title: 'LinkedIn',
       value: '/in/niruss-dev',
       link: 'https://linkedin.com/in/niruss-dev',
@@ -120,10 +121,10 @@ export default function Contact() {
   ];
 
   const socialLinks = [
-    { name: 'GitHub', icon: '🔗', url: 'https://github.com/NirussVn0' },
-    { name: 'LinkedIn', icon: '💼', url: 'https://linkedin.com/in/niruss-dev' },
-    { name: 'Twitter', icon: '🐦', url: 'https://twitter.com/niruss_dev' },
-    { name: 'Discord', icon: '💬', url: 'https://discord.gg/niruss' },
+    { name: 'GitHub', icon: 'github', url: 'https://github.com/NirussVn0' },
+    { name: 'LinkedIn', icon: 'linkedin', url: 'https://linkedin.com/in/niruss-dev' },
+    { name: 'Twitter', icon: 'twitter', url: 'https://twitter.com/niruss_dev' },
+    { name: 'Discord', icon: 'discord', url: 'https://discord.gg/niruss' },
   ];
 
   return (
@@ -246,8 +247,15 @@ export default function Contact() {
                     href={info.link}
                     className="contact-item opacity-0 flex items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:scale-105 transition-all duration-300 group"
                   >
-                    <div className="text-2xl group-hover:scale-110 transition-transform duration-300">
-                      {info.icon}
+                    <div>
+                      <Icon
+                        name={info.icon}
+                        size={24}
+                        className="text-primary-500"
+                        hover={true}
+                        hoverScale={1.15}
+                        hoverRotate={5}
+                      />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800 dark:text-white">{info.title}</h4>
@@ -268,10 +276,17 @@ export default function Contact() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="contact-item opacity-0 w-12 h-12 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-xl hover:shadow-lg hover:scale-110 hover:rotate-12 transition-all duration-300"
+                      className="contact-item opacity-0 w-12 h-12 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center hover:shadow-lg hover:scale-110 hover:rotate-12 transition-all duration-300 hover:border-primary-500"
                       aria-label={social.name}
                     >
-                      {social.icon}
+                      <Icon
+                        name={social.icon}
+                        size={20}
+                        className="text-primary-500 hover:text-primary-600"
+                        hover={true}
+                        hoverScale={1.2}
+                        hoverRotate={12}
+                      />
                     </a>
                   ))}
                 </div>

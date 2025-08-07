@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { AnimationController } from '@/lib/animations';
+import { Icon } from '@/components/icons';
 
 export class ProjectsSection {
   private animationController: AnimationController;
@@ -162,8 +163,15 @@ export default function Projects() {
             >
               <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-gray-700">
                 <div className="relative overflow-hidden">
-                  <div className="w-full h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                    <div className="text-white text-6xl opacity-50">🚀</div>
+                  <div className="w-full h-48 bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center">
+                    <Icon
+                      name="rocket"
+                      size={64}
+                      className="text-white opacity-50"
+                      hover={true}
+                      hoverScale={1.1}
+                      hoverRotate={5}
+                    />
                   </div>
                   <div className="absolute top-4 right-4">
                     <span className="px-3 py-1 bg-white/90 dark:bg-gray-800/90 text-xs font-medium rounded-full text-gray-800 dark:text-gray-200">
@@ -172,8 +180,15 @@ export default function Projects() {
                   </div>
                   {project.featured && (
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-yellow-400 text-yellow-900 text-xs font-bold rounded-full">
-                        ⭐ Featured
+                      <span className="px-3 py-1 bg-warning-400 text-warning-900 text-xs font-bold rounded-full flex items-center gap-1">
+                        <Icon
+                          name="star"
+                          size={12}
+                          className="text-warning-900"
+                          hover={true}
+                          hoverScale={1.2}
+                        />
+                        Featured
                       </span>
                     </div>
                   )}
@@ -201,14 +216,16 @@ export default function Projects() {
                   <div className="flex gap-3">
                     <a
                       href={project.liveUrl}
-                      className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center py-2 px-4 rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 text-sm"
+                      className="flex-1 bg-gradient-to-r from-primary-500 to-secondary-600 text-white text-center py-2 px-4 rounded-lg font-medium hover:shadow-lg hover:shadow-primary-500/25 transition-all duration-300 text-sm flex items-center justify-center gap-2"
                     >
+                      <Icon name="external" size={16} />
                       Live Demo
                     </a>
                     <a
                       href={project.githubUrl}
-                      className="flex-1 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-center py-2 px-4 rounded-lg font-medium hover:border-blue-500 hover:text-blue-500 transition-all duration-300 text-sm"
+                      className="flex-1 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-center py-2 px-4 rounded-lg font-medium hover:border-primary-500 hover:text-primary-500 transition-all duration-300 text-sm flex items-center justify-center gap-2"
                     >
+                      <Icon name="github" size={16} />
                       GitHub
                     </a>
                   </div>
@@ -227,9 +244,9 @@ export default function Projects() {
               These are just a few highlights from my portfolio. I have many more projects 
               showcasing different technologies and problem-solving approaches.
             </p>
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105">
+            <button className="group relative px-8 py-4 bg-gradient-to-r from-primary-500 to-secondary-600 text-white font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25 hover:scale-105">
               <span className="relative z-10">View All Projects</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-700 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>

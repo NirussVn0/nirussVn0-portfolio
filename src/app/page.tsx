@@ -3,6 +3,7 @@ import AboutMe from '@/components/AboutMe';
 import TechStack from '@/components/TechStack';
 import Projects from '@/components/Projects';
 import Roadmap from '@/components/Roadmap';
+import Contact from '@/components/Contact';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <TechStack />
       <Projects />
       <Roadmap />
+      <Contact />
     </main>
   );
 }

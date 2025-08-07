@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website 2025
 
-## Getting Started
+A visually stunning, high-performance portfolio website for a senior fullstack developer. Built with modern technologies and optimized for performance, featuring smooth animations and clean, object-oriented code.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 15 (App Router, TypeScript)
+- **Styling**: Tailwind CSS 4
+- **Animation**: Anime.js for smooth transitions and effects
+- **Testing**: Jest with React Testing Library
+- **Code Quality**: ESLint + Prettier
+- **Deployment**: Vercel with CI/CD
+
+## ✨ Features
+
+- **Responsive Design**: Optimized for mobile, tablet, and desktop
+- **Smooth Animations**: 60 FPS animations with Anime.js
+- **Performance Optimized**: Lighthouse score >90
+- **Modern UI**: Eye-catching design with cohesive color palette
+- **Interactive Effects**: Mouse hover interactions and cursor trails
+- **Clean Code**: OOP principles, TypeScript, and modular structure
+
+## 📁 Project Structure
+
+```
+portfolio/
+├── src/
+│   ├── app/                 # Next.js App Router
+│   ├── components/          # Reusable React components
+│   ├── lib/                 # Utility functions
+│   └── styles/              # Global styles
+├── public/                  # Static assets
+├── tests/                   # Jest test files
+└── docs/                    # Documentation
+```
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/NirussVn0/portfolio-website-2025.git
+cd portfolio-website-2025
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧪 Testing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the test suite:
 
-## Learn More
+```bash
+npm run test
+```
 
-To learn more about Next.js, take a look at the following resources:
+Run tests in watch mode:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run test:watch
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎨 Code Quality
 
-## Deploy on Vercel
+Format code:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run format
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check formatting:
+
+```bash
+npm run format:check
+```
+
+Lint code:
+
+```bash
+npm run lint
+```
+
+## 🚀 Deployment
+
+This project is configured for automatic deployment on Vercel:
+
+1. Connect your GitHub repository to Vercel
+2. Push to the main branch
+3. Vercel will automatically build and deploy
+
+## 📊 Performance Goals
+
+- ⚡ Load time: <2 seconds
+- 🎯 Lighthouse score: >90
+- 🖱️ Animations: 60 FPS
+- 📱 Responsive: All devices
+
+## 🎯 Sections
+
+- **Hero**: Eye-catching introduction with animations
+- **About Me**: Bio and skills showcase
+- **Tech Stack**: Animated technology icons
+- **Projects**: Portfolio showcase with interactive cards
+- **Roadmap**: Career timeline
+- **Contact**: Interactive contact form
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 👨‍💻 Author
+
+**NirussVn0** - Senior Fullstack Developer
+
+- GitHub: [@NirussVn0](https://github.com/NirussVn0)
+- Email: 166131247+NirussVn0@users.noreply.github.com

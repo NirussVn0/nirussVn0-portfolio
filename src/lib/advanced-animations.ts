@@ -1,4 +1,4 @@
-import { animate, stagger, timeline, utils } from 'animejs';
+import { animate, stagger } from 'animejs';
 
 export interface AnimationOptions {
   duration?: number;
@@ -160,17 +160,30 @@ export class AdvancedAnimationController {
 
   // Timeline Management
   createTimeline(): any {
-    const tl = timeline({
-      autoplay: false,
-    });
-    
-    this.timelines.push(tl);
-    return tl;
+    const animations: any[] = [];
+
+    const timeline = {
+      animations,
+      add: (animationConfig: any, delay: number = 0) => {
+        const animation = animate(animationConfig.targets, {
+          ...animationConfig,
+          delay
+        });
+        animations.push(animation);
+        return timeline;
+      },
+      play: () => animations.forEach(anim => anim.play?.()),
+      pause: () => animations.forEach(anim => anim.pause?.()),
+      restart: () => animations.forEach(anim => anim.restart?.())
+    };
+
+    this.timelines.push(timeline);
+    return timeline;
   }
 
   createSynchronizedSequence(animations: Array<{ target: string | HTMLElement; options: AnimationOptions }>): any {
     const tl = this.createTimeline();
-    
+
     animations.forEach(({ target, options }, index) => {
       tl.add({
         targets: target,

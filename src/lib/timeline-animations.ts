@@ -1,4 +1,4 @@
-import { animate, timeline, stagger } from 'animejs';
+import { animate, stagger } from 'animejs';
 
 export interface TimelineStep {
   target: string | HTMLElement | HTMLElement[];
@@ -22,64 +22,75 @@ export class TimelineAnimationSystem {
   private isPlaying: boolean = false;
 
   createSequentialTimeline(steps: TimelineStep[], callbacks?: TimelineCallbacks): any {
-    const tl = timeline({
-      autoplay: false,
-      begin: callbacks?.onBegin,
-      update: (anim) => {
-        this.globalTime = anim.currentTime;
-        callbacks?.onUpdate?.(anim.progress);
-      },
-      complete: callbacks?.onComplete
-    });
+    let currentDelay = 0;
+    const animations: any[] = [];
+
+    callbacks?.onBegin?.();
 
     steps.forEach((step, index) => {
-      const stepAnimation = {
-        targets: step.target,
+      const stepDelay = currentDelay + (step.delay || 0);
+
+      const animation = animate(step.target, {
         ...step.properties,
         duration: step.duration || 1000,
-        delay: step.delay || 0,
-        easing: step.ease || 'easeOutExpo',
-        complete: () => callbacks?.onStepComplete?.(index)
-      };
+        delay: stepDelay,
+        ease: step.ease || 'outExpo',
+        complete: () => {
+          callbacks?.onStepComplete?.(index);
+          if (index === steps.length - 1) {
+            callbacks?.onComplete?.();
+          }
+        }
+      });
 
-      if (step.offset !== undefined) {
-        tl.add(stepAnimation, step.offset);
-      } else {
-        tl.add(stepAnimation);
-      }
+      animations.push(animation);
+      currentDelay += (step.duration || 1000);
     });
 
-    this.timelines.push(tl);
-    return tl;
+    const timeline = {
+      animations,
+      play: () => animations.forEach(anim => anim.play?.()),
+      pause: () => animations.forEach(anim => anim.pause?.()),
+      restart: () => animations.forEach(anim => anim.restart?.())
+    };
+
+    this.timelines.push(timeline);
+    return timeline;
   }
 
   createParallelTimeline(steps: TimelineStep[], callbacks?: TimelineCallbacks): any {
-    const tl = timeline({
-      autoplay: false,
-      begin: callbacks?.onBegin,
-      update: (anim) => {
-        this.globalTime = anim.currentTime;
-        callbacks?.onUpdate?.(anim.progress);
-      },
-      complete: callbacks?.onComplete
-    });
+    const animations: any[] = [];
+    let completedCount = 0;
+
+    callbacks?.onBegin?.();
 
     steps.forEach((step, index) => {
-      const stepAnimation = {
-        targets: step.target,
+      const animation = animate(step.target, {
         ...step.properties,
         duration: step.duration || 1000,
         delay: step.delay || 0,
-        easing: step.ease || 'easeOutExpo',
-        complete: () => callbacks?.onStepComplete?.(index)
-      };
+        ease: step.ease || 'outExpo',
+        complete: () => {
+          callbacks?.onStepComplete?.(index);
+          completedCount++;
+          if (completedCount === steps.length) {
+            callbacks?.onComplete?.();
+          }
+        }
+      });
 
-      // Add all steps at the same time (parallel execution)
-      tl.add(stepAnimation, 0);
+      animations.push(animation);
     });
 
-    this.timelines.push(tl);
-    return tl;
+    const timeline = {
+      animations,
+      play: () => animations.forEach(anim => anim.play?.()),
+      pause: () => animations.forEach(anim => anim.pause?.()),
+      restart: () => animations.forEach(anim => anim.restart?.())
+    };
+
+    this.timelines.push(timeline);
+    return timeline;
   }
 
   createStaggeredTimeline(
@@ -100,54 +111,56 @@ export class TimelineAnimationSystem {
       grid
     } = staggerOptions;
 
-    const tl = timeline({
-      autoplay: false,
-      begin: callbacks?.onBegin,
-      update: (anim) => {
-        this.globalTime = anim.currentTime;
-        callbacks?.onUpdate?.(anim.progress);
-      },
-      complete: callbacks?.onComplete
-    });
+    callbacks?.onBegin?.();
 
     const staggerConfig: any = { from };
     if (grid) staggerConfig.grid = grid;
     if (direction === 'reverse') staggerConfig.direction = 'reverse';
 
-    tl.add({
-      targets,
+    const animation = animate(targets, {
       ...properties,
       delay: stagger(delay, staggerConfig),
-      easing: properties.ease || 'easeOutExpo'
-    });
-
-    this.timelines.push(tl);
-    return tl;
-  }
-
-  createMasterTimeline(childTimelines: any[], callbacks?: TimelineCallbacks): any {
-    const masterTl = timeline({
-      autoplay: false,
-      begin: callbacks?.onBegin,
-      update: (anim) => {
-        this.globalTime = anim.currentTime;
-        callbacks?.onUpdate?.(anim.progress);
-      },
+      ease: properties.ease || 'outExpo',
       complete: callbacks?.onComplete
     });
 
+    const timeline = {
+      animations: [animation],
+      play: () => animation.play?.(),
+      pause: () => animation.pause?.(),
+      restart: () => animation.restart?.()
+    };
+
+    this.timelines.push(timeline);
+    return timeline;
+  }
+
+  createMasterTimeline(childTimelines: any[], callbacks?: TimelineCallbacks): any {
+    callbacks?.onBegin?.();
+
+    let currentDelay = 0;
     childTimelines.forEach((childTl, index) => {
-      masterTl.add({
-        targets: {},
-        duration: 1,
-        begin: () => {
+      setTimeout(() => {
+        if (childTl.play) {
           childTl.play();
         }
-      }, index * 500); // Offset each child timeline by 500ms
+        if (index === childTimelines.length - 1) {
+          callbacks?.onComplete?.();
+        }
+      }, currentDelay);
+
+      currentDelay += 500; // Offset each child timeline by 500ms
     });
 
-    this.timelines.push(masterTl);
-    return masterTl;
+    const timeline = {
+      animations: childTimelines,
+      play: () => childTimelines.forEach((tl: any) => tl.play?.()),
+      pause: () => childTimelines.forEach((tl: any) => tl.pause?.()),
+      restart: () => childTimelines.forEach((tl: any) => tl.restart?.())
+    };
+
+    this.timelines.push(timeline);
+    return timeline;
   }
 
   // Synchronized animation system
@@ -161,29 +174,36 @@ export class TimelineAnimationSystem {
     }>,
     callbacks?: TimelineCallbacks
   ): any {
-    const tl = timeline({
-      autoplay: false,
-      begin: callbacks?.onBegin,
-      update: (anim) => {
-        this.globalTime = anim.currentTime;
-        callbacks?.onUpdate?.(anim.progress);
-      },
-      complete: callbacks?.onComplete
-    });
+    callbacks?.onBegin?.();
+    const animations: any[] = [];
+    let completedCount = 0;
 
     animationGroups.forEach((group) => {
-      const animation = {
-        targets: group.targets,
+      const animation = animate(group.targets, {
         ...group.properties,
         duration: group.duration || 1000,
-        easing: group.properties.ease || 'easeOutExpo'
-      };
+        delay: group.syncPoint || 0,
+        ease: group.properties.ease || 'outExpo',
+        complete: () => {
+          completedCount++;
+          if (completedCount === animationGroups.length) {
+            callbacks?.onComplete?.();
+          }
+        }
+      });
 
-      tl.add(animation, group.syncPoint || 0);
+      animations.push(animation);
     });
 
-    this.timelines.push(tl);
-    return tl;
+    const timeline = {
+      animations,
+      play: () => animations.forEach(anim => anim.play?.()),
+      pause: () => animations.forEach(anim => anim.pause?.()),
+      restart: () => animations.forEach(anim => anim.restart?.())
+    };
+
+    this.timelines.push(timeline);
+    return timeline;
   }
 
   // Complex choreography system
@@ -197,60 +217,50 @@ export class TimelineAnimationSystem {
     }>,
     callbacks?: TimelineCallbacks
   ): any {
-    const masterTl = timeline({
-      autoplay: false,
-      begin: callbacks?.onBegin,
-      update: (anim) => {
-        this.globalTime = anim.currentTime;
-        callbacks?.onUpdate?.(anim.progress);
-      },
-      complete: callbacks?.onComplete
-    });
+    callbacks?.onBegin?.();
 
     let currentTime = 0;
+    const allAnimations: any[] = [];
 
     scenes.forEach((scene, sceneIndex) => {
       // Scene enter callback
       if (scene.onEnter) {
-        masterTl.add({
-          targets: {},
-          duration: 1,
-          begin: scene.onEnter
-        }, currentTime);
+        setTimeout(scene.onEnter, currentTime);
       }
 
       // Scene animations
-      const sceneTl = timeline({ autoplay: false });
       scene.animations.forEach((step) => {
-        sceneTl.add({
-          targets: step.target,
+        const animation = animate(step.target, {
           ...step.properties,
           duration: step.duration || 1000,
-          delay: step.delay || 0,
-          easing: step.ease || 'easeOutExpo'
-        }, step.offset || 0);
+          delay: currentTime + (step.delay || 0),
+          ease: step.ease || 'outExpo'
+        });
+        allAnimations.push(animation);
       });
-
-      masterTl.add({
-        targets: {},
-        duration: scene.duration,
-        begin: () => sceneTl.play()
-      }, currentTime);
 
       // Scene exit callback
       if (scene.onExit) {
-        masterTl.add({
-          targets: {},
-          duration: 1,
-          begin: scene.onExit
-        }, currentTime + scene.duration);
+        setTimeout(scene.onExit, currentTime + scene.duration);
       }
 
       currentTime += scene.duration;
     });
 
-    this.timelines.push(masterTl);
-    return masterTl;
+    // Call complete callback after all scenes
+    setTimeout(() => {
+      callbacks?.onComplete?.();
+    }, currentTime);
+
+    const timeline = {
+      animations: allAnimations,
+      play: () => allAnimations.forEach(anim => anim.play?.()),
+      pause: () => allAnimations.forEach(anim => anim.pause?.()),
+      restart: () => allAnimations.forEach(anim => anim.restart?.())
+    };
+
+    this.timelines.push(timeline);
+    return timeline;
   }
 
   // Time control methods

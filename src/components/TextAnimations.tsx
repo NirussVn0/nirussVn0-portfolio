@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { animate } from 'animejs';
 import { AdvancedAnimationController } from '@/lib/advanced-animations';
 
 interface TextRevealProps {

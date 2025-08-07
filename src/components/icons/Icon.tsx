@@ -141,8 +141,10 @@ const icons = {
     <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4m4-5l5-5 5 5m-5 7V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
   ),
   search: (
-    <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" fill="none" />
-    <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <g>
+      <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" fill="none" />
+      <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
   ),
   heart: (
     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="currentColor" />
@@ -151,35 +153,49 @@ const icons = {
     <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" stroke="currentColor" strokeWidth="2" fill="none" />
   ),
   share: (
-    <circle cx="18" cy="5" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
-    <circle cx="6" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
-    <circle cx="18" cy="19" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
-    <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke="currentColor" strokeWidth="2" />
+    <g>
+      <circle cx="18" cy="5" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+      <circle cx="6" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+      <circle cx="18" cy="19" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+      <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke="currentColor" strokeWidth="2" />
+    </g>
   ),
   settings: (
-    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
-    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" strokeWidth="2" fill="none" />
+    <g>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+      <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" strokeWidth="2" fill="none" />
+    </g>
   ),
   user: (
-    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
+    <g>
+      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
+    </g>
   ),
   users: (
-    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
-    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <g>
+      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
+      <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
   ),
   calendar: (
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" strokeWidth="2" fill="none" />
-    <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <g>
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" strokeWidth="2" fill="none" />
+      <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
   ),
   clock: (
-    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
-    <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <g>
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+      <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
   ),
   globe: (
-    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
-    <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <g>
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+      <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
   ),
   shield: (
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" fill="none" />
@@ -188,17 +204,23 @@ const icons = {
     <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor" />
   ),
   trending_up: (
-    <path d="M23 6l-9.5 9.5-5-5L1 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    <path d="M17 6h6v6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <g>
+      <path d="M23 6l-9.5 9.5-5-5L1 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M17 6h6v6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
   ),
   award: (
-    <circle cx="12" cy="8" r="7" stroke="currentColor" strokeWidth="2" fill="none" />
-    <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <g>
+      <circle cx="12" cy="8" r="7" stroke="currentColor" strokeWidth="2" fill="none" />
+      <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
   ),
   target: (
-    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
-    <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="2" fill="none" />
-    <circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="2" fill="none" />
+    <g>
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+      <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="2" fill="none" />
+      <circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="2" fill="none" />
+    </g>
   ),
 };
 

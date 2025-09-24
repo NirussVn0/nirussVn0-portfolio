@@ -16,16 +16,15 @@
 
 ## 👨‍💻 About Me
 
-Hi, I'm **NirussVn0**, a passionate student, fullstack developer and learning a AI enginering. This is my portfolio website showcasing my journey in web development, featuring modern technologies and clean, performant code.
+Hi, I'm **Niruss**, a passionate student, fullstack developer and learning a web3 enginering. This is my portfolio website showcasing my journey in development, featuring modern technologies and clean, performant code.
 
-## 🚀 Live Showcase
 
-**🔗 [Visit Portfolio](https://visualniruss.xyz/)**
+- Showcase **🔗 [Visit Portfolio](https://visualniruss.xyz/)**
 
 ## 🛠️ Tech Stack
 
 ### Frontend Core
-
+- ![pnpm](https://img.shields.io/badge/Package%20Manager-pnpm-FFA500?style=flat&logo=pnpm&logoColor=white) **Recommend pnpm** - Fast, disk space efficient package manager
 - ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat&logo=next.js&logoColor=white) **Next.js 15** - React framework with App Router
 - ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript&logoColor=white) **TypeScript** - Type-safe development
 - ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=flat&logo=tailwind-css&logoColor=white) **Tailwind CSS** - Utility-first CSS framework
@@ -67,6 +66,6 @@ Hi, I'm **NirussVn0**, a passionate student, fullstack developer and learning a 
 
 **⭐ Star this repository if you found it helpful!**
 
-Made with ❤️ by [NirussVn0](https://github.com/NirussVn0)
+Made with ❤️ by [NirussVn0](https://github.com/NirussVn0) 2025
 
 </div>

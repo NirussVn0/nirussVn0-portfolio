@@ -1,7 +1,7 @@
 {
   "name": "Niruss Portfolio - fullstack developer",
   "short_name": "Niruss Portfolio",
-  "description": "A visually stunning, high-performance portfolio website showcasing expertise in modern web technologies",
+  "description": "high-performance portfolio website",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",

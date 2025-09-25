@@ -156,4 +156,261 @@
   .hover-lift:hover {
     transform: translateY(-2px);
   }
+
+  /* Added cursor magnet effect for cards */
+  .magnet-card {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+  }
+
+  .magnet-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    z-index: 10;
+  }
+
+  /* Exclude buttons and small interactive elements from magnet effect */
+  .magnet-card button,
+  .magnet-card .social-icon,
+  .magnet-card a:not(.magnet-card) {
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+  }
+
+  /* Added diverse animated border styles */
+  .border-solid-animated {
+    border: 2px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .border-solid-animated::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    border-top: 2px solid var(--foreground);
+    border-right: 2px solid var(--foreground);
+    transition: all 0.5s ease;
+  }
+
+  .border-solid-animated:hover::before {
+    left: 0;
+  }
+
+  .border-dashed-animated {
+    border: 2px dashed var(--border);
+    position: relative;
+  }
+
+  .border-dashed-animated::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px dashed var(--foreground);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .border-dashed-animated:hover::after {
+    opacity: 1;
+    animation: dash-move 2s linear infinite;
+  }
+
+  @keyframes dash-move {
+    0% {
+      border-dash-offset: 0;
+    }
+    100% {
+      border-dash-offset: 20px;
+    }
+  }
+
+  .border-wave-animated {
+    border: 2px solid var(--border);
+    position: relative;
+  }
+
+  .border-wave-animated::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid var(--foreground);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .border-wave-animated:hover::before {
+    opacity: 1;
+    animation: wave-border 1.5s ease-in-out infinite;
+  }
+
+  @keyframes wave-border {
+    0%,
+    100% {
+      border-width: 2px;
+    }
+    50% {
+      border-width: 4px;
+    }
+  }
+
+  .border-pulse-animated {
+    border: 2px solid var(--border);
+    position: relative;
+  }
+
+  .border-pulse-animated:hover {
+    animation: pulse-border 1s ease-in-out infinite;
+  }
+
+  @keyframes pulse-border {
+    0%,
+    100% {
+      border-color: var(--border);
+      box-shadow: 0 0 0 0 var(--foreground);
+    }
+    50% {
+      border-color: var(--foreground);
+      box-shadow: 0 0 0 4px rgba(var(--foreground), 0.3);
+    }
+  }
+
+  .border-gradient-animated {
+    border: 2px solid var(--border);
+    position: relative;
+    background: linear-gradient(var(--background), var(--background)) padding-box,
+      linear-gradient(45deg, var(--border), var(--foreground), var(--border)) border-box;
+  }
+
+  .border-gradient-animated:hover {
+    animation: gradient-rotate 2s linear infinite;
+  }
+
+  @keyframes gradient-rotate {
+    0% {
+      background: linear-gradient(var(--background), var(--background)) padding-box,
+        linear-gradient(0deg, var(--border), var(--foreground), var(--border)) border-box;
+    }
+    25% {
+      background: linear-gradient(var(--background), var(--background)) padding-box,
+        linear-gradient(90deg, var(--border), var(--foreground), var(--border)) border-box;
+    }
+    50% {
+      background: linear-gradient(var(--background), var(--background)) padding-box,
+        linear-gradient(180deg, var(--border), var(--foreground), var(--border)) border-box;
+    }
+    75% {
+      background: linear-gradient(var(--background), var(--background)) padding-box,
+        linear-gradient(270deg, var(--border), var(--foreground), var(--border)) border-box;
+    }
+    100% {
+      background: linear-gradient(var(--background), var(--background)) padding-box,
+        linear-gradient(360deg, var(--border), var(--foreground), var(--border)) border-box;
+    }
+  }
+
+  .border-double-animated {
+    border: 2px double var(--border);
+    position: relative;
+  }
+
+  .border-double-animated:hover {
+    border-style: solid;
+    animation: double-flash 0.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes double-flash {
+    0% {
+      border-color: var(--border);
+    }
+    100% {
+      border-color: var(--foreground);
+    }
+  }
+
+  .border-neon-animated {
+    border: 2px solid var(--border);
+    position: relative;
+  }
+
+  .border-neon-animated:hover {
+    border-color: var(--foreground);
+    box-shadow: 0 0 5px var(--foreground), 0 0 10px var(--foreground), 0 0 15px var(--foreground);
+    animation: neon-glow 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes neon-glow {
+    0% {
+      box-shadow: 0 0 5px var(--foreground), 0 0 10px var(--foreground), 0 0 15px var(--foreground);
+    }
+    100% {
+      box-shadow: 0 0 10px var(--foreground), 0 0 20px var(--foreground), 0 0 30px var(--foreground);
+    }
+  }
+
+  .border-zigzag-animated {
+    border: 2px solid var(--border);
+    position: relative;
+  }
+
+  .border-zigzag-animated::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent 30%, var(--foreground) 30%, var(--foreground) 70%, transparent 70%),
+      linear-gradient(-45deg, transparent 30%, var(--foreground) 30%, var(--foreground) 70%, transparent 70%);
+    background-size: 10px 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .border-zigzag-animated:hover::after {
+    opacity: 0.3;
+    animation: zigzag-move 2s linear infinite;
+  }
+
+  @keyframes zigzag-move {
+    0% {
+      background-position: 0 0, 0 0;
+    }
+    100% {
+      background-position: 10px 10px, -10px 10px;
+    }
+  }
+
+  /* Added smooth cursor magnet effect with JavaScript */
+  @media (hover: hover) and (pointer: fine) {
+    .magnet-card {
+      will-change: transform;
+    }
+  }
+
+  /* Accessibility: Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .magnet-card,
+    .border-solid-animated::before,
+    .border-dashed-animated::after,
+    .border-wave-animated::before,
+    .border-pulse-animated,
+    .border-gradient-animated,
+    .border-double-animated,
+    .border-neon-animated,
+    .border-zigzag-animated::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
 }

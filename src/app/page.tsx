@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ReactNode, ReactElement, useEffect, useRef, useState } from 'react';
-
+import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 export default function Home() {
   const [isDark, setIsDark] = useState(true);
   const [activeSection, setActiveSection] = useState('');
@@ -57,22 +57,6 @@ export default function Home() {
     'ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu will-change-transform will-change-opacity',
     'hover:-translate-y-1 hover:shadow-2xl hover:bg-muted/60',
   ].join(' ');
-
-  // Format year -> split lines if contains "-"
-  function formatYear(value: string) {
-    const parts = value.split('-');
-    if (parts.length < 2) {
-      return <span className="block">{value}</span>;
-    }
-    const left = parts[0].trim();
-    const right = parts.slice(1).join('-').trim();
-    return (
-      <>
-        <span className="block">{left}</span>
-        <span className="block">- {right}</span>
-      </>
-    );
-  }
 
   // SVG icons
   const tsIcon = (
@@ -187,97 +171,36 @@ export default function Home() {
       <span className="inline-flex items-center justify-center">{icon}</span>
     );
   }
-
-  // Discord magnet card 
   function MagnetDiscordCard({ href }: { href: string }) {
-    const ref = useRef<HTMLDivElement | null>(null);
-    const [t, setT] = useState({ x: 0, y: 0 });
-    const [hover, setHover] = useState(false);
-
-    const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
-      const el = ref.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const dx = e.clientX - (rect.left + rect.width / 2);
-      const dy = e.clientY - (rect.top + rect.height / 2);
-      const damp = 18;
-      setT({ x: dx / damp, y: dy / damp });
-      // update CSS vars for underlay
-      const mx = ((e.clientX - rect.left) / rect.width) * 100;
-      const my = ((e.clientY - rect.top) / rect.height) * 100;
-      el.style.setProperty('--mx', `${mx}%`);
-      el.style.setProperty('--my', `${my}%`);
-    };
-
-    const handleLeave = () => {
-      setHover(false);
-      setT({ x: 0, y: 0 });
-      const el = ref.current;
-      if (el) {
-        el.style.setProperty('--mx', `50%`);
-        el.style.setProperty('--my', `50%`);
-      }
-    };
-
     return (
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Join our Discord"
+        className="block"
       >
-        <div
-          ref={ref}
-          onMouseEnter={() => setHover(true)}
-          onMouseMove={handleMove}
-          onMouseLeave={handleLeave}
-          className="relative overflow-hidden group magnet-card border-border p-6 cursor-pointer transition-[transform,shadow,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu hover:bg-muted/60"
-          style={{ transform: `translate3d(${t.x}px, ${t.y}px, 0)` }}
-        >
-          {/* Glow border */}
-          <div
-            className={`pointer-events-none absolute inset-0 rounded-2xl transition-all duration-500 ${
-              hover
-                ? 'shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)]'
-                : 'shadow-[0_0_0_1px_rgba(255,255,255,0.25),0_0_14px_6px_rgba(255,255,255,0.08)]'
-            } animate-whiteGlow`}
-          />
-
-          <div className="relative z-10 flex items-center gap-4">
-            <div
-              className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground text-background transition-transform duration-500"
-              style={{
-                transform: `translate3d(${t.x * 0.6}px, ${t.y * 0.6}px, 0)`,
-              }}
+        {/* Content same as above */}
+        <div className="flex items-center gap-4">
+          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground text-background">
+            <svg
+              viewBox="0 0 24 24"
+              className="w-6 h-6"
+              fill="currentColor"
+              aria-hidden
             >
-              <svg
-                viewBox="0 0 24 24"
-                className="w-6 h-6"
-                fill="currentColor"
-                aria-hidden
-              >
-                <path d="M20.317 4.369A19.791 19.791 0 0016.558 3c-.2.36-.43.85-.59 1.232a18.27 18.27 0 00-7.938 0C7.37 3.85 7.14 3.36 6.94 3a19.791 19.791 0 00-3.76 1.369C1.18 8.063.35 11.64.7 15.16A19.9 19.9 0 006.08 18c.3-.41.57-.85.81-1.31a12.8 12.8 0 01-1.27-.62c.11-.08.22-.16.33-.24a13.2 13.2 0 0012.1 0c.11.08.22.16.33.24-.41.22-.84.43-1.28.62.24.46.52.9.82 1.31a19.9 19.9 0 005.38-2.84c.42-4.02-.53-7.57-2.92-10.06zM8.88 13.89c-.79 0-1.43-.73-1.43-1.63 0-.9.64-1.64 1.43-1.64s1.44.74 1.44 1.64-.65 1.63-1.44 1.63zm6.24 0c-.79 0-1.43-.73-1.43-1.63 0-.9.64-1.64 1.43-1.64.8 0 1.44.74 1.44 1.64s-.64 1.63-1.44 1.63z" />
-              </svg>
-            </div>
-
-            <div className="flex-1">
-              <div className="text-2xl font-bold tracking-wide">
-                Join our community
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Hop in our Discord — build, learn, vibe together.
-              </div>
-            </div>
+              <path d="M20.317 4.369A19.791 19.791 0 0016.558 3c-.2.36-.43.85-.59 1.232a18.27 18.27 0 00-7.938 0C7.37 3.85 7.14 3.36 6.94 3a19.791 19.791 0 00-3.76 1.369C1.18 8.063.35 11.64.7 15.16A19.9 19.9 0 006.08 18c.3-.41.57-.85.81-1.31a12.8 12.8 0 01-1.27-.62c.11-.08.22-.16.33-.24a13.2 13.2 0 0012.1 0c.11.08.22.16.33.24-.41.22-.84.43-1.28.62.24.46.52.9.82 1.31a19.9 19.9 0 005.38-2.84c.42-4.02-.53-7.57-2.92-10.06zM8.88 13.89c-.79 0-1.43-.73-1.43-1.63 0-.9.64-1.64 1.43-1.64s1.44.74 1.44 1.64-.65 1.63-1.44 1.63zm6.24 0c-.79 0-1.43-.73-1.43-1.63 0-.9.64-1.64 1.43-1.64.8 0 1.44.74 1.44 1.64s-.64 1.63-1.44 1.63z" />
+            </svg>
           </div>
 
-          {/* Underlay follows cursor (trắng nhạt -> đậm) */}
-          <div
-            className="pointer-events-none absolute -inset-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{
-              background:
-                'radial-gradient(120px 120px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.18), transparent 60%)',
-            }}
-          />
+          <div className="flex-1">
+            <div className="text-2xl font-bold tracking-wide">
+              Join our community
+            </div>
+            <div className="text-sm text-muted-foreground">
+              Hop in our Discord — build, learn, vibe together.
+            </div>
+          </div>
         </div>
       </a>
     );
@@ -338,6 +261,11 @@ export default function Home() {
               <div className="magnet-card border-dashed-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-square bg-muted flex items-center justify-center">
                   <div className="text-muted-foreground text-sm">Portrait</div>
+                  <img
+                    src="/portrait.png"
+                    alt="Portrait"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
 
@@ -361,40 +289,19 @@ export default function Home() {
                     href="https://facebook.com/"
                     className="social-icon w-8 h-8 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
                   >
-                    <svg
-                      width="1.2em"
-                      height="1.2em"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                    </svg>
+                    <FaFacebook size="1.2em" />
                   </Link>
                   <Link
                     href="https://instagram.com/nirussvn0"
                     className="social-icon w-8 h-8 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
                   >
-                    <svg
-                      width="1.2em"
-                      height="1.2em"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M12 2.163c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg>
+                    <FaInstagram size="1.2em" />
                   </Link>
                   <Link
                     href="https://twitter.com/nirussvn0"
                     className="social-icon w-8 h-8 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
                   >
-                    <svg
-                      width="1.2em"
-                      height="1.2em"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                    </svg>
+                    <FaTwitter size="1.2em" />
                   </Link>
                 </div>
               </div>
@@ -488,7 +395,11 @@ export default function Home() {
               </div>
 
               {/* Mind Channel card */}
-              <div className="magnet-card border-neon-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl hover:bg-muted transition-all duration-500">
+              <div
+                className="border-neon-animated border-border p-6 hover:scale-105 
+                              hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
+                              hover:bg-muted transition-all duration-500 "
+              >
                 <div className="space-y-4 text-center">
                   <div className="text-xs tracking-wider">= = = = =</div>
                   <div className="text-2xl font-bold">MIND</div>
@@ -533,6 +444,21 @@ export default function Home() {
                   </p>
                 </div>
               </div>
+
+              {/* 🔥 Join our community card*/}
+              <div
+                className="
+        relative overflow-hidden group border border-border 
+        rounded-1xl p-6 cursor-pointer
+        transition-[transform,box-shadow] duration-300 ease-out
+        hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)]
+        hover:-translate-y-1
+        will-change-transform
+        transform-gpu
+          "
+              >
+                <MagnetDiscordCard href="https://discord.gg/sabicoder" />
+              </div>
             </div>
           </div>
         </header>
@@ -565,14 +491,14 @@ export default function Home() {
             <div className="space-y-8 sm:space-y-12">
               {[
                 {
-                  year: '2025 Present',
+                  year: 'Apr.2025 Present',
                   role: 'Fullstack Developer',
                   company: 'Sabicoder',
                   description: 'create a few projects and share to the world',
                   tech: ['React', 'TypeScript', 'Next.js', 'TailwindCSS'],
                 },
                 {
-                  year: '07.2025 Present',
+                  year: 'Sep.2025 Present',
                   role: 'Provincial gifted student competition',
                   company: 'DSA Learning',
                   description:
@@ -588,7 +514,7 @@ export default function Home() {
                   tech: ['Html', 'Css', 'js', 'Node.js'],
                 },
                 {
-                  year: '2024',
+                  year: 'Mar.2024',
                   role: 'STEM Development in School',
                   company: 'High School',
                   description:
@@ -616,7 +542,7 @@ export default function Home() {
                       {/* YEAR */}
                       <div className="lg:col-span-2">
                         <div className="text-xl sm:text-2xl font-bold h-full flex items-center justify-center text-center leading-tight transition-all duration-500 group-hover:text-foreground group-hover:scale-110">
-                          {formatYear(job.year)}
+                          {job.year}
                         </div>
                       </div>
 
@@ -656,7 +582,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* THOUGHTS */}
+        {/* projects */}
         <section
           id="thoughts"
           ref={(el) => {
@@ -674,17 +600,17 @@ export default function Home() {
               }}
             >
               <h2 className="text-3xl sm:text-4xl font-bold uppercase">
-                Recent Thoughts
+                Thoughts Project
               </h2>
             </div>
 
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
               {[
                 {
-                  title: 'The Future of Web Development',
+                  title: 'Portfolio Website',
                   excerpt:
-                    'Exploring how AI and automation are reshaping the way we build for the web.',
-                  date: 'Dec 2024',
+                    'Start to building a beautiful and functional portfolio website.',
+                  date: 'Sep 2025',
                   readTime: '5 min',
                 },
                 {
@@ -693,55 +619,6 @@ export default function Home() {
                     'Lessons learned from building and maintaining design systems across multiple products.',
                   date: 'Nov 2024',
                   readTime: '8 min',
-                },
-                {
-                  title: 'Performance-First Development',
-                  excerpt:
-                    'Why performance should be a first-class citizen in your development workflow.',
-                  date: 'Oct 2024',
-                  readTime: '6 min',
-                },
-                {
-                  title: 'The Art of Code Review',
-                  excerpt:
-                    'Building better software through thoughtful and constructive code reviews.',
-                  date: 'Sep 2024',
-                  readTime: '4 min',
-                },
-                {
-                  title: 'The Art of Code Review',
-                  excerpt:
-                    'Building better software through thoughtful and constructive code reviews.',
-                  date: 'Sep 2024',
-                  readTime: '4 min',
-                },
-                {
-                  title: 'The Art of Code Review',
-                  excerpt:
-                    'Building better software through thoughtful and constructive code reviews.',
-                  date: 'Sep 2024',
-                  readTime: '4 min',
-                },
-                {
-                  title: 'The Art of Code Review',
-                  excerpt:
-                    'Building better software through thoughtful and constructive code reviews.',
-                  date: 'Sep 2024',
-                  readTime: '4 min',
-                },
-                {
-                  title: 'The Art of Code Review',
-                  excerpt:
-                    'Building better software through thoughtful and constructive code reviews.',
-                  date: 'Sep 2024',
-                  readTime: '4 min',
-                },
-                {
-                  title: 'The Art of Code Review',
-                  excerpt:
-                    'Building better software through thoughtful and constructive code reviews.',
-                  date: 'Sep 2024',
-                  readTime: '4 min',
                 },
                 {
                   title: 'The Art of Code Review',
@@ -885,9 +762,6 @@ export default function Home() {
                   </Link>
                 ))}
               </div>
-
-              {/* Join our community card */}
-              <MagnetDiscordCard href="https://discord.gg/your_invite_code" />
             </div>
           </div>
         </section>
@@ -953,27 +827,6 @@ export default function Home() {
 
       {/* global gradient mask */}
       <div className="fixed bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
-
-      {/* Global glow animation (đặt 1 lần) */}
-      <style jsx global>{`
-        @keyframes whiteGlow {
-          0% {
-            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25),
-              0 0 14px 6px rgba(255, 255, 255, 0.08);
-          }
-          50% {
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.65),
-              0 0 28px 12px rgba(255, 255, 255, 0.18);
-          }
-          100% {
-            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3),
-              0 0 14px 6px rgba(255, 255, 255, 0.1);
-          }
-        }
-        .animate-whiteGlow {
-          animation: whiteGlow 2.2s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 }

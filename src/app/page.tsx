@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { ReactNode, ReactElement, useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   const [isDark, setIsDark] = useState(true);
@@ -85,7 +85,7 @@ export default function Home() {
     </svg>
   );
 
-  const iconMap: Record<string, JSX.Element> = {
+  const iconMap: Record<string, ReactElement> = {
     html: (
       <svg viewBox="0 0 128 128" className="w-3.5 h-3.5" aria-hidden>
         <path
@@ -135,7 +135,7 @@ export default function Home() {
       <svg viewBox="0 0 256 154" className="w-4 h-4" aria-hidden>
         <path
           fill="currentColor"
-          d="M128 0c-34 0-55 17-64 51 13-17 28-23 47-18 10 3 17 10 25 18 13 13 29 18 50 18 34 0 55-17 64-51-13 17-28 23-47 18-10-3-17-10-25-18C165 5 149 0 128 0zM0 103c13-17 28-23 47-18 10 3 17 10 25 18 13 13 29 18 50 18 34 0 55-17 64-51-13 17-28 23-47 18-10-3-17-10-25-18-13-13-29-18-50-18C30 52 9 69 0 103z"
+          d="M128 0c-34 0-55 17-64 51 13-17 28-23 47-18 10 3 17 10 25 18 13 13 29 18 50 18 34 0 55-17 64-51-13 17-28 23-47 18-10-3-17-10-25-18-13-13-29-18-50-18C30 52 9 69 0 103z"
         />
       </svg>
     ),
@@ -188,7 +188,7 @@ export default function Home() {
     );
   }
 
-  // Discord magnet card (CHỈ trả về card, không lồng cả trang)
+  // Discord magnet card 
   function MagnetDiscordCard({ href }: { href: string }) {
     const ref = useRef<HTMLDivElement | null>(null);
     const [t, setT] = useState({ x: 0, y: 0 });
@@ -380,7 +380,7 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
-                      <path d="M12 2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                      <path d="M12 2.163c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                   </Link>
                   <Link

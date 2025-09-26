@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ReactNode, ReactElement, useEffect, useRef, useState } from 'react';
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTwitter, FaDiscord, FaGithub } from 'react-icons/fa';
 export default function Home() {
   const [isDark, setIsDark] = useState(true);
   const [activeSection, setActiveSection] = useState('');
@@ -171,6 +171,8 @@ export default function Home() {
       <span className="inline-flex items-center justify-center">{icon}</span>
     );
   }
+
+  // Discord card component 🔥
   function MagnetDiscordCard({ href }: { href: string }) {
     return (
       <a
@@ -183,14 +185,7 @@ export default function Home() {
         {/* Content same as above */}
         <div className="flex items-center gap-4">
           <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground text-background">
-            <svg
-              viewBox="0 0 24 24"
-              className="w-6 h-6"
-              fill="currentColor"
-              aria-hidden
-            >
-              <path d="M20.317 4.369A19.791 19.791 0 0016.558 3c-.2.36-.43.85-.59 1.232a18.27 18.27 0 00-7.938 0C7.37 3.85 7.14 3.36 6.94 3a19.791 19.791 0 00-3.76 1.369C1.18 8.063.35 11.64.7 15.16A19.9 19.9 0 006.08 18c.3-.41.57-.85.81-1.31a12.8 12.8 0 01-1.27-.62c.11-.08.22-.16.33-.24a13.2 13.2 0 0012.1 0c.11.08.22.16.33.24-.41.22-.84.43-1.28.62.24.46.52.9.82 1.31a19.9 19.9 0 005.38-2.84c.42-4.02-.53-7.57-2.92-10.06zM8.88 13.89c-.79 0-1.43-.73-1.43-1.63 0-.9.64-1.64 1.43-1.64s1.44.74 1.44 1.64-.65 1.63-1.44 1.63zm6.24 0c-.79 0-1.43-.73-1.43-1.63 0-.9.64-1.64 1.43-1.64.8 0 1.44.74 1.44 1.64s-.64 1.63-1.44 1.63z" />
-            </svg>
+            <FaDiscord className="w-10 h-10" />
           </div>
 
           <div className="flex-1">
@@ -303,6 +298,19 @@ export default function Home() {
                   >
                     <FaTwitter size="1.2em" />
                   </Link>
+                  <Link
+                    href="https://discord.com/users/nirussvn0"
+                    className="social-icon w-8 h-8 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
+                  >
+                    <FaDiscord size="1.2em" />
+                  </Link>
+                  <Link
+                    href="https://github.com/nirussvn0"
+                    className="social-icon w-8 h-8 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
+                  >
+                    <FaGithub size="1.2em" />
+                  </Link>
+
                 </div>
               </div>
 

@@ -565,14 +565,14 @@ export default function Home() {
             <div className="space-y-8 sm:space-y-12">
               {[
                 {
-                  year: '2025 - Present',
+                  year: '2025 Present',
                   role: 'Fullstack Developer',
                   company: 'Sabicoder',
                   description: 'create a few projects and share to the world',
                   tech: ['React', 'TypeScript', 'Next.js', 'TailwindCSS'],
                 },
                 {
-                  year: '07.2025 - Present',
+                  year: '07.2025 Present',
                   role: 'Provincial gifted student competition',
                   company: 'DSA Learning',
                   description:

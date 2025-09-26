@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   generator: "nirussvn0",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/next-icon.svg", type: "image/svg+xml" },
+      { url: "/icon.ico", sizes: "16x16", type: "image/png" },
+      { url: "/next-icon.svg", sizes: "any", type: "image/svg+xml" },
     ],
     shortcut: "/favicon.ico",
   }

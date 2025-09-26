@@ -421,9 +421,9 @@ export default function Home() {
 
               {/* Mind Channel card */}
               <div
-                className="border-neon-animated border-border p-6 hover:scale-105 
-                              hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
-                              hover:bg-muted transition-all duration-500 "
+                className="border-border p-6 hover:scale-105 
+                          hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
+                          hover:bg-muted transition-all duration-500 "
               >
                 <div className="space-y-4 text-center">
                   <div className="text-xs tracking-wider">= = = = =</div>

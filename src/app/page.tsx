@@ -281,7 +281,7 @@ export default function Home() {
               <div className="magnet-card border-wave-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
                 <div className="flex justify-center gap-6">
                   <Link
-                    href="https://facebook.com/"
+                    href="https://facebook.com/nirussvn0"
                     className="social-icon w-8 h-8 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
                   >
                     <FaFacebook size="1.2em" />

@@ -2,7 +2,13 @@
 
 import Link from 'next/link';
 import { ReactNode, ReactElement, useEffect, useRef, useState } from 'react';
-import { FaFacebook, FaInstagram, FaTwitter, FaDiscord, FaGithub } from 'react-icons/fa';
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaDiscord,
+  FaGithub,
+} from 'react-icons/fa';
 export default function Home() {
   const [isDark, setIsDark] = useState(true);
   const [activeSection, setActiveSection] = useState('');
@@ -252,14 +258,26 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Portrait placeholder */}
+              {/* Portrait */}
               <div className="magnet-card border-dashed-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
-                <div className="aspect-square bg-muted flex items-center justify-center">
-                  <div className="text-muted-foreground text-sm">Portrait</div>
+                <div className="aspect-square bg-muted rounded-lg overflow-hidden relative">
                   <img
-                    src="/portrait.png"
+                    src="/portrait.jng"
                     alt="Portrait"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                    onError={(e) => {
+                      // Debug: Log error to console
+                      console.error('Image failed to load:', e);
+                      // Fallback: Show text if image fails
+                      e.currentTarget.style.display = 'none';
+                      if (e.currentTarget.parentElement) {
+                        e.currentTarget.parentElement.innerHTML =
+                          '<div class="flex items-center justify-center h-full text-muted-foreground text-sm">Portrait not found</div>';
+                      }
+                    }}
+                    onLoad={() => {
+                      console.log('Image loaded successfully!');
+                    }}
                   />
                 </div>
               </div>
@@ -310,7 +328,6 @@ export default function Home() {
                   >
                     <FaGithub size="1.2em" />
                   </Link>
-
                 </div>
               </div>
 

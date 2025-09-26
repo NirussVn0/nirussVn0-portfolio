@@ -320,6 +320,7 @@ export default function Home() {
             </div>
           </div>
         </header>
+        
         {/* ROADMAP — unified effect */}
         <section
           id="work"
@@ -360,7 +361,7 @@ export default function Home() {
                   role: 'Provincial gifted student competition',
                   company: 'DSA Learing',
                   description:
-                    'I will learn data structure and algorithm to win the competition in Vietnam',
+                    'Preparing to compete in the provincial gifted student contest in Vietnam, which evaluates advanced algorithmic knowledge and problem-solving ability.',
                   tech: ['C++', 'Python'],
                 },
                 {
@@ -369,7 +370,7 @@ export default function Home() {
                   company: 'Learning',
                   description:
                     'learning web development and other related stuff',
-                  tech: ['Html', 'Css', 'js'],
+                  tech: ['Html', 'Css', 'js', 'Node.js'],
                 },
                 {
                   year: '2024',
@@ -487,13 +488,53 @@ export default function Home() {
                   date: 'Sep 2024',
                   readTime: '4 min',
                 },
+                {
+                  title: 'The Art of Code Review',
+                  excerpt:
+                    'Building better software through thoughtful and constructive code reviews.',
+                  date: 'Sep 2024',
+                  readTime: '4 min',
+                },
+                {
+                  title: 'The Art of Code Review',
+                  excerpt:
+                    'Building better software through thoughtful and constructive code reviews.',
+                  date: 'Sep 2024',
+                  readTime: '4 min',
+                },
+                {
+                  title: 'The Art of Code Review',
+                  excerpt:
+                    'Building better software through thoughtful and constructive code reviews.',
+                  date: 'Sep 2024',
+                  readTime: '4 min',
+                },
+                {
+                  title: 'The Art of Code Review',
+                  excerpt:
+                    'Building better software through thoughtful and constructive code reviews.',
+                  date: 'Sep 2024',
+                  readTime: '4 min',
+                },
+                {
+                  title: 'The Art of Code Review',
+                  excerpt:
+                    'Building better software through thoughtful and constructive code reviews.',
+                  date: 'Sep 2024',
+                  readTime: '4 min',
+                },
+                {
+                  title: 'The Art of Code Review',
+                  excerpt:
+                    'Building better software through thoughtful and constructive code reviews.',
+                  date: 'Sep 2024',
+                  readTime: '4 min',
+                },
               ].map((post, index) => {
                 const border =
                   index % 3 === 0
-                    ? 'border-neon-animated'
-                    : index % 3 === 1
-                    ? 'border-gradient-animated'
-                    : 'border-zigzag-animated';
+                    ? 'border-zigzag-animated'
+                    : 'border-gradient-animated';
 
                 return (
                   <article

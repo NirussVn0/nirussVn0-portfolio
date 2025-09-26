@@ -262,7 +262,7 @@ export default function Home() {
               <div className="magnet-card border-dashed-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-square bg-muted rounded-lg overflow-hidden relative">
                   <img
-                    src="/portrait.jng"
+                    src="/portrait.jpg"
                     alt="Portrait"
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                     onError={(e) => {

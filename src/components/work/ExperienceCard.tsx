@@ -1,6 +1,15 @@
 'use client';
 
-import { TechIcon } from '@/components/work/TechIcon';
+import { 
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaNode,
+  FaPython,
+  FaPlus
+} from 'react-icons/fa';
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiCplusplus } from 'react-icons/si';
 import { Experience } from '@/lib/constants';
 
 interface ExperienceCardProps {
@@ -17,6 +26,38 @@ export function ExperienceCard({ job, index, activeSection }: ExperienceCardProp
     'ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu will-change-transform will-change-opacity',
     'hover:-translate-y-1 hover:shadow-2xl hover:bg-muted/60',
   ].join(' ');
+
+  // Function to get the appropriate icon for each technology
+  const getTechIcon = (techName: string) => {
+    const tech = techName.trim().toLowerCase();
+    
+    switch (tech) {
+      case 'html':
+        return <FaHtml5 />;
+      case 'css':
+        return <FaCss3Alt />;
+      case 'js':
+      case 'javascript':
+        return <FaJs />;
+      case 'ts':
+      case 'typescript':
+        return <SiTypescript />;
+      case 'react':
+        return <FaReact />;
+      case 'next.js':
+        return <SiNextdotjs />;
+      case 'tailwindcss':
+        return <SiTailwindcss />;
+      case 'node.js':
+        return <FaNode />;
+      case 'python':
+        return <FaPython />;
+      case 'c++':
+        return <SiCplusplus />;
+      default:
+        return <FaPlus />;
+    }
+  };
 
   return (
     <div
@@ -60,7 +101,9 @@ export function ExperienceCard({ job, index, activeSection }: ExperienceCardProp
               className="px-2 py-1 text-xs border border-border rounded-sm inline-flex items-center gap-1 transition-colors duration-300 group-hover:bg-foreground group-hover:text-background"
               title={tech}
             >
-              <TechIcon name={tech} />
+              <span className="inline-flex items-center justify-center w-3.5 h-3.5">
+                {getTechIcon(tech)}
+              </span>
               <span className="leading-none">{tech}</span>
             </span>
           ))}

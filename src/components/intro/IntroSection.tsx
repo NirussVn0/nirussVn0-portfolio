@@ -2,11 +2,16 @@
 
 import { useState } from 'react';
 import { FaDiscord } from 'react-icons/fa';
+
 import { SocialLinks } from '@/components/intro/SocialLinks';
 import { ContactInfo } from '@/components/intro/ContactInfo';
 import { useClock } from '@/hooks/useClock';
 
-export function IntroSection({ sectionRef }: { sectionRef: (el: HTMLElement | null) => void }) {
+export function IntroSection({
+  sectionRef,
+}: {
+  sectionRef: (el: HTMLElement | null) => void;
+}) {
   const { currentTime } = useClock();
   const [imageError, setImageError] = useState(false);
 
@@ -88,9 +93,9 @@ export function IntroSection({ sectionRef }: { sectionRef: (el: HTMLElement | nu
                   Niruss
                 </span>
                 . It is such an honour to have you here. Connect with me and
-                let&apos;s have a deep conversation, or explore creative
-                ideas together. If you vibe with tech, learning, or just fun
-                convos, follow and stay ahead with the truth. Feel at home
+                let&apos;s have a deep conversation, or explore creative ideas
+                together. If you vibe with tech, learning, or just fun convos,
+                follow and stay ahead with the truth. Feel at home
               </p>
 
               <div className="flex gap-2 mt-4">
@@ -145,9 +150,12 @@ export function IntroSection({ sectionRef }: { sectionRef: (el: HTMLElement | nu
 
           {/* Mind Channel card */}
           <div
-            className="border-border p-6 hover:scale-105 
-                          hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
-                          hover:bg-muted transition-all duration-500 "
+            className="relative overflow-hidden group border border-border 
+        rounded-1xl p-6 cursor-pointer
+        transition-[transform,box-shadow] duration-300 ease-out
+        hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)]
+        hover:scale-105 hover:bg-muted
+        will-change-transform transform-gpu"
           >
             <div className="space-y-4 text-center">
               <div className="text-xs tracking-wider">= = = = =</div>
@@ -169,10 +177,10 @@ export function IntroSection({ sectionRef }: { sectionRef: (el: HTMLElement | nu
                 </span>
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-700 ease-out group-hover:w-full"></span>
               </span>{' '}
-              "Every sunrise is a fresh chance to rewrite your story. No
-              matter how small the step, it still moves you closer to the
-              life you dream of. Keep going — your effort today is the seed
-              of tomorrow's victory."
+              "Every sunrise is a fresh chance to rewrite your story. No matter
+              how small the step, it still moves you closer to the life you
+              dream of. Keep going — your effort today is the seed of tomorrow's
+              victory."
             </p>
 
             {/* Animated quote text */}
@@ -196,15 +204,9 @@ export function IntroSection({ sectionRef }: { sectionRef: (el: HTMLElement | nu
 
           {/* 🔥 Join our community card*/}
           <div
-            className="
-        relative overflow-hidden group border border-border 
-        rounded-1xl p-6 cursor-pointer
-        transition-[transform,box-shadow] duration-300 ease-out
-        hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)]
-        hover:-translate-y-1
-        will-change-transform
-        transform-gpu
-          "
+            className="relative overflow-hidden p-6 hover:scale-105 
+                      hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
+                      hover:bg-muted transition-all duration-500"
           >
             <a
               href="https://discord.gg/sabicoder"

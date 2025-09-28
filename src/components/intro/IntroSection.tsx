@@ -134,6 +134,37 @@ export function IntroSection({
               </div>
             </div>
           </a>
+
+          {/* 🔥 Join our community card*/}
+          <div
+            className="relative overflow-hidden p-6 hover:scale-105 
+            hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
+            hover:bg-muted transition-all duration-500 border border-dashed border-border group/community"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/community:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+            <a
+              href="https://discord.gg/sabicoder"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Join our Discord"
+              className="block"
+            >
+              <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground text-background transition-all duration-500 group-hover/community:bg-background group-hover/community:text-foreground group-hover/community:border group-hover/community:border-foreground">
+                  <FaDiscord className="w-10 h-10 transition-all duration-500 group-hover/community:scale-110" />
+                </div>
+
+                <div className="flex-1">
+                  <div className="text-2xl font-bold tracking-wide transition-all duration-500 group-hover/community:text-foreground group-hover/community:dark:text-background">
+                    Join our community
+                  </div>
+                  <div className="text-sm text-muted-foreground transition-all duration-500 group-hover/community:text-foreground/80 group-hover/community:dark:text-background/80">
+                    Hop in our Discord — build, learn, vibe together.
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
 
         {/* Right column - Business cards */}
@@ -201,37 +232,6 @@ export function IntroSection({
                 </span>
               </p>
             </div>
-          </div>
-
-          {/* 🔥 Join our community card*/}
-          <div
-            className="relative overflow-hidden p-6 hover:scale-105 
-            hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
-            hover:bg-muted transition-all duration-500 border border-dashed border-border group/community"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/community:translate-x-full transition-transform duration-1000 ease-in-out"></div>
-            <a
-              href="https://discord.gg/sabicoder"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Join our Discord"
-              className="block"
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground text-background transition-all duration-500 group-hover/community:bg-background group-hover/community:text-foreground group-hover/community:border group-hover/community:border-foreground">
-                  <FaDiscord className="w-10 h-10 transition-all duration-500 group-hover/community:scale-110" />
-                </div>
-
-                <div className="flex-1">
-                  <div className="text-2xl font-bold tracking-wide transition-all duration-500 group-hover/community:text-foreground group-hover/community:dark:text-background">
-                    Join our community
-                  </div>
-                  <div className="text-sm text-muted-foreground transition-all duration-500 group-hover/community:text-foreground/80 group-hover/community:dark:text-background/80">
-                    Hop in our Discord — build, learn, vibe together.
-                  </div>
-                </div>
-              </div>
-            </a>
           </div>
         </div>
       </div>

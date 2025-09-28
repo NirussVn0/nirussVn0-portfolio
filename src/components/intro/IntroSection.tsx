@@ -40,7 +40,7 @@ export function IntroSection({
 
           {/* Portrait */}
           <div className="magnet-card border-dashed-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
-            <div className="aspect-square bg-muted rounded-lg overflow-hidden relative">
+            <div className="aspect-square bg-muted rounded-lg overflow-hidden relative hoverr:scale-200 transition-transform duration-500">
               {!imageError ? (
                 <img
                   src="/portrait.jpg"
@@ -137,7 +137,7 @@ export function IntroSection({
 
           {/* 🔥 Join our community card*/}
           <div
-            className="relative overflow-hidden p-6 hover:scale-105 
+            className="m-auto relative overflow-hidden p-6 hover:scale-105 
             hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
             transition-all duration-500 border border-dashed border-border group/community"
           >

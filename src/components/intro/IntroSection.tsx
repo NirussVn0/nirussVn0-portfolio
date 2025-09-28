@@ -39,17 +39,17 @@ export function IntroSection({
           </div>
 
           {/* Portrait */}
-          <div className="magnet-card border-dashed-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
-            <div className="aspect-square bg-muted rounded-lg overflow-hidden relative hoverr:scale-200 transition-transform duration-500">
+          <div className="group magnet-card border-dashed-animated border-border hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500 relative overflow-hidden rounded-lg">
+            <div className="group relative w-64 h-64 overflow-hidden rounded-lg border border-dashed border-gray-300 shadow-lg">
               {!imageError ? (
                 <img
                   src="/portrait.jpg"
                   alt="Portrait"
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   onError={() => setImageError(true)}
                 />
               ) : (
-                <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                <div className="flex items-center justify-center w-full h-full bg-gray-100 text-gray-400 text-sm">
                   Portrait not found
                 </div>
               )}
@@ -137,9 +137,9 @@ export function IntroSection({
 
           {/* 🔥 Join our community card*/}
           <div
-            className="m-auto relative overflow-hidden p-6 hover:scale-105 
+            className="m-2 relative overflow-hidden p-6 hover:scale-105 
             hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
-            transition-all duration-500 border border-dashed border-border group/community"
+            transition-all duration-500 border border-dashed border-border group/community mb-8"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/community:translate-x-full transition-transform duration-1000 ease-in-out"></div>
             <a
@@ -155,10 +155,10 @@ export function IntroSection({
                 </div>
 
                 <div className="flex-1">
-                  <div className="text-2xl font-bold tracking-wide transition-all duration-500 group-hover/community:text-black group-hover/community:dark:text-white group-hover/community:bg-white group-hover/community:dark:bg-black group-hover/community:px-2 group-hover/community:py-1">
+                  <div className="text-2xl font-bold tracking-wide transition-all duration-500 dark:group-hover/community:text-black group-hover/community:text-white group-hover/community:dark:bg-white group-hover/community:bg-black group-hover/community:px-2 group-hover/community:py-1">
                     Join our community
                   </div>
-                  <div className="text-sm text-muted-foreground transition-all duration-500 group-hover/community:text-black/80 group-hover/community:dark:text-white/80 group-hover/community:bg-white/90 group-hover/community:dark:bg-black/90 group-hover/community:px-2 group-hover/community:py-1">
+                  <div className="text-sm text-muted-foreground transition-all duration-500 dark:group-hover/community:text-white/80 group-hover/community:text-black/80 group-hover/community:dark:bg-white/90 group-hover/community:bg-black/90 group-hover/community:px-2 group-hover/community:py-1">
                     Hop in our Discord — build, learn, vibe together.
                   </div>
                 </div>

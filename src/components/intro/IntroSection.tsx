@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { SocialLinks } from '@/components/intro/SocialLinks';
-import { CommunityInfo } from '@/components/intro/ContactInfo';
+import { CommunityInfo } from '@/components/intro/ComunityInfo';
 import { useClock } from '@/hooks/useClock';
 
 export function IntroSection({

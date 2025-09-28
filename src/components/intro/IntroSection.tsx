@@ -139,8 +139,9 @@ export function IntroSection({
         {/* Right column - Business cards */}
         <div className="lg:col-span-1 space-y-8">
           {/* Studio card */}
-          <div className="magnet-card border-double-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500 group">
-            <div className="space-y-4">
+          <div className="magnet-card border-double-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+            <div className="absolute inset-0 bg-white transform scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-500 ease-out"></div>
+            <div className="space-y-4 relative z-10">
               <div className="bg-foreground text-background p-4 text-center transition-all duration-500 group-hover:bg-white group-hover:text-black">
                 <div className="text-sm font-bold">SABI OF VIBE</div>
                 <div className="text-xs">NIRUSSVNO</div>
@@ -205,8 +206,8 @@ export function IntroSection({
           {/* 🔥 Join our community card*/}
           <div
             className="relative overflow-hidden p-6 hover:scale-105 
-                      hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
-                      hover:bg-muted transition-all duration-500 border border-dashed border-border group/community"
+            hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
+            hover:bg-muted transition-all duration-500 border border-dashed border-border group/community"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/community:translate-x-full transition-transform duration-1000 ease-in-out"></div>
             <a
@@ -217,15 +218,15 @@ export function IntroSection({
               className="block"
             >
               <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground text-background transition-all duration-500 group-hover/community:bg-white group-hover/community:text-black">
+                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground text-background transition-all duration-500 group-hover/community:bg-background group-hover/community:text-foreground group-hover/community:border group-hover/community:border-foreground">
                   <FaDiscord className="w-10 h-10 transition-all duration-500 group-hover/community:scale-110" />
                 </div>
 
                 <div className="flex-1">
-                  <div className="text-2xl font-bold tracking-wide transition-all duration-500 group-hover/community:text-white">
+                  <div className="text-2xl font-bold tracking-wide transition-all duration-500 group-hover/community:text-foreground group-hover/community:dark:text-background">
                     Join our community
                   </div>
-                  <div className="text-sm text-muted-foreground transition-all duration-500 group-hover/community:text-gray-300">
+                  <div className="text-sm text-muted-foreground transition-all duration-500 group-hover/community:text-foreground/80 group-hover/community:dark:text-background/80">
                     Hop in our Discord — build, learn, vibe together.
                   </div>
                 </div>

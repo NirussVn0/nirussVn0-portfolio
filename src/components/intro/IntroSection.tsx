@@ -1,10 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { FaDiscord } from 'react-icons/fa';
-
 import { SocialLinks } from '@/components/intro/SocialLinks';
-import { ContactInfo } from '@/components/intro/ContactInfo';
+import { CommunityInfo } from '@/components/intro/ContactInfo';
 import { useClock } from '@/hooks/useClock';
 
 export function IntroSection({
@@ -24,7 +22,22 @@ export function IntroSection({
       <div className="grid lg:grid-cols-3 gap-8 w-full">
         {/* Left column - Main info */}
         <div className="lg:col-span-1 space-y-8">
-          <div className="magnet-card border-solid-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
+          <div
+            className="magnet-card border-solid-animated border-border
+           p-6 hover-lift hover:scale-105 hover:shadow-2xl
+           transition-all duration-500
+           group/info
+           dark:hover:bg-background dark:hover:text-foreground"
+          >
+            {/* Shimmer effect */}
+            <div
+              className="absolute inset-0 
+                   dark:from-transparent dark:via-black/20dark:to-transparent
+                   -translate-x-full group-hover/info:translate-x-full 
+                   transition-transform duration-1000 ease-in-out
+                   dark:bg-background dark:text-foreground"
+            ></div>
+
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight uppercase">
                 AIZAWA NIRUSS
@@ -39,17 +52,17 @@ export function IntroSection({
           </div>
 
           {/* Portrait */}
-          <div className="group magnet-card border-dashed-animated border-border hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500 relative overflow-hidden rounded-lg">
-            <div className="group relative w-64 h-64 overflow-hidden rounded-lg border border-dashed border-gray-300 shadow-lg">
+          <div className="group magnet-card border-dashed-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
+            <div className="group hover-lift hover:scale-125 out aspect-square bg-muted rounded-lg overflow-hidden relative">
               {!imageError ? (
                 <img
                   src="/portrait.jpg"
                   alt="Portrait"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                   onError={() => setImageError(true)}
                 />
               ) : (
-                <div className="flex items-center justify-center w-full h-full bg-gray-100 text-gray-400 text-sm">
+                <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
                   Portrait not found
                 </div>
               )}
@@ -112,14 +125,9 @@ export function IntroSection({
             </div>
           </div>
 
-          {/* Contact info */}
-          {/* <div className="magnet-card border-gradient-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
-            <ContactInfo />
-          </div> */}
-
           {/* Payment info */}
           <a href="https://sabicoder.xyz/donate">
-            <div className="magnet-card border-dotted-thick border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
+            <div className="mb-8 magnet-card border-dotted-thick border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
               <div className="space-y-4">
                 <h3 className="font-bold text-lg">Support me ☕💖</h3>
                 <div className="text-sm">Support me with Paypal</div>
@@ -137,33 +145,25 @@ export function IntroSection({
 
           {/* 🔥 Join our community card*/}
           <div
-            className="m-2 relative overflow-hidden p-6 hover:scale-105 
-            hover:shadow-[0_0_0_2px_rgba(255,255,255,0.85),0_0_36px_14px_rgba(255,255,255,0.25)] 
-            transition-all duration-500 border border-dashed border-border group/community mb-8"
+            className="mb-8 relative overflow-hidden p-6
+                group/community
+                border borrder-dashed-animated border-border
+                hover-lift hover:scale-110 hover:shadow-2xl transition-all duration-500 
+               
+                /* Light mode default */
+                bg-background text-foreground
+               
+                /* Dark mode default */  
+                dark:bg-background dark:text-foreground
+               
+                /* Light mode hover - becomes dark theme */
+                hover:bg-black hover:text-white hover:border-white
+               
+                /* Dark mode hover - becomes light theme */
+                dark:hover:bg-white dark:hover:text-black dark:hover:border-black
+               "
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/community:translate-x-full transition-transform duration-1000 ease-in-out"></div>
-            <a
-              href="https://discord.gg/sabicoder"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Join our Discord"
-              className="block"
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground text-background transition-all duration-500 group-hover/community:bg-white group-hover/community:text-black group-hover/community:border group-hover/community:border-black dark:group-hover/community:border-white">
-                  <FaDiscord className="w-10 h-10 transition-all duration-500 group-hover/community:scale-110" />
-                </div>
-
-                <div className="flex-1">
-                  <div className="text-2xl font-bold tracking-wide transition-all duration-500 dark:group-hover/community:text-black group-hover/community:text-white group-hover/community:dark:bg-white group-hover/community:bg-black group-hover/community:px-2 group-hover/community:py-1">
-                    Join our community
-                  </div>
-                  <div className="text-sm text-muted-foreground transition-all duration-500 dark:group-hover/community:text-white/80 group-hover/community:text-black/80 group-hover/community:dark:bg-white/90 group-hover/community:bg-black/90 group-hover/community:px-2 group-hover/community:py-1">
-                    Hop in our Discord — build, learn, vibe together.
-                  </div>
-                </div>
-              </div>
-            </a>
+            <CommunityInfo />
           </div>
         </div>
 

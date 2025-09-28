@@ -144,25 +144,7 @@ export function IntroSection({
           </a>
 
           {/* 🔥 Join our community card*/}
-          <div
-            className="mb-8 relative overflow-hidden p-6
-                group/community
-                border borrder-dashed-animated border-border
-                hover-lift hover:scale-110 hover:shadow-2xl transition-all duration-500 
-               
-                /* Light mode default */
-                bg-background text-foreground
-               
-                /* Dark mode default */  
-                dark:bg-background dark:text-foreground
-               
-                /* Light mode hover - becomes dark theme */
-                hover:bg-black hover:text-white hover:border-white
-               
-                /* Dark mode hover - becomes light theme */
-                dark:hover:bg-white dark:hover:text-black dark:hover:border-black
-               "
-          >
+          <div className='mb-8'>
             <CommunityInfo />
           </div>
         </div>

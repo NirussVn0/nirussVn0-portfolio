@@ -5,6 +5,8 @@ import { SocialLinks } from '@/components/intro/SocialLinks';
 import { CommunityInfo } from '@/components/intro/ComunityInfo';
 import { useClock } from '@/hooks/useClock';
 
+import Link from 'next/link';
+
 export function IntroSection({
   sectionRef,
 }: {
@@ -71,12 +73,12 @@ export function IntroSection({
 
           {/* Action buttons */}
           <div className="flex gap-4">
-            <button className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift">
-              Connect
-            </button>
-            <button className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift">
-              Follow
-            </button>
+              <Link href="/Connect" className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift"> 
+                Connect
+              </Link>
+              <Link href="/Secret" className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift"> 
+                My Matrix
+              </Link>
           </div>
         </div>
 
@@ -112,15 +114,15 @@ export function IntroSection({
               </p>
 
               <div className="flex gap-2 mt-4">
-                <span className="px-3 py-1 text-xs border border-border hover:bg-foreground hover:text-background transition-all duration-300">
-                  Business
-                </span>
-                <span className="px-3 py-1 text-xs border border-border hover:bg-foreground hover:text-background transition-all duration-300">
-                  Faith
-                </span>
-                <span className="px-3 py-1 text-xs border border-border hover:bg-foreground hover:text-background transition-all duration-300">
-                  Family
-                </span>
+                <div className="px-3 py-1 text-xs border border-border hover:bg-foreground hover:text-background transition-all duration-300">
+                  AI Dev
+                </div>
+                <div className="px-3 py-1 text-xs border border-border hover:bg-foreground hover:text-background transition-all duration-300">
+                  Web Dev
+                </div>
+                <div  className="px-3 py-1 text-xs border border-border hover:bg-foreground hover:text-background transition-all duration-300">
+                  Fitech/web3
+                </div>
               </div>
             </div>
           </div>

@@ -59,7 +59,7 @@ export function CommunityInfo() {
                        dark:group-hover/community:bg-black dark:group-hover/community:text-white
                        dark:group-hover/community:border dark:group-hover/community:border-white"
           >
-            <FaDiscord className="w-10 h-10 transition-all duration-500" />
+            <FaDiscord className="w-8 h-8 transition-all" />
           </div>
 
           {/* Text content */}

@@ -17,6 +17,8 @@ export default function Home() {
       <SectionNavigation activeSection={activeSection} />
 
       <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
+
+        
         <IntroSection 
           sectionRef={(el) => {
             sectionsRef.current[0] = el;

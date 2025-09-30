@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CONNECT_LINKS } from '@/lib/constants';
+import { CONNECT_LINKS, generateConnectUrl } from '@/lib/constants';
 
 interface ConnectSectionProps {
   activeSection: string;
@@ -64,7 +64,7 @@ export function ConnectSection({ activeSection, sectionRef }: ConnectSectionProp
             {CONNECT_LINKS.map((social, index) => (
               <Link
                 key={social.name}
-                href={social.url}
+                href={generateConnectUrl(social.urlTemplate, social.handle)}
                 className={`group magnet-card ${
                   index % 2 === 0
                     ? 'border-pulse-animated'

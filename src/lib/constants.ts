@@ -73,40 +73,102 @@ export const ARTICLES: Article[] = [
   },
 ];
 
-// Social links data
+// User handles data - centralized for easy maintenance
+export interface UserHandles {
+  all: string;
+  discordId: string;
+  linkedin?: string;
+  [key: string]: string | undefined; // Allow for additional handles
+}
+
+export const USER_HANDLES: UserHandles = {
+  all: 'nirussvn0',
+  discordId: '1195303714777468988',
+  linkedin: 'nirussvn0',
+};
+
+// Social links data with URL templates
 export interface SocialLink {
   name: string;
-  url: string;
-  icon: string; // We'll map this to actual icons in the component
+  urlTemplate: string;
+  handleKey: keyof UserHandles;
+  icon: string;
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { name: 'Facebook', url: 'https://facebook.com/nirussvn0', icon: 'facebook' },
-  { name: 'Instagram', url: 'https://instagram.com/nirussvn0', icon: 'instagram' },
-  { name: 'Twitter', url: 'https://twitter.com/nirussvn0', icon: 'twitter' },
-  { name: 'Discord', url: 'https://discord.com/users/nirussvn0', icon: 'discord' },
-  { name: 'GitHub', url: 'https://github.com/nirussvn0', icon: 'github' },
+  { 
+    name: 'Facebook', 
+    urlTemplate: 'https://facebook.com/{handle}', 
+    handleKey: 'all', 
+    icon: 'facebook' 
+  },
+  { 
+    name: 'Instagram', 
+    urlTemplate: 'https://instagram.com/{handle}', 
+    handleKey: 'all', 
+    icon: 'instagram' 
+  },
+  { 
+    name: 'Twitter', 
+    urlTemplate: 'https://twitter.com/{handle}', 
+    handleKey: 'all', 
+    icon: 'twitter' 
+  },
+  { 
+    name: 'Discord', 
+    urlTemplate: 'https://discord.com/users/{handle}', 
+    handleKey: 'discordId', 
+    icon: 'discord' 
+  },
+  { 
+    name: 'GitHub', 
+    urlTemplate: 'https://github.com/{handle}', 
+    handleKey: 'all', 
+    icon: 'github' 
+  },
 ];
 
-// Connect section data
-export const CONNECT_LINKS = [
-  { name: 'GitHub', handle: '@NirussVn0', url: '#' },
-  { name: 'Discord', handle: '@NirussVn0', url: '#' },
-  { name: 'HubSpot Community', handle: '@NirussVn0', url: '#' },
-  { name: 'LinkedIn', handle: 'NirussVn0', url: '#' },
+// Connect section data with URL templates
+export interface ConnectLink {
+  name: string;
+  handle: string;
+  urlTemplate: string;
+  handleKey: keyof UserHandles;
+}
+
+export const CONNECT_LINKS: ConnectLink[] = [
+  { 
+    name: 'GitHub', 
+    handle: '@NirussVn0', 
+    urlTemplate: 'https://github.com/{handle}', 
+    handleKey: 'all' 
+  },
+  { 
+    name: 'Discord', 
+    handle: '@NirussVn0', 
+    urlTemplate: 'https://discord.com/users/{handle}', 
+    handleKey: 'discordId' 
+  },
+  { 
+    name: 'HubSpot Community', 
+    handle: '@NirussVn0', 
+    urlTemplate: '#', 
+    handleKey: 'all' 
+  },
+  { 
+    name: 'LinkedIn', 
+    handle: 'NirussVn0', 
+    urlTemplate: 'https://www.linkedin.com/in/{handle}', 
+    handleKey: 'linkedin' 
+  },
 ];
 
-// Tech icons mapping
-export const TECH_ICONS: Record<string, string> = {
-  html: 'html',
-  css: 'css',
-  js: 'js',
-  typescript: 'ts',
-  ts: 'ts',
-  react: 'react',
-  'next.js': 'next.js',
-  tailwindcss: 'tailwindcss',
-  'node.js': 'node.js',
-  python: 'python',
-  'c++': 'c++',
+// Function to generate actual URLs from templates
+export const generateSocialUrl = (urlTemplate: string, handle: string): string => {
+  return urlTemplate.replace('{handle}', handle);
+};
+
+// Function to generate connect link URLs
+export const generateConnectUrl = (urlTemplate: string, handle: string): string => {
+  return urlTemplate.replace('{handle}', handle);
 };

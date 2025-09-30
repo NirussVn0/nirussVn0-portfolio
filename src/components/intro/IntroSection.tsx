@@ -73,12 +73,18 @@ export function IntroSection({
 
           {/* Action buttons */}
           <div className="flex gap-4">
-              <Link href="/Connect" className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift"> 
-                Connect
-              </Link>
-              <Link href="/Secret" className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift"> 
-                My Matrix
-              </Link>
+            <Link
+              href="/connect"
+              className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift"
+            >
+              Connect
+            </Link>
+            <Link
+              href="/secret"
+              className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift"
+            >
+              My Matrix
+            </Link>
           </div>
         </div>
 
@@ -120,7 +126,7 @@ export function IntroSection({
                 <div className="px-3 py-1 text-xs border border-border hover:bg-foreground hover:text-background transition-all duration-300">
                   Web Dev
                 </div>
-                <div  className="px-3 py-1 text-xs border border-border hover:bg-foreground hover:text-background transition-all duration-300">
+                <div className="px-3 py-1 text-xs border border-border hover:bg-foreground hover:text-background transition-all duration-300">
                   Fitech/web3
                 </div>
               </div>
@@ -128,7 +134,8 @@ export function IntroSection({
           </div>
 
           {/* Payment info */}
-          <a href="https://sabicoder.xyz/donate">
+          <Link 
+          href="/suport">
             <div className="mb-8 magnet-card border-dotted-thick border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
               <div className="space-y-4">
                 <h3 className="font-bold text-lg">Support me ☕💖</h3>
@@ -143,10 +150,10 @@ export function IntroSection({
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* 🔥 Join our community card*/}
-          <div className='mb-8'>
+          <div className="mb-8">
             <CommunityInfo />
           </div>
         </div>

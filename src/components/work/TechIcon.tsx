@@ -1,43 +1,30 @@
 'use client';
 
-import { 
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaReact,
-  FaNode,
-  FaPython,
-  FaPlus,
-  FaLess,
-  FaSass
-} from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiCplusplus } from 'react-icons/si';
+import { TECH_ICONS } from '@/lib/iconMapping';
+import { cn } from '@/lib/utils';
 
-export function TechIcon({ name }: { name: string }) {
-  const iconMap: Record<string, React.ReactNode> = {
-    html: <FaHtml5 />,
-    css: <FaCss3Alt />,
-    js: <FaJs />,
-    ts: <SiTypescript />,
-    typescript: <SiTypescript />,
-    react: <FaReact />,
-    'next.js': <SiNextdotjs />,
-    tailwindcss: <SiTailwindcss />,
-    'node.js': <FaNode />,
-    python: <FaPython />,
-    'c++': <SiCplusplus />,
-  };
+interface TechIconProps {
+  tech: string;
+  className?: string;
+}
 
-  const key = name.trim().toLowerCase();
-  const icon =
-    iconMap[key] ||
-    iconMap[key.replace(/\s+/g, '')] ||
-    iconMap[key.replace(/\./g, '')] ||
-    <FaPlus />; // fallback icon
+export function TechIcon({ tech, className }: TechIconProps) {
+  // Normalize the tech name to lowercase for matching
+  const normalizedTech = tech.toLowerCase();
+  const Icon = TECH_ICONS[normalizedTech] || TECH_ICONS[normalizedTech.replace('.', '')];
+  
+  if (!Icon) {
+    return null;
+  }
 
   return (
-    <span className="inline-flex items-center justify-center w-3.5 h-3.5">
-      {icon}
-    </span>
+    <div 
+      className={cn(
+        'p-2 rounded-md bg-muted border border-border',
+        className
+      )}
+    >
+      <Icon size="1.5em" />
+    </div>
   );
 }

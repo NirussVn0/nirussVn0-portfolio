@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { SocialLinks } from '@/components/intro/SocialLinks';
 import { CommunityInfo } from '@/components/intro/ComunityInfo';
+import { WebsiteInfoCard } from '@/components/intro/WebsiteInfoCard';
 import { useClock } from '@/hooks/useClock';
 
 import Link from 'next/link';
@@ -224,6 +225,9 @@ export function IntroSection({
               </p>
             </div>
           </div>
+          
+          {/* Website Info Card */}
+          <WebsiteInfoCard />
         </div>
       </div>
     </header>

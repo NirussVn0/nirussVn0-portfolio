@@ -1,49 +1,104 @@
-//route.ts
-
-import { kv } from '@vercel/kv';
+import redis from '@/lib/redis';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const runtime = 'edge';
-
+export const runtime = 'edge'; // @upstash/redis support edge runtime!
+export const dynamic = 'force-dynamic';
 export async function GET(request: NextRequest) {
   try {
-    const count = await kv.get<number>('visitor_count') || 0;
-    return NextResponse.json({ count });
+    const today = new Date().toISOString().split('T')[0];
+    const week = getWeekNumber();
+
+    const [total, todayCount, weekCount] = await Promise.all([
+      redis.get<number>('visitor_count'),
+      redis.get<number>(`visitor_today:${today}`),
+      redis.get<number>(`visitor_week:${week}`),
+    ]);
+
+    return NextResponse.json({
+      total: total || 0,
+      today: todayCount || 0,
+      week: weekCount || 0,
+    });
   } catch (error) {
-    console.error('Failed to fetch visitor count:', error);
-    return NextResponse.json({ count: 0 }, { status: 500 });
+    console.error('Failed to fetch stats:', error);
+    return NextResponse.json(
+      { total: 0, today: 0, week: 0 },
+      { status: 500 }
+    );
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    
     const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
-    const hash = await crypto.subtle.digest(
-      'SHA-256', 
-      new TextEncoder().encode(ip)
-    );
-    const hashedIP = Array.from(new Uint8Array(hash))
-      .map(b => b.toString(16).padStart(2, '0'))
-      .join('');
+    const hashedIP = await hashIP(ip);
     
-    // check ip
-    const isNewVisitor = await kv.set(
-      `visitor:${hashedIP}`, 
-      true, 
-      { ex: 86400, nx: true } 
+    const today = new Date().toISOString().split('T')[0];
+    const week = getWeekNumber();
+
+    // SET với NX (only if not exists)
+    const isNewToday = await redis.set(
+      `visitor:${hashedIP}:${today}`,
+      true,
+      { ex: 86400, nx: true }
     );
-    
-    if (isNewVisitor) {
-      // Increment counter
-      const newCount = await kv.incr('visitor_count');
-      return NextResponse.json({ count: newCount, incremented: true });
+
+    if (isNewToday) {
+      const [totalCount, todayCount, weekCount] = await Promise.all([
+        redis.incr('visitor_count'),
+        redis.incr(`visitor_today:${today}`),
+        redis.incr(`visitor_week:${week}`),
+      ]);
+
+      await Promise.all([
+        redis.expire(`visitor_today:${today}`, 86400 * 2),
+        redis.expire(`visitor_week:${week}`, 86400 * 14),
+      ]);
+
+      return NextResponse.json({
+        total: totalCount,
+        today: todayCount,
+        week: weekCount,
+        incremented: true,
+      });
     }
-    
-    const currentCount = await kv.get<number>('visitor_count') || 0;
-    return NextResponse.json({ count: currentCount, incremented: false });
+
+    const [total, todayCount, weekCount] = await Promise.all([
+      redis.get<number>('visitor_count'),
+      redis.get<number>(`visitor_today:${today}`),
+      redis.get<number>(`visitor_week:${week}`),
+    ]);
+
+    return NextResponse.json({
+      total: total || 0,
+      today: todayCount || 0,
+      week: weekCount || 0,
+      incremented: false,
+    });
   } catch (error) {
-    console.error('Failed to increment visitor count:', error);
-    return NextResponse.json({ error: 'Failed to increment' }, { status: 500 });
+    console.error('Failed to track visitor:', error);
+    return NextResponse.json(
+      { error: 'Failed to track visitor' },
+      { status: 500 }
+    );
   }
+}
+
+async function hashIP(ip: string): Promise<string> {
+  const hash = await crypto.subtle.digest(
+    'SHA-256',
+    new TextEncoder().encode(ip + (process.env.SALT || ''))
+  );
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+function getWeekNumber(): string {
+  const date = new Date();
+  const year = date.getFullYear();
+  const weekNum = Math.ceil(
+    ((date.getTime() - new Date(year, 0, 1).getTime()) / 86400000 + 1) / 7
+  );
+  return `${year}-W${weekNum}`;
 }

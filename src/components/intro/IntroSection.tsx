@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SocialLinks } from '@/components/intro/SocialLinks';
 import { CommunityInfo } from '@/components/intro/ComunityInfo';
 import { WebsiteInfoCard } from '@/components/intro/WebsiteInfoCard';
-import { useClock } from '@/hooks/useClock';
 
 import Link from 'next/link';
 
@@ -13,8 +12,26 @@ export function IntroSection({
 }: {
   sectionRef: (el: HTMLElement | null) => void;
 }) {
-  const { currentTime } = useClock();
+  const [currentTime, setCurrentTime] = useState('00:00:00');
   const [imageError, setImageError] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    
+    const updateClock = () => {
+      const now = new Date();
+      const utc7Time = new Date(now.getTime() + 7 * 60 * 60 * 1000);
+      const hours = utc7Time.getUTCHours().toString().padStart(2, '0');
+      const minutes = utc7Time.getUTCMinutes().toString().padStart(2, '0');
+      const seconds = utc7Time.getUTCSeconds().toString().padStart(2, '0');
+      setCurrentTime(`${hours}:${minutes}:${seconds}`);
+    };
+
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <header
@@ -186,7 +203,7 @@ export function IntroSection({
               <div className="text-2xl font-bold">MIND</div>
               <div className="text-sm">CHANNEL</div>
               <div className="text-2xl font-bold font-mono bg-foreground text-background px-2 py-1 inline-block">
-                {currentTime}
+                {mounted ? currentTime : '00:00:00'}
               </div>
               <div className="text-xs">UTC+7 LIVE</div>
             </div>

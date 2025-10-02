@@ -9,45 +9,73 @@ import { ThoughtsSection } from '@/components/thoughts/ThoughtsSection';
 import { ConnectSection } from '@/components/connect/ConnectSection';
 
 export default function Home() {
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark, toggleTheme, mounted } = useTheme();
   const { activeSection, sectionsRef } = useIntersectionObserver();
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-background text-foreground relative">
+        <div className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
+          <div className="flex flex-col gap-4 p-4 border-dotted-thick border-border bg-background">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="w-3 h-8 bg-transparent border-border" />
+            ))}
+          </div>
+        </div>
+
+        <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
+          <div className="min-h-screen flex items-center opacity-0">
+            <div className="grid lg:grid-cols-3 gap-8 w-full">
+              <div className="lg:col-span-1 space-y-8">
+                <div className="border-solid-animated border-border p-6">
+                  <div className="space-y-4">
+                    <div className="h-8 bg-muted rounded w-3/4"></div>
+                    <div className="h-4 bg-muted rounded w-1/2"></div>
+                    <div className="h-4 bg-muted rounded w-2/3"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
       <SectionNavigation activeSection={activeSection} />
 
       <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
-
-        
-        <IntroSection 
+        <IntroSection
           sectionRef={(el) => {
             sectionsRef.current[0] = el;
             return undefined;
-          }} 
+          }}
         />
 
-        <WorkSection 
-          activeSection={activeSection} 
+        <WorkSection
+          activeSection={activeSection}
           sectionRef={(el) => {
             sectionsRef.current[1] = el;
             return undefined;
-          }} 
+          }}
         />
 
-        <ThoughtsSection 
-          activeSection={activeSection} 
+        <ThoughtsSection
+          activeSection={activeSection}
           sectionRef={(el) => {
             sectionsRef.current[2] = el;
             return undefined;
-          }} 
+          }}
         />
 
-        <ConnectSection 
-          activeSection={activeSection} 
+        <ConnectSection
+          activeSection={activeSection}
           sectionRef={(el) => {
             sectionsRef.current[3] = el;
             return undefined;
-          }} 
+          }}
         />
 
         <footer className="py-12 sm:py-16 border-t-2 border-dotted border-border">

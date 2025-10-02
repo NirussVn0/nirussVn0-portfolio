@@ -4,8 +4,8 @@ import { Eye, Globe, Code } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export function WebsiteInfoCard() {
-  const [visitorCount, setVisitorCount] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [visitorCount, setVisitorCount] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
   
   useEffect(() => {
     const trackVisitor = async () => {

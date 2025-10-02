@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import { 
   FaFacebook, 
   FaInstagram, 
@@ -13,8 +14,10 @@ import {
 } from 'react-icons/fa';
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiCplusplus } from 'react-icons/si';
 
+type IconComponent = ComponentType<{ size?: string | number; className?: string }>;
+
 // Social media icon mapping
-export const SOCIAL_ICONS: Record<string, React.ComponentType<{ size?: string | number }>> = {
+export const SOCIAL_ICONS: Record<string, IconComponent> = {
   facebook: FaFacebook,
   instagram: FaInstagram,
   twitter: FaTwitter,
@@ -23,7 +26,7 @@ export const SOCIAL_ICONS: Record<string, React.ComponentType<{ size?: string | 
 };
 
 // Technology icon mapping
-export const TECH_ICONS: Record<string, React.ComponentType<{ size?: string | number }>> = {
+export const TECH_ICONS: Record<string, IconComponent> = {
   html: FaHtml5,
   css: FaCss3Alt,
   js: FaJs,

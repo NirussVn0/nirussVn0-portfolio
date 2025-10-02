@@ -1,22 +1,25 @@
 'use client';
 
-import { 
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaReact,
-  FaNode,
-  FaPython,
-  FaPlus
-} from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiCplusplus } from 'react-icons/si';
+import { FaPlus } from 'react-icons/fa';
 import { Experience } from '@/lib/constants';
+import { TechIcon } from '@/components/work/TechIcon';
+import { TECH_ICONS } from '@/lib/iconMapping';
 
 interface ExperienceCardProps {
   job: Experience;
   index: number;
   activeSection: string;
 }
+
+const hasTechIcon = (techName: string) => {
+  const normalized = techName.trim().toLowerCase();
+  if (TECH_ICONS[normalized]) {
+    return true;
+  }
+
+  const dotlessTech = normalized.replace(/\./g, '');
+  return Boolean(TECH_ICONS[dotlessTech]);
+};
 
 export function ExperienceCard({ job, index, activeSection }: ExperienceCardProps) {
   const border = index % 2 === 0 ? 'border-wave-animated' : 'border-pulse-animated';
@@ -26,38 +29,6 @@ export function ExperienceCard({ job, index, activeSection }: ExperienceCardProp
     'ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu will-change-transform will-change-opacity',
     'hover:-translate-y-1 hover:shadow-2xl hover:bg-muted/60',
   ].join(' ');
-
-  // Function to get the appropriate icon for each technology
-  const getTechIcon = (techName: string) => {
-    const tech = techName.trim().toLowerCase();
-    
-    switch (tech) {
-      case 'html':
-        return <FaHtml5 />;
-      case 'css':
-        return <FaCss3Alt />;
-      case 'js':
-      case 'javascript':
-        return <FaJs />;
-      case 'ts':
-      case 'typescript':
-        return <SiTypescript />;
-      case 'react':
-        return <FaReact />;
-      case 'next.js':
-        return <SiNextdotjs />;
-      case 'tailwindcss':
-        return <SiTailwindcss />;
-      case 'node.js':
-        return <FaNode />;
-      case 'python':
-        return <FaPython />;
-      case 'c++':
-        return <SiCplusplus />;
-      default:
-        return <FaPlus />;
-    }
-  };
 
   return (
     <div
@@ -95,18 +66,31 @@ export function ExperienceCard({ job, index, activeSection }: ExperienceCardProp
 
         {/* TECH */}
         <div className="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
-          {job.tech.map((tech) => (
-            <span
-              key={tech}
-              className="px-2 py-1 text-xs border border-border rounded-sm inline-flex items-center gap-1 transition-colors duration-300 group-hover:bg-foreground group-hover:text-background"
-              title={tech}
-            >
+          {job.tech.map((tech) => {
+            const icon = hasTechIcon(tech) ? (
+              <TechIcon
+                tech={tech}
+                unstyled
+                className="inline-flex items-center justify-center w-3.5 h-3.5"
+                size="1em"
+              />
+            ) : (
               <span className="inline-flex items-center justify-center w-3.5 h-3.5">
-                {getTechIcon(tech)}
+                <FaPlus className="h-3 w-3" aria-hidden="true" />
               </span>
-              <span className="leading-none">{tech}</span>
-            </span>
-          ))}
+            );
+
+            return (
+              <span
+                key={tech}
+                className="px-2 py-1 text-xs border border-border rounded-sm inline-flex items-center gap-1 transition-colors duration-300 group-hover:bg-foreground group-hover:text-background"
+                title={tech}
+              >
+                {icon}
+                <span className="leading-none">{tech}</span>
+              </span>
+            );
+          })}
         </div>
       </div>
     </div>

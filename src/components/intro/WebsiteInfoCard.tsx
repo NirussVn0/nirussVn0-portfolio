@@ -14,16 +14,24 @@ export function WebsiteInfoCard() {
         const response = await fetch('/api/visitor', {
           method: 'POST',
         });
+        if (!response.ok) {
+          throw new Error(`Failed to increment visitor count: ${response.status}`);
+        }
         const data = await response.json();
-        setVisitorCount(data.count);
+        const totalVisitors = Number(data?.total ?? data?.count ?? 0);
+        setVisitorCount(Number.isFinite(totalVisitors) ? totalVisitors : 0);
         setLoading(false);
       } catch (error) {
         console.error('Failed to track visitor:', error);
         // Fallback: Fetch count without incrementing
         try {
           const response = await fetch('/api/visitor');
+          if (!response.ok) {
+            throw new Error(`Failed to fetch visitor count: ${response.status}`);
+          }
           const data = await response.json();
-          setVisitorCount(data.count);
+          const totalVisitors = Number(data?.total ?? data?.count ?? 0);
+          setVisitorCount(Number.isFinite(totalVisitors) ? totalVisitors : 0);
         } catch {
           setVisitorCount(0);
         }

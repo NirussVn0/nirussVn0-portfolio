@@ -2,7 +2,9 @@
 
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useTheme } from '@/hooks/useTheme';
+import { useIntroOverlay } from '@/hooks/useIntroOverlay';
 import { SectionNavigation } from '@/components/navigation/SectionNavigation';
+import { IntroOverlay } from '@/components/intro/IntroOverlay';
 import { IntroSection } from '@/components/intro/IntroSection';
 import { WorkSection } from '@/components/work/WorkSection';
 import { ThoughtsSection } from '@/components/thoughts/ThoughtsSection';
@@ -11,6 +13,7 @@ import { ConnectSection } from '@/components/connect/ConnectSection';
 export default function Home() {
   const { isDark, toggleTheme, mounted } = useTheme();
   const { activeSection, sectionsRef } = useIntersectionObserver();
+  const introOverlay = useIntroOverlay();
 
   if (!mounted) {
     return (
@@ -44,6 +47,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
+      <IntroOverlay
+        title="Sabi of Vibe"
+        subtitle="Effect Movement"
+        description="So beautiful - let the motion set the tone before the portfolio unfolds."
+        controller={introOverlay}
+      />
+
       <SectionNavigation activeSection={activeSection} />
 
       <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">

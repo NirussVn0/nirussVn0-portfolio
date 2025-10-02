@@ -21,8 +21,13 @@ const hasTechIcon = (techName: string) => {
   return Boolean(TECH_ICONS[dotlessTech]);
 };
 
-export function ExperienceCard({ job, index, activeSection }: ExperienceCardProps) {
-  const border = index % 2 === 0 ? 'border-wave-animated' : 'border-pulse-animated';
+export function ExperienceCard({
+  job,
+  index,
+  activeSection,
+}: ExperienceCardProps) {
+  const border =
+    index % 2 === 0 ? 'border-wave-animated' : 'border-pulse-animated';
   const CARD_BASE = [
     'group magnet-card border-border p-6 cursor-pointer',
     'transition-[transform,opacity,shadow,background-color,color] duration-500',
@@ -36,9 +41,7 @@ export function ExperienceCard({ job, index, activeSection }: ExperienceCardProp
       data-inview={activeSection === 'work' ? 'true' : undefined}
       style={{
         transitionDelay:
-          activeSection === 'work'
-            ? `${150 + index * 90}ms`
-            : '0ms',
+          activeSection === 'work' ? `${150 + index * 90}ms` : '0ms',
       }}
     >
       <div className="grid lg:grid-cols-12 gap-4 sm:gap-8">
@@ -70,6 +73,7 @@ export function ExperienceCard({ job, index, activeSection }: ExperienceCardProp
             const icon = hasTechIcon(tech) ? (
               <TechIcon
                 tech={tech}
+                as="span"
                 unstyled
                 className="inline-flex items-center justify-center w-3.5 h-3.5"
                 size="1em"

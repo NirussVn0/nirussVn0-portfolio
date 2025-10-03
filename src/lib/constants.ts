@@ -45,7 +45,9 @@ export interface Projects {
   title: string;
   excerpt: string;
   date: string;
-  readTime: string;
+  readTime?: string;
+  tags?: string[];
+  link?: string;
 }
 
 export const PROJECTS: Projects[] = [
@@ -55,9 +57,20 @@ export const PROJECTS: Projects[] = [
       'Start to building a beautiful and functional portfolio website.',
     date: 'Sep 2025',
     readTime: '5 min',
+    tags: ['React', 'TailwindCSS', 'Next.js'],
+    link: 'https://sabicoder.xyz/',
   },
   {
-    title: 'Design Systems at Scale',
+    title: 'Pomodoro Peak',
+    excerpt:
+      'A peak productivity app using the Pomodoro technique to help users stay focused and manage their time effectively.',
+    date: 'Sep 2025',
+    readTime: '2 min',
+    tags: ['React', 'TailwindCSS', 'Next.js'],
+    link: 'https://pomodoro-peak.sabicoder.xyz/',
+  },
+  {
+    title: 'P',
     excerpt:
       'Lessons learned from building and maintaining design systems across multiple products.',
     date: 'Nov 2024',
@@ -95,13 +108,13 @@ export interface SocialLink {
 export const SOCIAL_LINKS: SocialLink[] = [
   { 
     name: 'Facebook', 
-    urlTemplate: 'https://facebook.com/{handle}', 
+    urlTemplate: 'https://facebook.com/hikarii.owo/', 
     handleKey: 'all', 
     icon: 'facebook' 
   },
   { 
     name: 'Instagram', 
-    urlTemplate: 'https://instagram.com/{handle}', 
+    urlTemplate: 'https://instagram.com/nirussvien/', 
     handleKey: 'all', 
     icon: 'instagram' 
   },

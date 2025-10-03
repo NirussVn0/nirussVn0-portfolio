@@ -2,7 +2,7 @@
 
 import { FaPlus } from 'react-icons/fa';
 import { Experience } from '@/lib/constants';
-import { TechIcon } from '@/components/work/TechIcon';
+import { TechIcon } from '@/components/ui/TechIcon';
 import { TECH_ICONS } from '@/lib/iconMapping';
 
 interface ExperienceCardProps {

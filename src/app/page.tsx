@@ -7,7 +7,7 @@ import { SectionNavigation } from '@/components/navigation/SectionNavigation';
 import { IntroOverlay } from '@/components/intro/IntroOverlay';
 import { IntroSection } from '@/components/intro/IntroSection';
 import { WorkSection } from '@/components/work/WorkSection';
-import { ProjectSection } from '@/components/thoughts/ProjectSection';
+import { ProjectSection } from '@/components/projects/ProjectSection';
 import { ConnectSection } from '@/components/connect/ConnectSection';
 
 export default function Home() {

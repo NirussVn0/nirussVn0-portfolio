@@ -1,14 +1,14 @@
 'use client';
 
-import { ARTICLES } from '@/lib/constants';
-import { ArticleCard } from '@/components/thoughts/ArticleCard';
+import { PROJECTS } from '@/lib/constants';
+import { ProjectCard } from '@/components/thoughts/ProjectCard';
 
-interface ThoughtsSectionProps {
+interface ProjectSectionProps {
   activeSection: string;
   sectionRef: (el: HTMLElement | null) => void;
 }
 
-export function ThoughtsSection({ activeSection, sectionRef }: ThoughtsSectionProps) {
+export function ProjectSection({ activeSection, sectionRef }: ProjectSectionProps) {
   return (
     <section
       id="thoughts"
@@ -29,8 +29,8 @@ export function ThoughtsSection({ activeSection, sectionRef }: ThoughtsSectionPr
         </div>
 
         <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
-          {ARTICLES.map((post, index) => (
-            <ArticleCard 
+          {PROJECTS.map((post, index) => (
+            <ProjectCard 
               key={index} 
               post={post} 
               index={index} 

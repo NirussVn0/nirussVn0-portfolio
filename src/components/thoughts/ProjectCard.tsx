@@ -1,14 +1,14 @@
 'use client';
 
-import { Article } from '@/lib/constants';
+import { Projects } from '@/lib/constants';
 
-interface ArticleCardProps {
-  post: Article;
+interface ProjectCardProps {
+  post: Projects;
   index: number;
   activeSection: string;
 }
 
-export function ArticleCard({ post, index, activeSection }: ArticleCardProps) {
+export function ProjectCard({ post, index, activeSection }: ProjectCardProps) {
   const border = index % 3 === 0 ? 'border-zigzag-animated' : 'border-gradient-animated';
   const CARD_BASE = [
     'group magnet-card border-border p-6 cursor-pointer',

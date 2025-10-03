@@ -7,7 +7,7 @@ import { SectionNavigation } from '@/components/navigation/SectionNavigation';
 import { IntroOverlay } from '@/components/intro/IntroOverlay';
 import { IntroSection } from '@/components/intro/IntroSection';
 import { WorkSection } from '@/components/work/WorkSection';
-import { ThoughtsSection } from '@/components/thoughts/ThoughtsSection';
+import { ProjectSection } from '@/components/thoughts/ProjectSection';
 import { ConnectSection } from '@/components/connect/ConnectSection';
 
 export default function Home() {
@@ -72,7 +72,7 @@ export default function Home() {
           }}
         />
 
-        <ThoughtsSection
+        <ProjectSection
           activeSection={activeSection}
           sectionRef={(el) => {
             sectionsRef.current[2] = el;

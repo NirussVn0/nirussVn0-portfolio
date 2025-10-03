@@ -1,4 +1,4 @@
-// Experience data
+
 export interface Experience {
   year: string;
   role: string;
@@ -41,15 +41,14 @@ export const EXPERIENCES: Experience[] = [
   },
 ];
 
-// Thoughts/Articles data
-export interface Article {
+export interface Projects {
   title: string;
   excerpt: string;
   date: string;
   readTime: string;
 }
 
-export const ARTICLES: Article[] = [
+export const PROJECTS: Projects[] = [
   {
     title: 'Portfolio Website',
     excerpt:
@@ -73,7 +72,6 @@ export const ARTICLES: Article[] = [
   },
 ];
 
-// User handles data - centralized for easy maintenance
 export interface UserHandles {
   all: string;
   discordId: string;
@@ -87,7 +85,6 @@ export const USER_HANDLES: UserHandles = {
   linkedin: 'nirussvn0',
 };
 
-// Social links data with URL templates
 export interface SocialLink {
   name: string;
   urlTemplate: string;

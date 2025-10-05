@@ -83,7 +83,7 @@ export const PROJECTS: Projects[] = [
     excerpt:
       'if you want to check your token or managae your token, this app is for you. App deployed on Node Package Manager',
     date: 'Jun 2025',
-    types: 'library',
+    types: 'tool',
     tags: ['Node.js', 'Typescript'],
     link: 'https://github.com/NirussVn0/token-discord-checker',
   },
@@ -92,7 +92,7 @@ export const PROJECTS: Projects[] = [
     excerpt:
       'A tool to automate gmail, built with Python and FastAPI, containerized with Docker for easy deployment.',
     date: 'Jun 2025',
-    types: 'archive app',
+    types: 'tool',
     tags: ['Python', 'Next.js', 'FastAPI', 'Docker'],
     link: 'https://github.com/NirussVn0/Gmail-Automation-Tool'
   },
@@ -101,7 +101,7 @@ export const PROJECTS: Projects[] = [
     excerpt:
       'A self-bot for Discord, built with Python and the discord.py library.',
     date: 'Apr 2025',
-    types: 'bot',
+    types: 'tool',
     tags: ['Python', 'Discord.py'],
     link: 'https://github.com/NirussVn0/Python-Hikari-SelfBot'
   },
@@ -117,7 +117,7 @@ export const PROJECTS: Projects[] = [
   {
     title: '404-Page',
     excerpt:
-      "This directory contains the core application for the LinkingBio platform, a modern, customizable bio-link platform built with Next.js 15, TypeScript, and Tailwind CSS. It allows users to create stunning, interactive profile pages with advanced customization options, analytics, and premium features. but linking-bio-homepage haven't deploy yet",
+      "A beautiful and minimalist 404 page, built with HTML, CSS, and JavaScript.",
     date: 'Feb 2025',
     types: 'Fontend',
     tags: ['Html', 'Css', 'JavaScript'],

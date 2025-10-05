@@ -11,7 +11,7 @@ import {
   FaReact,
   FaNode,
   FaPython,
-  
+  FaDocker,
 } from 'react-icons/fa';
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiCplusplus } from 'react-icons/si';
 
@@ -28,6 +28,7 @@ export const SOCIAL_ICONS: Record<string, IconComponent> = {
 
 // Technology icon mapping
 export const TECH_ICONS: Record<string, IconComponent> = {
+  docker: FaDocker,
   html: FaHtml5,
   css: FaCss3Alt,
   js: FaJs,

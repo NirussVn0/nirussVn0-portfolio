@@ -65,25 +65,55 @@ export const PROJECTS: Projects[] = [
     excerpt:
       'A peak productivity app using the Pomodoro technique to help users stay focused and manage their time effectively.',
     date: 'Sep 2025',
-    types: '2 min',
+    types: 'minimal app',
     tags: ['React', 'TailwindCSS', 'Next.js'],
     link: 'https://pp.sabicoder.xyz/',
+  },
+  {
+    title: 'Linking-Bio Homepage',
+    excerpt:
+      "This directory contains the core application for the LinkingBio platform, a modern, customizable bio-link platform built with Next.js 15, TypeScript, and Tailwind CSS. It allows users to create stunning, interactive profile pages with advanced customization options, analytics, and premium features. but linking-bio-homepage haven't deploy yet",
+    date: 'Jul 2025',
+    types: 'archive app',
+    tags: ['React', 'TailwindCSS', 'Next.js'],
+    link: 'https://github.com/NirussVn0/linking-bio-homepage'
+  },
+  {
+    title: 'Gmail Automation Tool',
+    excerpt:
+      'A tool to automate gmail, built with Python and FastAPI, containerized with Docker for easy deployment.',
+    date: 'Jul 2025',
+    types: 'archive app',
+    tags: ['Python', 'Next.js', 'FastAPI', 'Docker'],
+    link: 'https://github.com/NirussVn0/Gmail-Automation-Tool'
+  },
+  {
+    title: 'SelfBot',
+    excerpt:
+      'A self-bot for Discord, built with Python and the discord.py library.',
+    date: 'Apr 2025',
+    types: 'bot',
+    tags: ['Python', 'Discord.py']
+    ,
+    link: 'https://github.com/NirussVn0/Python-Hikari-SelfBot'
   },
   {
     title: 'THPTQG coutdown EX',
     excerpt:
       'A sleek countdown web application for the Vietnamese High School Graduation Exam, built with Next.js.',
     date: 'Apr 2025',
-    types: '5 min',
+    types: 'minimal app',
     tags: ['Node.js', 'Next.js', 'React', 'TailwindCSS', 'TypeScript'],
     link: 'https://project.sabicoder.xyz/',
   },
   {
-    title: 'The Art of Code Review',
+    title: 'token discord checker',
     excerpt:
-      'Building better software through thoughtful and constructive code reviews.',
-    date: 'Sep 2024',
-    types: '4 min',
+      'if you want to check your token or managae your token, this app is for you. App deployed on Node Package Manager',
+    date: 'Jul 2025',
+    types: 'library',
+    tags: ['Node.js', 'Typescript'],
+    link: 'https://github.com/NirussVn0/token-discord-checker',
   },
 ];
 

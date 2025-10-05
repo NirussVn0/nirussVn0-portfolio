@@ -10,7 +10,8 @@ import {
   FaJs,
   FaReact,
   FaNode,
-  FaPython
+  FaPython,
+  
 } from 'react-icons/fa';
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiCplusplus } from 'react-icons/si';
 

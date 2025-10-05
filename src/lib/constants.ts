@@ -74,15 +74,24 @@ export const PROJECTS: Projects[] = [
     excerpt:
       "This directory contains the core application for the LinkingBio platform, a modern, customizable bio-link platform built with Next.js 15, TypeScript, and Tailwind CSS. It allows users to create stunning, interactive profile pages with advanced customization options, analytics, and premium features. but linking-bio-homepage haven't deploy yet",
     date: 'Jul 2025',
-    types: 'archive app',
+    types: 'Fontend',
     tags: ['React', 'TailwindCSS', 'Next.js'],
     link: 'https://github.com/NirussVn0/linking-bio-homepage'
+  },
+  {
+    title: 'token discord checker',
+    excerpt:
+      'if you want to check your token or managae your token, this app is for you. App deployed on Node Package Manager',
+    date: 'Jun 2025',
+    types: 'library',
+    tags: ['Node.js', 'Typescript'],
+    link: 'https://github.com/NirussVn0/token-discord-checker',
   },
   {
     title: 'Gmail Automation Tool',
     excerpt:
       'A tool to automate gmail, built with Python and FastAPI, containerized with Docker for easy deployment.',
-    date: 'Jul 2025',
+    date: 'Jun 2025',
     types: 'archive app',
     tags: ['Python', 'Next.js', 'FastAPI', 'Docker'],
     link: 'https://github.com/NirussVn0/Gmail-Automation-Tool'
@@ -93,8 +102,7 @@ export const PROJECTS: Projects[] = [
       'A self-bot for Discord, built with Python and the discord.py library.',
     date: 'Apr 2025',
     types: 'bot',
-    tags: ['Python', 'Discord.py']
-    ,
+    tags: ['Python', 'Discord.py'],
     link: 'https://github.com/NirussVn0/Python-Hikari-SelfBot'
   },
   {
@@ -107,13 +115,13 @@ export const PROJECTS: Projects[] = [
     link: 'https://project.sabicoder.xyz/',
   },
   {
-    title: 'token discord checker',
+    title: '404-Page',
     excerpt:
-      'if you want to check your token or managae your token, this app is for you. App deployed on Node Package Manager',
-    date: 'Jul 2025',
-    types: 'library',
-    tags: ['Node.js', 'Typescript'],
-    link: 'https://github.com/NirussVn0/token-discord-checker',
+      "This directory contains the core application for the LinkingBio platform, a modern, customizable bio-link platform built with Next.js 15, TypeScript, and Tailwind CSS. It allows users to create stunning, interactive profile pages with advanced customization options, analytics, and premium features. but linking-bio-homepage haven't deploy yet",
+    date: 'Feb 2025',
+    types: 'Fontend',
+    tags: ['Html', 'Css', 'JavaScript'],
+    link: 'https://github.com/NirussVn0/404-animation'
   },
 ];
 

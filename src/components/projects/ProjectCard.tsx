@@ -52,7 +52,7 @@ export function ProjectCard({ project, index, activeSection }: ProjectCardProps)
       style={{ transitionDelay }}
     >
       <div className="space-y-5">
-        <ProjectMeta date={project.date} readTime={project.readTime} />
+        <ProjectMeta date={project.date} types={project.types} />
         <ProjectHeading title={project.title} />
         <ProjectExcerpt excerpt={project.excerpt} />
         <ProjectTags tags={project.tags} />
@@ -81,18 +81,18 @@ export function ProjectCard({ project, index, activeSection }: ProjectCardProps)
 
 interface ProjectMetaProps {
   date: Projects['date'];
-  readTime: Projects['readTime'];
+  types: Projects['types'];
 }
 
-function ProjectMeta({ date, readTime }: ProjectMetaProps) {
-  if (!date && !readTime) {
+function ProjectMeta({ date, types }: ProjectMetaProps) {
+  if (!date && !types) {
     return null;
   }
 
   return (
     <div className="flex items-center justify-between text-xs font-mono text-muted-foreground">
       <span>{date}</span>
-      {readTime ? <span>{readTime}</span> : <span aria-hidden="true" />}
+      {types ? <span>{types}</span> : <span aria-hidden="true" />}
     </div>
   );
 }

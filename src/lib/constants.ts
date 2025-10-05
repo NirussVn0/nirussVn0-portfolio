@@ -45,7 +45,7 @@ export interface Projects {
   title: string;
   excerpt: string;
   date: string;
-  readTime?: string;
+  types?: string;
   tags?: string[];
   link?: string;
 }
@@ -56,7 +56,7 @@ export const PROJECTS: Projects[] = [
     excerpt:
       'Start to building a beautiful and functional portfolio website.',
     date: 'Sep 2025',
-    readTime: '5 min',
+    types: 'minimal app',
     tags: ['React', 'TailwindCSS', 'Next.js'],
     link: 'https://sabicoder.xyz/',
   },
@@ -65,23 +65,25 @@ export const PROJECTS: Projects[] = [
     excerpt:
       'A peak productivity app using the Pomodoro technique to help users stay focused and manage their time effectively.',
     date: 'Sep 2025',
-    readTime: '2 min',
+    types: '2 min',
     tags: ['React', 'TailwindCSS', 'Next.js'],
-    link: 'https://pomodoro-peak.sabicoder.xyz/',
+    link: 'https://pp.sabicoder.xyz/',
   },
   {
-    title: 'P',
+    title: 'THPTQG coutdown EX',
     excerpt:
-      'Lessons learned from building and maintaining design systems across multiple products.',
-    date: 'Nov 2024',
-    readTime: '8 min',
+      'A sleek countdown web application for the Vietnamese High School Graduation Exam, built with Next.js.',
+    date: 'Apr 2025',
+    types: '5 min',
+    tags: ['Node.js', 'Next.js', 'React', 'TailwindCSS', 'TypeScript'],
+    link: 'https://project.sabicoder.xyz/',
   },
   {
     title: 'The Art of Code Review',
     excerpt:
       'Building better software through thoughtful and constructive code reviews.',
     date: 'Sep 2024',
-    readTime: '4 min',
+    types: '4 min',
   },
 ];
 

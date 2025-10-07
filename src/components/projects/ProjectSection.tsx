@@ -10,7 +10,10 @@ interface ProjectSectionProps {
 
 const SECTION_ID = 'thoughts';
 
-export function ProjectSection({ activeSection, sectionRef }: ProjectSectionProps) {
+export function ProjectSection({
+  activeSection,
+  sectionRef,
+}: ProjectSectionProps) {
   const isActiveSection = activeSection === SECTION_ID;
 
   return (
@@ -32,7 +35,7 @@ export function ProjectSection({ activeSection, sectionRef }: ProjectSectionProp
           </h2>
         </div>
 
-        <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
+        <div className="auto-rows-fr grid gap-6 sm:gap-8 lg:grid-cols-2">
           {PROJECTS.map((project, index) => (
             <ProjectCard
               key={`${project.title}-${project.date}`}

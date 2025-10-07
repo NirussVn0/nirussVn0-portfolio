@@ -14,7 +14,7 @@ interface ProjectCardProps {
 }
 
 const CARD_ANIMATION_CLASSES = [
-  'magnet-card border-border p-6',
+  'magnet-card border-border p-6 h-full flex flex-col',
   'transition-[transform,opacity,shadow,background-color,color] duration-500',
   'ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu will-change-transform will-change-opacity',
   'opacity-0 translate-y-4',
@@ -28,21 +28,32 @@ const CTA_ICON = (
     stroke="currentColor"
     viewBox="0 0 24 24"
   >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M17 8l4 4m0 0l-4 4m4-4H3"
+    />
   </svg>
 );
 
-export function ProjectCard({ project, index, activeSection }: ProjectCardProps) {
-  const border = index % 3 === 0 ? 'border-zigzag-animated' : 'border-gradient-animated';
+export function ProjectCard({
+  project,
+  index,
+  activeSection,
+}: ProjectCardProps) {
+  const border =
+    index % 3 === 0 ? 'border-zigzag-animated' : 'border-gradient-animated';
   const isActiveSection = activeSection === 'thoughts';
   const transitionDelay = isActiveSection ? `${150 + index * 90}ms` : '0ms';
   const isLinked = Boolean(project.link);
   const cardClasses = cn(
     'group rounded-xl',
     CARD_ANIMATION_CLASSES,
-    isLinked && 'cursor-pointer hover:-translate-y-1 hover:shadow-2xl hover:bg-muted/60',
+    isLinked &&
+      'cursor-pointer hover:-translate-y-1 hover:shadow-2xl hover:bg-muted/60',
     !isLinked && 'cursor-default',
-    border,
+    border
   );
 
   const article = (
@@ -51,7 +62,7 @@ export function ProjectCard({ project, index, activeSection }: ProjectCardProps)
       data-inview={isActiveSection ? 'true' : undefined}
       style={{ transitionDelay }}
     >
-      <div className="space-y-5">
+      <div className="flex h-full flex-col gap-5">
         <ProjectMeta date={project.date} types={project.types} />
         <ProjectHeading title={project.title} />
         <ProjectExcerpt excerpt={project.excerpt} />
@@ -155,7 +166,7 @@ interface ProjectCallToActionProps {
 
 function ProjectCallToAction({ label, children }: ProjectCallToActionProps) {
   return (
-    <div className="flex items-center gap-2 text-sm text-muted-foreground transition-[color,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-foreground">
+    <div className="mt-auto flex items-center gap-2 text-sm text-muted-foreground transition-[color,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-foreground">
       <span>{label}</span>
       {children}
     </div>

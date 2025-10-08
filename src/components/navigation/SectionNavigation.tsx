@@ -5,7 +5,7 @@ interface SectionNavigationProps {
 }
 
 export function SectionNavigation({ activeSection }: SectionNavigationProps) {
-  const sections = ['intro', 'work', 'thoughts', 'connect'];
+  const sections = ['intro', 'work', 'project', 'service'];
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });

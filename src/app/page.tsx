@@ -26,7 +26,7 @@ export default function Home() {
           </div>
         </div>
 
-        <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
+        <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-28">
           <div className="min-h-screen flex items-center opacity-0">
             <div className="grid lg:grid-cols-3 gap-8 w-full">
               <div className="lg:col-span-1 space-y-8">
@@ -56,7 +56,7 @@ export default function Home() {
 
       <SectionNavigation activeSection={activeSection} />
 
-      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
+      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-28">
         <IntroSection
           sectionRef={(el) => {
             sectionsRef.current[0] = el;

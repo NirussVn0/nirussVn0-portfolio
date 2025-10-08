@@ -92,13 +92,13 @@ export function IntroSection({
           {/* Action buttons */}
           <div className="flex gap-4">
             <Link
-              href="/connect"
+              href="/#service"
               className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift"
             >
               Connect
             </Link>
             <Link
-              href="/secret"
+              href="/project"
               className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift"
             >
               My Matrix

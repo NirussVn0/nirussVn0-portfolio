@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import Script from "next/script"
 import { Geist } from "next/font/google"
 import "./globals.css"
-import { AppWindow } from "lucide-react"
+import { HeaderNavigation } from "@/components/navigation/HeaderNavigation"
 
 export const runtime = "edge"
 
@@ -34,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased" suppressHydrationWarning>
+        <HeaderNavigation />
         <Script
           id="remove-bis-skin"
           strategy="beforeInteractive"

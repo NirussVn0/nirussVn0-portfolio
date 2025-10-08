@@ -11,7 +11,7 @@ interface ConnectSectionProps {
 export function ConnectSection({ activeSection, sectionRef }: ConnectSectionProps) {
   return (
     <section
-      id="connect"
+      id="service"
       ref={sectionRef}
       className="py-20 sm:py-32 opacity-0 translate-y-8 transform-gpu transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] data-[inview=true]:opacity-100 data-[inview=true]:translate-y-0"
     >
@@ -19,12 +19,12 @@ export function ConnectSection({ activeSection, sectionRef }: ConnectSectionProp
         <div className="magnet-card border-double-animated border-border p-6 hover-lift hover:scale-105 hover:shadow-2xl transition-all duration-500">
           <div className="space-y-6 sm:space-y-8">
             <h2 className="text-3xl sm:text-4xl font-bold uppercase">
-              Let&apos;s Connect
+              Let's Connect
             </h2>
             <div className="space-y-6">
               <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-                Always interested in new opportunities, collaborations, and
-                conversations about technology and design.
+                Partner with me on product builds, creative strategy, and technical leadership.
+                Let&apos;s craft thoughtful experiences that resonate.
               </p>
               <div className="space-y-4">
                 <Link

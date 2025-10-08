@@ -61,26 +61,26 @@ export interface ConnectLink {
 export const CONNECT_LINKS: ConnectLink[] = [
   {
     name: 'GitHub',
-    handle: '@NirussVn0',
+    handle: 'NirussVn0',
     urlTemplate: 'https://github.com/{handle}',
     handleKey: 'all',
   },
   {
     name: 'Discord',
-    handle: '@NirussVn0',
+    handle: 'NirussVn0',
     urlTemplate: 'https://discord.com/users/{handle}',
     handleKey: 'discordId',
   },
   {
     name: 'Dev.to',
-    handle: '@niruss',
+    handle: 'niruss',
     urlTemplate: 'https://dev.to/{handle}',
     handleKey: 'all',
   },
   {
-    name: 'Medium',
-    handle: '@nirussvn0',
-    urlTemplate: 'https://medium.com/@{handle}',
+    name: 'HuggingFace',
+    handle: 'nirussvn0',
+    urlTemplate: 'fuggingface.co/@{handle}',
     handleKey: 'all',
   },
   {

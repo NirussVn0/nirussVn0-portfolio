@@ -20,12 +20,9 @@ import {
   SiCplusplus,
   SiFastapi,
   SiPostgresql,
-  SiSupabase,
-  SiPrisma,
-  SiVscodium,
-  SiFigma,
-  SiVercel,
+  SiSqlite,
 } from 'react-icons/si';
+import { VscCode } from 'react-icons/vsc';
 
 type IconComponent = ComponentType<{ size?: string | number; className?: string }>;
 
@@ -58,12 +55,10 @@ export const TECH_ICONS: Record<string, IconComponent> = {
   cpp: SiCplusplus,
   fastapi: SiFastapi,
   postgresql: SiPostgresql,
-  supabase: SiSupabase,
-  prisma: SiPrisma,
-  vscode: SiVscodium,
-  vscodium: SiVscodium,
-  figma: SiFigma,
-  vercel: SiVercel,
-  discordpy: FaDiscord,
+  sqlite: SiSqlite,
+  vscode: VscCode,
+  'visual studio code': VscCode,
+  github: FaGithub,
   'discord.py': FaDiscord,
+  discordpy: FaDiscord,
 };

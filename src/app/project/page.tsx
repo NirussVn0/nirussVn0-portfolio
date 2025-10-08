@@ -1,26 +1,19 @@
 import type { Metadata } from 'next';
 
-import { ProjectCatalog } from '@/components/projects/ProjectCatalog';
-import {
-  PROJECTS,
-  PROJECT_TYPES,
-  TECHNOLOGIES,
-  TOOL_STACK_GROUPS,
-} from '@/lib/projects';
+import { ProjectExplorer } from '@/modules/projects/presentation/ProjectExplorer';
 
 export const metadata: Metadata = {
-  title: 'Projects • NirussVn0',
+  title: 'Project Hypergrid | NirussVn0',
   description:
-    'Dive into NirussVn0’s project matrix. Explore builds by type, stack, and toolkit with live demos and source code.',
+    'Dive into the full matrix of NirussVn0 projects, filter by stack or mission, and explore the supporting tool arsenal.',
 };
 
-export default function ProjectsPage() {
+export default function ProjectPage() {
   return (
-    <ProjectCatalog
-      projects={PROJECTS}
-      projectTypes={PROJECT_TYPES}
-      technologies={TECHNOLOGIES}
-      toolStacks={TOOL_STACK_GROUPS}
-    />
+    <div className="min-h-screen bg-background text-foreground">
+      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-28 pb-16 sm:pb-20 lg:pb-24">
+        <ProjectExplorer />
+      </main>
+    </div>
   );
 }

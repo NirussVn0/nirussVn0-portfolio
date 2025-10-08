@@ -17,7 +17,7 @@ export default function Home() {
 
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-background text-foreground relative">
+      <div className="min-h-screen bg-background text-foreground relative ">
         <div className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
           <div className="flex flex-col gap-4 p-4 border-dotted-thick border-border bg-background">
             {[...Array(4)].map((_, i) => (
@@ -26,7 +26,7 @@ export default function Home() {
           </div>
         </div>
 
-        <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
+        <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-28">
           <div className="min-h-screen flex items-center opacity-0">
             <div className="grid lg:grid-cols-3 gap-8 w-full">
               <div className="lg:col-span-1 space-y-8">
@@ -46,7 +46,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="min-h-screen bg-background text-foreground relative ">
       <IntroOverlay
         title="Sabi of Vibe"
         subtitle="Dev Portfolio"
@@ -56,7 +56,7 @@ export default function Home() {
 
       <SectionNavigation activeSection={activeSection} />
 
-      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
+      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-28">
         <IntroSection
           sectionRef={(el) => {
             sectionsRef.current[0] = el;

@@ -1,26 +1,52 @@
 'use client';
 
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 
-import { FEATURED_PROJECTS, PROJECTS } from '@/lib/projects';
-import { ProjectCard } from '@/components/projects/ProjectCard';
+import type { ProjectSnapshot } from '@/domain/projects/Project';
+import { ProjectCatalogService } from '@/application/projects/ProjectCatalogService';
+import { StaticProjectRepository } from '@/infrastructure/projects/StaticProjectRepository';
+import { ProjectCatalogController } from '@/modules/projects/controllers/ProjectCatalogController';
 
 interface ProjectSectionProps {
   activeSection: string;
   sectionRef: (el: HTMLElement | null) => void;
 }
 
-const SECTION_ID = 'thoughts';
+const SECTION_ID = 'project';
+const FEATURE_COUNT = 3;
 
 export function ProjectSection({
   activeSection,
   sectionRef,
 }: ProjectSectionProps) {
-  const isActiveSection = activeSection === SECTION_ID;
-  const projects = (FEATURED_PROJECTS.length ? FEATURED_PROJECTS : PROJECTS).slice(
-    0,
-    4,
+  const [featuredProjects, setFeaturedProjects] = useState<ProjectSnapshot[]>([]);
+
+  const controller = useMemo(
+    () =>
+      new ProjectCatalogController(
+        new ProjectCatalogService(new StaticProjectRepository())
+      ),
+    []
   );
+
+  useEffect(() => {
+    let isMounted = true;
+
+    void controller.initialize().then((catalog) => {
+      if (!isMounted) {
+        return;
+      }
+
+      setFeaturedProjects(catalog.projects.slice(0, FEATURE_COUNT));
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [controller]);
+
+  const isActiveSection = activeSection === SECTION_ID;
 
   return (
     <section
@@ -36,22 +62,21 @@ export function ProjectSection({
             transitionDelay: isActiveSection ? '80ms' : '0ms',
           }}
         >
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="space-y-2">
               <h2 className="text-3xl sm:text-4xl font-bold uppercase">
-                Featured Projects
+                Project Hypergrid
               </h2>
-              <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-                A quick glimpse at work I&apos;m most proud of right now.
-                Explore the full matrix to browse every build, filter by stack,
-                and discover the story behind each project.
+              <p className="max-w-xl text-sm text-muted-foreground">
+                Enter the dedicated project space to explore full case studies,
+                tag-driven filtering, and the entire stack powering each build.
               </p>
             </div>
             <Link
               href="/project"
-              className="inline-flex items-center gap-2 self-start rounded-full border border-dotted border-border px-5 py-2 text-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-foreground hover:text-background hover:shadow-2xl"
+              className="inline-flex items-center gap-3 border-dotted-thick border-border px-6 py-3 text-sm uppercase tracking-[0.3em] transition-all duration-300 hover:-translate-y-1 hover:bg-foreground hover:text-background"
             >
-              View all projects
+              Enter Matrix
               <svg
                 className="h-4 w-4"
                 fill="none"
@@ -69,17 +94,46 @@ export function ProjectSection({
           </div>
         </div>
 
-        <div className="auto-rows-fr grid gap-6 sm:gap-8 lg:grid-cols-2">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={`${project.title}-${project.date}`}
-              project={project}
-              index={index}
-              activeSection={activeSection}
-            />
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
+          {featuredProjects.map((project) => (
+            <FeatureCard key={project.id} project={project} />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+interface FeatureCardProps {
+  project: ProjectSnapshot;
+}
+
+function FeatureCard({ project }: FeatureCardProps) {
+  return (
+    <article className="magnet-card flex h-full flex-col gap-4 border-pulse-animated border-border p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
+      <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.3em] text-muted-foreground">
+        <span>{project.date}</span>
+        <span>{project.categories[0]?.label ?? 'Project'}</span>
+      </div>
+      <h3 className="text-lg font-semibold uppercase tracking-[0.3em]">
+        {project.title}
+      </h3>
+      <p className="text-sm text-muted-foreground">{project.summary}</p>
+      <div className="mt-auto flex flex-wrap gap-2 text-xs uppercase tracking-wide text-muted-foreground">
+        {project.languages.slice(0, 3).map((language) => (
+          <span
+            key={language.slug}
+            className="rounded-full border border-border px-3 py-1"
+          >
+            {language.label}
+          </span>
+        ))}
+        {project.languages.length > 3 ? (
+          <span className="rounded-full border border-border px-3 py-1">
+            +{project.languages.length - 3}
+          </span>
+        ) : null}
+      </div>
+    </article>
   );
 }

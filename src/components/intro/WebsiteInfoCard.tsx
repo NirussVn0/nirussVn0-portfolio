@@ -9,34 +9,35 @@ export function WebsiteInfoCard() {
 
   useEffect(() => {
     const trackVisitor = async () => {
-      try {
-        // Increment visitor count khi component mount
-        const response = await fetch('/api/visitor', {
-          method: 'POST',
-        });
-        if (!response.ok) {
-          throw new Error(`Failed to increment visitor count: ${response.status}`);
-        }
-        const data = await response.json();
-        const totalVisitors = Number(data?.total ?? data?.count ?? 0);
-        setVisitorCount(Number.isFinite(totalVisitors) ? totalVisitors : 0);
-        setLoading(false);
-      } catch (error) {
-        console.error('Failed to track visitor:', error);
-        // Fallback: Fetch count without incrementing
+      const parseVisitors = (data: unknown) => {
+        const total = Number((data as { total?: number; count?: number })?.total ?? (data as { total?: number; count?: number })?.count ?? 0);
+        return Number.isFinite(total) ? total : 0;
+      };
+
+      const requestCount = async (options?: RequestInit) => {
         try {
-          const response = await fetch('/api/visitor');
+          const response = await fetch('/api/visitor', options);
           if (!response.ok) {
-            throw new Error(`Failed to fetch visitor count: ${response.status}`);
+            return null;
           }
           const data = await response.json();
-          const totalVisitors = Number(data?.total ?? data?.count ?? 0);
-          setVisitorCount(Number.isFinite(totalVisitors) ? totalVisitors : 0);
-        } catch {
-          setVisitorCount(0);
+          return parseVisitors(data);
+        } catch (error) {
+          console.warn('Visitor tracking unavailable:', error);
+          return null;
         }
+      };
+
+      const incremented = await requestCount({ method: 'POST' });
+      if (incremented !== null) {
+        setVisitorCount(incremented);
         setLoading(false);
+        return;
       }
+
+      const fallback = await requestCount();
+      setVisitorCount(fallback ?? 0);
+      setLoading(false);
     };
 
     trackVisitor();

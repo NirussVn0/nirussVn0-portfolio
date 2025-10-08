@@ -41,26 +41,89 @@ export const EXPERIENCES: Experience[] = [
   },
 ];
 
-export type {
-  Project,
-  ProjectType,
-  ProjectTypeId,
-  Technology,
-  TechnologyCategory,
-  ToolStackGroup,
-} from './projects';
+export interface Projects {
+  title: string;
+  excerpt: string;
+  date: string;
+  types?: string;
+  tags?: string[];
+  link?: string;
+}
 
-export {
-  FEATURED_PROJECTS,
-  PROJECTS,
-  PROJECT_TYPES,
-  PROJECT_TYPE_LOOKUP,
-  TECHNOLOGIES,
-  TECHNOLOGY_LOOKUP,
-  TOOL_STACK_GROUPS,
-  resolveProjectTechnologies,
-  resolveProjectTypeLabels,
-} from './projects';
+export const PROJECTS: Projects[] = [
+  {
+    title: 'Portfolio Website',
+    excerpt:
+      'Start to building a beautiful and functional portfolio website.',
+    date: 'Sep 2025',
+    types: 'minimal app',
+    tags: ['React', 'TailwindCSS', 'Next.js'],
+    link: 'https://sabicoder.xyz/',
+  },
+  {
+    title: 'Pomodoro Peak',
+    excerpt:
+      'A peak productivity app using the Pomodoro technique to help users stay focused and manage their time effectively.',
+    date: 'Sep 2025',
+    types: 'minimal app',
+    tags: ['React', 'TailwindCSS', 'Next.js'],
+    link: 'https://pp.sabicoder.xyz/',
+  },
+  {
+    title: 'Linking-Bio Homepage',
+    excerpt:
+      "This directory contains the core application for the LinkingBio platform, a modern, customizable bio-link platform built with Next.js 15, TypeScript, and Tailwind CSS. It allows users to create stunning, interactive profile pages with advanced customization options, analytics, and premium features. but linking-bio-homepage haven't deploy yet",
+    date: 'Jul 2025',
+    types: 'Fontend',
+    tags: ['React', 'TailwindCSS', 'Next.js'],
+    link: 'https://github.com/NirussVn0/linking-bio-homepage'
+  },
+  {
+    title: 'token discord checker',
+    excerpt:
+      'if you want to check your token or managae your token, this app is for you. App deployed on Node Package Manager',
+    date: 'Jun 2025',
+    types: 'tool',
+    tags: ['Node.js', 'Typescript'],
+    link: 'https://github.com/NirussVn0/token-discord-checker',
+  },
+  {
+    title: 'Gmail Automation Tool',
+    excerpt:
+      'A tool to automate gmail, built with Python and FastAPI, containerized with Docker for easy deployment.',
+    date: 'Jun 2025',
+    types: 'tool',
+    tags: ['Python', 'Next.js', 'FastAPI', 'Docker'],
+    link: 'https://github.com/NirussVn0/Gmail-Automation-Tool'
+  },
+  {
+    title: 'SelfBot',
+    excerpt:
+      'A self-bot for Discord, built with Python and the discord.py library.',
+    date: 'Apr 2025',
+    types: 'tool',
+    tags: ['Python', 'Discord.py'],
+    link: 'https://github.com/NirussVn0/Python-Hikari-SelfBot'
+  },
+  {
+    title: 'THPTQG coutdown EX',
+    excerpt:
+      'A sleek countdown web application for the Vietnamese High School Graduation Exam, built with Next.js.',
+    date: 'Apr 2025',
+    types: 'minimal app',
+    tags: ['Node.js', 'Next.js', 'React', 'TailwindCSS', 'TypeScript'],
+    link: 'https://project.sabicoder.xyz/',
+  },
+  {
+    title: '404-Page',
+    excerpt:
+      "A beautiful and minimalist 404 page, built with HTML, CSS, and JavaScript.",
+    date: 'Feb 2025',
+    types: 'Fontend',
+    tags: ['Html', 'Css', 'JavaScript'],
+    link: 'https://github.com/NirussVn0/404-animation'
+  },
+];
 
 export interface UserHandles {
   all: string;

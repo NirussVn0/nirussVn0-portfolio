@@ -1,9 +1,9 @@
 import type { ComponentType } from 'react';
-import {
-  FaFacebook,
-  FaInstagram,
-  FaTwitter,
-  FaDiscord,
+import { 
+  FaFacebook, 
+  FaInstagram, 
+  FaTwitter, 
+  FaDiscord, 
   FaGithub,
   FaHtml5,
   FaCss3Alt,
@@ -13,19 +13,7 @@ import {
   FaPython,
   FaDocker,
 } from 'react-icons/fa';
-import {
-  SiTypescript,
-  SiNextdotjs,
-  SiTailwindcss,
-  SiCplusplus,
-  SiFastapi,
-  SiPostgresql,
-  SiSupabase,
-  SiPrisma,
-  SiVscodium,
-  SiFigma,
-  SiVercel,
-} from 'react-icons/si';
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiCplusplus } from 'react-icons/si';
 
 type IconComponent = ComponentType<{ size?: string | number; className?: string }>;
 
@@ -56,14 +44,4 @@ export const TECH_ICONS: Record<string, IconComponent> = {
   python: FaPython,
   'c++': SiCplusplus,
   cpp: SiCplusplus,
-  fastapi: SiFastapi,
-  postgresql: SiPostgresql,
-  supabase: SiSupabase,
-  prisma: SiPrisma,
-  vscode: SiVscodium,
-  vscodium: SiVscodium,
-  figma: SiFigma,
-  vercel: SiVercel,
-  discordpy: FaDiscord,
-  'discord.py': FaDiscord,
 };

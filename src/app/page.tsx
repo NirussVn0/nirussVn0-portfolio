@@ -17,7 +17,7 @@ export default function Home() {
 
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-background text-foreground relative">
+      <div className="min-h-screen bg-background text-foreground relative ">
         <div className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
           <div className="flex flex-col gap-4 p-4 border-dotted-thick border-border bg-background">
             {[...Array(4)].map((_, i) => (
@@ -46,7 +46,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="min-h-screen bg-background text-foreground relative ">
       <IntroOverlay
         title="Sabi of Vibe"
         subtitle="Dev Portfolio"

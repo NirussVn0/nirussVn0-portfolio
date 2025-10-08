@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import Script from "next/script"
 import { Geist } from "next/font/google"
 import "./globals.css"
-import { MainNavigation } from "@/components/navigation/MainNavigation"
+import { AppWindow } from "lucide-react"
 
 export const runtime = "edge"
 
@@ -76,7 +76,6 @@ export default function RootLayout({
           console.warn('Failed to clean bis_skin_checked attributes', error);
         }
       })();`}</Script>
-        <MainNavigation />
         {children}
       </body>
     </html>

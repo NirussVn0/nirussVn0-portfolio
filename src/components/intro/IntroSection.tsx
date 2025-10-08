@@ -37,7 +37,7 @@ export function IntroSection({
     <header
       id="intro"
       ref={sectionRef}
-      className="py-5 sm:py-10 min-h-screen flex items-center opacity-0 translate-y-8 transform-gpu transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] data-[inview=true]:opacity-100 data-[inview=true]:translate-y-0"
+      className="min-h-screen flex items-center opacity-0 translate-y-8 transform-gpu transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] data-[inview=true]:opacity-100 data-[inview=true]:translate-y-0"
     >
       <div className="grid lg:grid-cols-3 gap-8 w-full">
         {/* Left column - Main info */}
@@ -98,7 +98,7 @@ export function IntroSection({
               Connect
             </Link>
             <Link
-              href="/project"
+              href="/secret"
               className="px-6 py-2 border-dotted-thick border-border bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-300 hover-lift"
             >
               My Matrix

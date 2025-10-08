@@ -3,16 +3,12 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 
-import {
-  type Project,
-  resolveProjectTechnologies,
-  resolveProjectTypeLabels,
-} from '@/lib/projects';
+import { Projects } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { TechIcon } from '@/components/ui/TechIcon';
 
 interface ProjectCardProps {
-  project: Project;
+  project: Projects;
   index: number;
   activeSection: string;
 }
@@ -50,13 +46,7 @@ export function ProjectCard({
     index % 3 === 0 ? 'border-zigzag-animated' : 'border-gradient-animated';
   const isActiveSection = activeSection === 'thoughts';
   const transitionDelay = isActiveSection ? `${150 + index * 90}ms` : '0ms';
-  const preferredLink = project.link ?? project.repo ?? null;
-  const actionLabel = project.link
-    ? 'View live project'
-    : project.repo
-      ? 'View repository'
-      : 'Case study coming soon';
-  const isLinked = Boolean(preferredLink);
+  const isLinked = Boolean(project.link);
   const cardClasses = cn(
     'group rounded-xl',
     CARD_ANIMATION_CLASSES,
@@ -73,11 +63,11 @@ export function ProjectCard({
       style={{ transitionDelay }}
     >
       <div className="flex h-full flex-col gap-5">
-        <ProjectMeta date={project.date} typeLabels={resolveProjectTypeLabels(project.typeIds)} />
+        <ProjectMeta date={project.date} types={project.types} />
         <ProjectHeading title={project.title} />
         <ProjectExcerpt excerpt={project.excerpt} />
-        <ProjectTags techIds={project.techIds} />
-        <ProjectCallToAction label={actionLabel}>
+        <ProjectTags tags={project.tags} />
+        <ProjectCallToAction label={isLinked ? 'View project' : 'Read more'}>
           {CTA_ICON}
         </ProjectCallToAction>
       </div>
@@ -90,7 +80,7 @@ export function ProjectCard({
 
   return (
     <Link
-      href={preferredLink ?? '#'}
+      href={project.link ?? '#'}
       target="_blank"
       rel="noopener noreferrer"
       className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -101,27 +91,25 @@ export function ProjectCard({
 }
 
 interface ProjectMetaProps {
-  date: Project['date'];
-  typeLabels: string[];
+  date: Projects['date'];
+  types: Projects['types'];
 }
 
-function ProjectMeta({ date, typeLabels }: ProjectMetaProps) {
-  if (!date && !typeLabels.length) {
+function ProjectMeta({ date, types }: ProjectMetaProps) {
+  if (!date && !types) {
     return null;
   }
-
-  const typeDisplay = typeLabels.join(' • ');
 
   return (
     <div className="flex items-center justify-between text-xs font-mono text-muted-foreground">
       <span>{date}</span>
-      {typeDisplay ? <span className="text-right">{typeDisplay}</span> : <span aria-hidden="true" />}
+      {types ? <span>{types}</span> : <span aria-hidden="true" />}
     </div>
   );
 }
 
 interface ProjectHeadingProps {
-  title: Project['title'];
+  title: Projects['title'];
 }
 
 function ProjectHeading({ title }: ProjectHeadingProps) {
@@ -133,35 +121,38 @@ function ProjectHeading({ title }: ProjectHeadingProps) {
 }
 
 interface ProjectExcerptProps {
-  excerpt: Project['excerpt'];
+  excerpt: Projects['excerpt'];
 }
 
 function ProjectExcerpt({ excerpt }: ProjectExcerptProps) {
   return <p className="leading-relaxed text-muted-foreground">{excerpt}</p>;
 }
 
-function ProjectTags({ techIds }: { techIds: Project['techIds'] }) {
-  const technologies = resolveProjectTechnologies(techIds);
-  if (!technologies.length) {
+interface ProjectTagsProps {
+  tags?: Projects['tags'];
+}
+
+function ProjectTags({ tags }: ProjectTagsProps) {
+  if (!tags?.length) {
     return null;
   }
 
   return (
     <ul className="flex flex-wrap gap-2 text-xs">
-      {technologies.map((tech) => (
+      {tags.map((tag) => (
         <li
-          key={tech.id}
+          key={tag}
           className="flex items-center gap-2 rounded-full border border-border/60 bg-muted/50 px-3 py-1 font-medium uppercase tracking-wide text-muted-foreground transition-colors duration-300 group-hover:border-border group-hover:text-foreground"
         >
           <TechIcon
-            tech={tech.icon}
+            tech={tag}
             size="1em"
             as="span"
             unstyled
             className="flex h-4 w-4 items-center justify-center"
             iconClassName="h-4 w-4"
           />
-          <span>{tech.label}</span>
+          <span>{tag}</span>
         </li>
       ))}
     </ul>

@@ -49,8 +49,8 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground relative">
       <IntroOverlay
         title="Sabi of Vibe"
-        subtitle="Effect Movement"
-        description="So beautiful - let the motion set the tone before the portfolio unfolds."
+        subtitle="Dev Portfolio"
+        description="Code with passion, design with purpose, chill with style is portfolio unfolds."
         controller={introOverlay}
       />
 

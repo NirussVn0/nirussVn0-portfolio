@@ -80,12 +80,12 @@ export const CONNECT_LINKS: ConnectLink[] = [
   {
     name: 'HuggingFace',
     handle: 'nirussvn0',
-    urlTemplate: 'fuggingface.co/@{handle}',
+    urlTemplate: 'https://huggingface.co/{handle}',
     handleKey: 'all',
   },
   {
     name: 'HubSpot Community',
-    handle: '@NirussVn0',
+    handle: 'NirussVn0',
     urlTemplate: '#',
     handleKey: 'all',
   },

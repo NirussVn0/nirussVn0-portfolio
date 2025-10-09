@@ -3,8 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createHash } from 'crypto';
 
 if (typeof globalThis.self === 'undefined') {
-  // Ensure libraries expecting a web-like global do not crash on Node runtimes.
-  (globalThis as typeof globalThis & { self: typeof globalThis }).self = globalThis;
+  (globalThis as any).self = globalThis;
 }
 
 export const runtime = 'nodejs';
@@ -36,13 +35,13 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+    const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
     const hashedIP = await hashIP(ip);
     
     const today = new Date().toISOString().split('T')[0];
     const week = getWeekNumber();
 
-    // SET với NX (only if not exists)
+    // SET voi NX (only if not exists)
     const isNewToday = await redis.set(
       `visitor:${hashedIP}:${today}`,
       true,

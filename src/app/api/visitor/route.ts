@@ -1,7 +1,13 @@
 import redis from '@/lib/redis';
 import { NextRequest, NextResponse } from 'next/server';
+import { createHash } from 'crypto';
 
-export const runtime = 'edge'; // @upstash/redis support edge runtime!
+if (typeof globalThis.self === 'undefined') {
+  // Ensure libraries expecting a web-like global do not crash on Node runtimes.
+  (globalThis as typeof globalThis & { self: typeof globalThis }).self = globalThis;
+}
+
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export async function GET(request: NextRequest) {
   try {
@@ -85,13 +91,16 @@ export async function POST(request: NextRequest) {
 }
 
 async function hashIP(ip: string): Promise<string> {
-  const hash = await crypto.subtle.digest(
-    'SHA-256',
-    new TextEncoder().encode(ip + (process.env.SALT || ''))
-  );
-  return Array.from(new Uint8Array(hash))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
+  const salted = ip + (process.env.SALT || '');
+
+  if (typeof crypto !== 'undefined' && crypto.subtle) {
+    const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(salted));
+    return Array.from(new Uint8Array(hash))
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  return createHash('sha256').update(salted).digest('hex');
 }
 
 function getWeekNumber(): string {

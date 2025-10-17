@@ -2,9 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { ProjectCatalogService, type ProjectCatalogDto } from '@/application/projects/ProjectCatalogService';
-import { StaticProjectRepository } from '@/infrastructure/projects/StaticProjectRepository';
-import { ProjectCatalogController } from '@/modules/projects/controllers/ProjectCatalogController';
+import type { ProjectCatalogDto } from '@/application/projects/ProjectCatalogService';
 import { ProjectFilterState } from '@/modules/projects/state/ProjectFilterState';
 import { ProjectFilterPanel } from '@/components/projects/ProjectFilterPanel';
 import { ProjectShowcaseCard } from '@/components/projects/ProjectShowcaseCard';
@@ -12,13 +10,11 @@ import { ToolPaletteService, type ToolPaletteDto } from '@/application/tools/Too
 import { StaticToolRepository } from '@/infrastructure/tools/StaticToolRepository';
 import { ToolPaletteController } from '@/modules/tools/controllers/ToolPaletteController';
 import { ToolStackShowcase } from '@/components/tools/ToolStackShowcase';
+import { createProjectControllers } from '@/modules/projects/ProjectModule';
 
 export function ProjectExplorer() {
-  const projectController = useMemo(
-    () =>
-      new ProjectCatalogController(
-        new ProjectCatalogService(new StaticProjectRepository())
-      ),
+  const { catalog: projectController, refresh: refreshController } = useMemo(
+    () => createProjectControllers(),
     []
   );
   const toolController = useMemo(
@@ -35,6 +31,8 @@ export function ProjectExplorer() {
     ProjectFilterState.empty()
   );
   const [isReady, setIsReady] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const requestIdRef = useRef(0);
 
   useEffect(() => {
@@ -46,28 +44,47 @@ export function ProjectExplorer() {
       }
     });
 
-    void projectController.initialize().then((data) => {
-      if (isMounted) {
-        setCatalog(data);
-        setFilterState(ProjectFilterState.empty());
-        setIsReady(true);
-      }
-    });
+    setIsReady(false);
+    setError(null);
+
+    void refreshController
+      .initialLoad()
+      .then((data) => {
+        if (isMounted) {
+          setCatalog(data);
+          setFilterState(ProjectFilterState.empty());
+          setIsReady(true);
+        }
+      })
+      .catch((err: unknown) => {
+        if (isMounted) {
+          setError(err instanceof Error ? err.message : 'Failed to load projects.');
+          setIsReady(true);
+        }
+      });
 
     return () => {
       isMounted = false;
     };
-  }, [projectController, toolController]);
+  }, [refreshController, toolController]);
 
   const runFilter = useCallback(
     (state: ProjectFilterState) => {
       const requestId = ++requestIdRef.current;
 
-      void projectController.applyFilter(state).then((data) => {
-        if (requestId === requestIdRef.current) {
-          setCatalog(data);
-        }
-      });
+      void projectController
+        .applyFilter(state)
+        .then((data) => {
+          if (requestId === requestIdRef.current) {
+            setCatalog(data);
+            setError(null);
+          }
+        })
+        .catch((err: unknown) => {
+          if (requestId === requestIdRef.current) {
+            setError(err instanceof Error ? err.message : 'Failed to filter projects.');
+          }
+        });
     },
     [projectController]
   );
@@ -100,7 +117,31 @@ export function ProjectExplorer() {
     runFilter(empty);
   }, [runFilter]);
 
-  if (!isReady || !catalog) {
+  const handleRefresh = useCallback(() => {
+    const requestId = ++requestIdRef.current;
+    setIsRefreshing(true);
+    setError(null);
+
+    void refreshController
+      .refresh(filterState)
+      .then((data) => {
+        if (requestId === requestIdRef.current) {
+          setCatalog(data);
+        }
+      })
+      .catch((err: unknown) => {
+        if (requestId === requestIdRef.current) {
+          setError(err instanceof Error ? err.message : 'Failed to refresh projects.');
+        }
+      })
+      .finally(() => {
+        if (requestId === requestIdRef.current) {
+          setIsRefreshing(false);
+        }
+      });
+  }, [filterState, refreshController]);
+
+  if (!isReady && !catalog) {
     return (
       <div className="space-y-8">
         <div className="h-14 w-3/4 rounded-2xl bg-muted/40" />
@@ -113,6 +154,22 @@ export function ProjectExplorer() {
     );
   }
 
+  if (!catalog) {
+    return (
+      <div className="space-y-8 rounded-2xl border border-dashed border-border/70 bg-muted/20 p-12 text-center">
+        <h2 className="text-lg font-semibold uppercase tracking-[0.3em]">Unable to load projects</h2>
+        <p className="text-sm text-muted-foreground">{error ?? 'Please verify the configured GitHub or Hugging Face profile and try again.'}</p>
+        <button
+          type="button"
+          onClick={handleRefresh}
+          className="mt-4 inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground transition-colors duration-300 hover:text-foreground"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
   const activeCategories = filterState.getCategorySlugs();
   const activeLanguages = filterState.getLanguageSlugs();
   const projects = catalog.projects;
@@ -120,8 +177,31 @@ export function ProjectExplorer() {
   return (
     <div className="space-y-12">
       <header className="space-y-4 rounded-2xl border border-border/60 bg-background/50 p-8 backdrop-blur">
-        <div className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-          Matrix Archive
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
+            Matrix Archive
+          </span>
+          <button
+            type="button"
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground transition-colors duration-300 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            <span>{isRefreshing ? 'Refreshing' : 'Reload'}</span>
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 4v5h.582m15.356 2A9 9 0 116.582 9"
+              />
+            </svg>
+          </button>
         </div>
         <h1 className="text-4xl font-bold uppercase tracking-[0.2em]">
           Project Hypergrid
@@ -129,6 +209,11 @@ export function ProjectExplorer() {
         <p className="max-w-3xl text-base text-muted-foreground">
           Filter by vibe, stack, and mission to discover each build in the matrix. Every project couples thoughtful design with high-signal engineering narratives.
         </p>
+        {error ? (
+          <p className="text-sm text-destructive">
+            {error}
+          </p>
+        ) : null}
       </header>
 
       <ToolStackShowcase groups={toolGroups} />

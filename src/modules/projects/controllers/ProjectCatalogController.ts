@@ -5,10 +5,6 @@ import type { ProjectFilterState } from '@/modules/projects/state/ProjectFilterS
 export class ProjectCatalogController {
   constructor(private readonly service: ProjectCatalogService) {}
 
-  async initialize(): Promise<ProjectCatalogDto> {
-    return this.service.loadCatalog();
-  }
-
   async applyFilter(filterState: ProjectFilterState): Promise<ProjectCatalogDto> {
     return this.service.loadCatalog(filterState.toFilterProps());
   }

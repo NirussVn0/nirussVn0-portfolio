@@ -4,9 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 
 import type { ProjectSnapshot } from '@/domain/projects/Project';
-import { ProjectCatalogService } from '@/application/projects/ProjectCatalogService';
-import { StaticProjectRepository } from '@/infrastructure/projects/StaticProjectRepository';
-import { ProjectCatalogController } from '@/modules/projects/controllers/ProjectCatalogController';
+import { createProjectControllers } from '@/modules/projects/ProjectModule';
 
 interface ProjectSectionProps {
   activeSection: string;
@@ -22,18 +20,12 @@ export function ProjectSection({
 }: ProjectSectionProps) {
   const [featuredProjects, setFeaturedProjects] = useState<ProjectSnapshot[]>([]);
 
-  const controller = useMemo(
-    () =>
-      new ProjectCatalogController(
-        new ProjectCatalogService(new StaticProjectRepository())
-      ),
-    []
-  );
+  const { refresh: refreshController } = useMemo(() => createProjectControllers(), []);
 
   useEffect(() => {
     let isMounted = true;
 
-    void controller.initialize().then((catalog) => {
+    void refreshController.initialLoad().then((catalog) => {
       if (!isMounted) {
         return;
       }
@@ -44,7 +36,7 @@ export function ProjectSection({
     return () => {
       isMounted = false;
     };
-  }, [controller]);
+  }, [refreshController]);
 
   const isActiveSection = activeSection === SECTION_ID;
 

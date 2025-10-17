@@ -1,7 +1,7 @@
 import { ProjectFilter, type ProjectFilterProps } from '@/domain/projects/ProjectFilter';
-import { ProjectRepository } from '@/domain/projects/ProjectRepository';
 import type { ProjectSnapshot } from '@/domain/projects/Project';
 import type { ProjectFacet } from '@/domain/projects/ProjectCollection';
+import { ProjectRefreshService } from './ProjectRefreshService';
 
 export interface ProjectFacetDto {
   label: string;
@@ -22,10 +22,10 @@ export interface ProjectCatalogDto {
 }
 
 export class ProjectCatalogService {
-  constructor(private readonly repository: ProjectRepository) {}
+  constructor(private readonly refreshService: ProjectRefreshService) {}
 
   async loadCatalog(filterProps: ProjectFilterProps = {}): Promise<ProjectCatalogDto> {
-    const collection = await this.repository.findAll();
+    const collection = await this.refreshService.refresh();
     const filter = new ProjectFilter(filterProps);
     const filtered = collection.filter(filter);
 

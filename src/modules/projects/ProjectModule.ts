@@ -4,6 +4,8 @@ import { ProjectRefreshService } from '@/application/projects/ProjectRefreshServ
 import { ProjectCatalogController } from '@/modules/projects/controllers/ProjectCatalogController';
 import { ProjectRefreshController } from '@/modules/projects/controllers/ProjectRefreshController';
 import { EnvProjectProfileProvider } from '@/infrastructure/projects/EnvProjectProfileProvider';
+import { ResilientProjectProfileProvider } from '@/infrastructure/projects/ResilientProjectProfileProvider';
+import { StaticProjectProfileProvider } from '@/infrastructure/projects/StaticProjectProfileProvider';
 import { RemoteProjectRepository } from '@/infrastructure/projects/RemoteProjectRepository';
 import { GitHubProjectDataSource } from '@/infrastructure/projects/sources/GitHubProjectDataSource';
 import { HuggingFaceModelDataSource } from '@/infrastructure/projects/sources/HuggingFaceModelDataSource';
@@ -14,6 +16,10 @@ export interface ProjectControllers {
   catalog: ProjectCatalogController;
   refresh: ProjectRefreshController;
 }
+
+const DEFAULT_PROJECT_PROFILE = {
+  githubUser: 'NirussVn0',
+};
 
 export function createProjectControllers(): ProjectControllers {
   const httpClient = new FetchHttpClient();
@@ -26,7 +32,10 @@ export function createProjectControllers(): ProjectControllers {
   ];
 
   const dataManager = new ProjectDataManager(sources);
-  const profileProvider = new EnvProjectProfileProvider();
+  const profileProvider = new ResilientProjectProfileProvider([
+    new EnvProjectProfileProvider(),
+    new StaticProjectProfileProvider(DEFAULT_PROJECT_PROFILE),
+  ]);
   const repository = new RemoteProjectRepository(dataManager, profileProvider);
   const refreshService = new ProjectRefreshService(repository);
   const catalogService = new ProjectCatalogService(refreshService);

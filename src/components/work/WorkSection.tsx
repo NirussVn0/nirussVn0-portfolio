@@ -1,11 +1,13 @@
 'use client';
 
+import type { RefCallback } from 'react';
+
 import { EXPERIENCES } from '@/lib/constants';
 import { ExperienceCard } from '@/components/work/ExperienceCard';
 
 interface WorkSectionProps {
   activeSection: string;
-  sectionRef: (el: HTMLElement | null) => void;
+  sectionRef: RefCallback<HTMLElement>;
 }
 
 export function WorkSection({ activeSection, sectionRef }: WorkSectionProps) {

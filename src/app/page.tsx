@@ -12,7 +12,7 @@ import { ConnectSection } from '@/components/connect/ConnectSection';
 
 export default function Home() {
   const { isDark, toggleTheme, mounted } = useTheme();
-  const { activeSection, sectionsRef } = useIntersectionObserver();
+  const { activeSection, registerSection } = useIntersectionObserver();
   const introOverlay = useIntroOverlay();
 
   if (!mounted) {
@@ -57,36 +57,13 @@ export default function Home() {
       <SectionNavigation activeSection={activeSection} />
 
       <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-28">
-        <IntroSection
-          sectionRef={(el) => {
-            sectionsRef.current[0] = el;
-            return undefined;
-          }}
-        />
+        <IntroSection sectionRef={registerSection('intro')} />
 
-        <WorkSection
-          activeSection={activeSection}
-          sectionRef={(el) => {
-            sectionsRef.current[1] = el;
-            return undefined;
-          }}
-        />
+        <WorkSection activeSection={activeSection} sectionRef={registerSection('work')} />
 
-        <ProjectSection
-          activeSection={activeSection}
-          sectionRef={(el) => {
-            sectionsRef.current[2] = el;
-            return undefined;
-          }}
-        />
+        <ProjectSection activeSection={activeSection} sectionRef={registerSection('project')} />
 
-        <ConnectSection
-          activeSection={activeSection}
-          sectionRef={(el) => {
-            sectionsRef.current[3] = el;
-            return undefined;
-          }}
-        />
+        <ConnectSection activeSection={activeSection} sectionRef={registerSection('service')} />
 
         <footer className="py-12 sm:py-16 border-t-2 border-dotted border-border">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-8">

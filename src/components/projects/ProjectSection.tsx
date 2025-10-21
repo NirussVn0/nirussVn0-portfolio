@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type RefCallback } from 'react';
 import Link from 'next/link';
 
 import type { ProjectSnapshot } from '@/domain/projects/Project';
@@ -8,7 +8,7 @@ import { createProjectControllers } from '@/modules/projects/ProjectModule';
 
 interface ProjectSectionProps {
   activeSection: string;
-  sectionRef: (el: HTMLElement | null) => void;
+  sectionRef: RefCallback<HTMLElement>;
 }
 
 const SECTION_ID = 'project';

@@ -90,13 +90,26 @@ export function useIntroOverlay(options: IntroOverlayOptions = {}): IntroOverlay
       };
     }
 
+    let removePreferenceListener: (() => void) | undefined;
+
     if (respectReducedMotion && typeof window !== 'undefined') {
       const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
       if (reduceMotionQuery.matches) {
-        setShouldRender(false);
-        setIsVisible(false);
-        return undefined;
+        setShouldRender(true);
+        setIsVisible(true);
       }
+
+      const handlePreferenceChange = (event: MediaQueryListEvent) => {
+        if (event.matches) {
+          clearTimers();
+          setShouldRender(true);
+          setIsVisible(true);
+        }
+      };
+
+      reduceMotionQuery.addEventListener('change', handlePreferenceChange);
+      removePreferenceListener = () => reduceMotionQuery.removeEventListener('change', handlePreferenceChange);
     }
 
     autoCloseTimeoutRef.current = window.setTimeout(() => {
@@ -108,6 +121,7 @@ export function useIntroOverlay(options: IntroOverlayOptions = {}): IntroOverlay
         window.clearTimeout(autoCloseTimeoutRef.current);
         autoCloseTimeoutRef.current = null;
       }
+      removePreferenceListener?.();
     };
   }, [autoCloseDelayMs, clearTimers, isVisible, respectReducedMotion, shouldRender]);
 

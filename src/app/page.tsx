@@ -55,7 +55,7 @@ export default function Home() {
         controller={introOverlay}
       />
 
-      {shouldShowNavigation ? <SectionNavigation activeSection={activeSection} /> : null}
+      <SectionNavigation activeSection={activeSection} isVisible={shouldShowNavigation} />
 
       <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-28">
         <IntroSection sectionRef={registerSection('intro')} />

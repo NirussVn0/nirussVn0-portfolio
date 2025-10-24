@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-import { useTheme } from '@/hooks/useTheme';
 import { cn } from '@/lib/utils';
 
 interface NavItem {
@@ -32,11 +32,51 @@ const NAV_ITEMS: NavItem[] = [
 
 export function HeaderNavigation() {
   const pathname = usePathname();
-  const { isDark, toggleTheme, mounted } = useTheme();
+  const [isVisible, setIsVisible] = useState(pathname !== '/');
+
+  useEffect(() => {
+    if (pathname !== '/') {
+      setIsVisible(true);
+      return;
+    }
+
+    const target = document.getElementById('intro');
+    if (!target) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.target === target) {
+            setIsVisible(!entry.isIntersecting);
+          }
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [pathname]);
+
+  const visibilityClasses = cn(
+    'transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
+    isVisible ? 'translate-y-0 opacity-100' : '-translate-y-8 opacity-0 pointer-events-none'
+  );
 
   return (
     <header className="fixed inset-x-0 top-0 z-40">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 border-b border-border/60 bg-background/80 px-6 py-4 backdrop-blur sm:px-8 lg:px-16">
+      <div
+        className={cn(
+          'mx-auto flex w-full max-w-6xl items-center justify-between gap-6 border-b border-border/60 bg-background/80 px-6 py-4 backdrop-blur sm:px-8 lg:px-16',
+          visibilityClasses
+        )}
+      >
         <Link
           href="/"
           className="text-xs font-semibold uppercase tracking-[0.5em] text-muted-foreground transition-colors hover:text-foreground"

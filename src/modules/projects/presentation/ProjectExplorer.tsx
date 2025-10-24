@@ -10,11 +10,15 @@ import { ToolPaletteService, type ToolPaletteDto } from '@/application/tools/Too
 import { StaticToolRepository } from '@/infrastructure/tools/StaticToolRepository';
 import { ToolPaletteController } from '@/modules/tools/controllers/ToolPaletteController';
 import { ToolStackShowcase } from '@/components/tools/ToolStackShowcase';
-import { createProjectControllers } from '@/modules/projects/ProjectModule';
+import { createProjectControllers, createProjectPreferenceController } from '@/modules/projects/ProjectModule';
 
 export function ProjectExplorer() {
   const { catalog: projectController, refresh: refreshController } = useMemo(
     () => createProjectControllers(),
+    []
+  );
+  const preferenceController = useMemo(
+    () => createProjectPreferenceController(),
     []
   );
   const toolController = useMemo(
@@ -33,6 +37,7 @@ export function ProjectExplorer() {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [featuredIds, setFeaturedIds] = useState<Set<string>>(new Set());
   const requestIdRef = useRef(0);
 
   useEffect(() => {
@@ -67,6 +72,30 @@ export function ProjectExplorer() {
       isMounted = false;
     };
   }, [refreshController, toolController]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    void preferenceController
+      .listFeatured()
+      .then((ids) => {
+        if (isMounted) {
+          setFeaturedIds(new Set(ids));
+        }
+      })
+      .catch(() => {});
+
+    const unsubscribe = preferenceController.subscribe((ids) => {
+      if (isMounted) {
+        setFeaturedIds(new Set(ids));
+      }
+    });
+
+    return () => {
+      isMounted = false;
+      unsubscribe();
+    };
+  }, [preferenceController]);
 
   const runFilter = useCallback(
     (state: ProjectFilterState) => {
@@ -140,6 +169,22 @@ export function ProjectExplorer() {
         }
       });
   }, [filterState, refreshController]);
+
+  const handleToggleFeatured = useCallback(
+    (projectId: string) => {
+      void preferenceController
+        .toggleFeatured(projectId)
+        .then((ids) => {
+          setFeaturedIds(new Set(ids));
+          setError(null);
+        })
+        .catch((err: unknown) => {
+          const message = err instanceof Error ? err.message : 'Unable to update featured projects.';
+          setError(message);
+        });
+    },
+    [preferenceController]
+  );
 
   if (!isReady && !catalog) {
     return (
@@ -252,7 +297,13 @@ export function ProjectExplorer() {
           ) : (
             <div className="grid gap-6 md:grid-cols-2">
               {projects.map((project, index) => (
-                <ProjectShowcaseCard key={project.id} project={project} index={index} />
+                <ProjectShowcaseCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  isFeatured={featuredIds.has(project.id)}
+                  onToggleFeatured={handleToggleFeatured}
+                />
               ))}
             </div>
           )}

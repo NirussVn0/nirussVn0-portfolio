@@ -3,14 +3,17 @@ import { ProjectCatalogService } from '@/application/projects/ProjectCatalogServ
 import { ProjectRefreshService } from '@/application/projects/ProjectRefreshService';
 import { ProjectCatalogController } from '@/modules/projects/controllers/ProjectCatalogController';
 import { ProjectRefreshController } from '@/modules/projects/controllers/ProjectRefreshController';
+import { ProjectPreferenceController } from '@/modules/projects/controllers/ProjectPreferenceController';
 import { EnvProjectProfileProvider } from '@/infrastructure/projects/EnvProjectProfileProvider';
 import { ResilientProjectProfileProvider } from '@/infrastructure/projects/ResilientProjectProfileProvider';
 import { StaticProjectProfileProvider } from '@/infrastructure/projects/StaticProjectProfileProvider';
+import { LocalStorageProjectPreferenceRepository } from '@/infrastructure/projects/LocalStorageProjectPreferenceRepository';
 import { RemoteProjectRepository } from '@/infrastructure/projects/RemoteProjectRepository';
 import { GitHubProjectDataSource } from '@/infrastructure/projects/sources/GitHubProjectDataSource';
 import { HuggingFaceModelDataSource } from '@/infrastructure/projects/sources/HuggingFaceModelDataSource';
 import { HuggingFaceSpaceDataSource } from '@/infrastructure/projects/sources/HuggingFaceSpaceDataSource';
 import { FetchHttpClient } from '@/infrastructure/shared/FetchHttpClient';
+import { FeaturedProjectService } from '@/application/projects/FeaturedProjectService';
 
 export interface ProjectControllers {
   catalog: ProjectCatalogController;
@@ -44,4 +47,10 @@ export function createProjectControllers(): ProjectControllers {
     catalog: new ProjectCatalogController(catalogService),
     refresh: new ProjectRefreshController(catalogService),
   };
+}
+
+export function createProjectPreferenceController(): ProjectPreferenceController {
+  const repository = new LocalStorageProjectPreferenceRepository();
+  const service = new FeaturedProjectService(repository);
+  return new ProjectPreferenceController(service);
 }

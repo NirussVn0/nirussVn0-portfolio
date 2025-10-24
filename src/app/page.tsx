@@ -14,6 +14,7 @@ export default function Home() {
   const { isDark, toggleTheme, mounted } = useTheme();
   const { activeSection, registerSection } = useIntersectionObserver();
   const introOverlay = useIntroOverlay();
+  const shouldShowNavigation = activeSection !== '' && activeSection !== 'intro';
 
   if (!mounted) {
     return (
@@ -54,7 +55,7 @@ export default function Home() {
         controller={introOverlay}
       />
 
-      <SectionNavigation activeSection={activeSection} />
+      {shouldShowNavigation ? <SectionNavigation activeSection={activeSection} /> : null}
 
       <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-28">
         <IntroSection sectionRef={registerSection('intro')} />

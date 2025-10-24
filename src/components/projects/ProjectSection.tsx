@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, type RefCallback } from 'react';
 import Link from 'next/link';
 
 import type { ProjectSnapshot } from '@/domain/projects/Project';
-import { createProjectControllers } from '@/modules/projects/ProjectModule';
+import { createProjectControllers, createProjectPreferenceController } from '@/modules/projects/ProjectModule';
 
 interface ProjectSectionProps {
   activeSection: string;
@@ -18,9 +18,12 @@ export function ProjectSection({
   activeSection,
   sectionRef,
 }: ProjectSectionProps) {
+  const [catalogProjects, setCatalogProjects] = useState<ProjectSnapshot[]>([]);
+  const [featuredIds, setFeaturedIds] = useState<Set<string>>(new Set());
   const [featuredProjects, setFeaturedProjects] = useState<ProjectSnapshot[]>([]);
 
   const { refresh: refreshController } = useMemo(() => createProjectControllers(), []);
+  const preferenceController = useMemo(() => createProjectPreferenceController(), []);
 
   useEffect(() => {
     let isMounted = true;
@@ -30,13 +33,40 @@ export function ProjectSection({
         return;
       }
 
-      setFeaturedProjects(catalog.projects.slice(0, FEATURE_COUNT));
+      setCatalogProjects(catalog.projects);
     });
 
     return () => {
       isMounted = false;
     };
   }, [refreshController]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    void preferenceController.listFeatured().then((ids) => {
+      if (!isMounted) {
+        return;
+      }
+      setFeaturedIds(new Set(ids));
+    });
+
+    const unsubscribe = preferenceController.subscribe((ids) => {
+      if (!isMounted) {
+        return;
+      }
+      setFeaturedIds(new Set(ids));
+    });
+
+    return () => {
+      isMounted = false;
+      unsubscribe();
+    };
+  }, [preferenceController]);
+
+  useEffect(() => {
+    setFeaturedProjects(deriveFeaturedProjects(catalogProjects, featuredIds, FEATURE_COUNT));
+  }, [catalogProjects, featuredIds]);
 
   const isActiveSection = activeSection === SECTION_ID;
 
@@ -128,4 +158,31 @@ function FeatureCard({ project }: FeatureCardProps) {
       </div>
     </article>
   );
+}
+
+function deriveFeaturedProjects(
+  projects: ProjectSnapshot[],
+  featuredIds: Set<string>,
+  limit: number
+): ProjectSnapshot[] {
+  if (projects.length === 0 || limit <= 0) {
+    return [];
+  }
+
+  if (featuredIds.size === 0) {
+    return projects.slice(0, limit);
+  }
+
+  const prioritized: ProjectSnapshot[] = [];
+  const remainder: ProjectSnapshot[] = [];
+
+  for (const project of projects) {
+    if (featuredIds.has(project.id)) {
+      prioritized.push(project);
+    } else {
+      remainder.push(project);
+    }
+  }
+
+  return prioritized.concat(remainder).slice(0, limit);
 }

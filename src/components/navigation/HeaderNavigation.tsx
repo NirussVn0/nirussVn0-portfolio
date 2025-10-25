@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { cn } from '@/lib/utils';
+import { HOME_NAV_EVENT } from '@/lib/constants/navigation';
 
 interface NavItem {
   label: string;
@@ -32,37 +33,33 @@ const NAV_ITEMS: NavItem[] = [
 
 export function HeaderNavigation() {
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(pathname !== '/');
+  const isHome = pathname === '/';
+  const [isVisible, setIsVisible] = useState(!isHome);
 
   useEffect(() => {
-    if (pathname !== '/') {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    if (!isHome) {
       setIsVisible(true);
       return;
     }
 
-    const target = document.getElementById('intro');
-    if (!target) {
-      setIsVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.target === target) {
-            setIsVisible(!entry.isIntersecting);
-          }
-        }
-      },
-      { threshold: 0.4 }
-    );
-
-    observer.observe(target);
-
-    return () => {
-      observer.disconnect();
+    const handler = (event: Event) => {
+      if (!(event instanceof CustomEvent)) {
+        return;
+      }
+      if (typeof event.detail === 'boolean') {
+        setIsVisible(event.detail);
+      }
     };
-  }, [pathname]);
+
+    window.addEventListener(HOME_NAV_EVENT, handler as EventListener);
+    return () => {
+      window.removeEventListener(HOME_NAV_EVENT, handler as EventListener);
+    };
+  }, [isHome]);
 
   const visibilityClasses = cn(
     'transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',

@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useTheme } from '@/hooks/useTheme';
 import { useIntroOverlay } from '@/hooks/useIntroOverlay';
@@ -9,12 +11,28 @@ import { IntroSection } from '@/components/intro/IntroSection';
 import { WorkSection } from '@/components/work/WorkSection';
 import { ProjectSection } from '@/components/projects/ProjectSection';
 import { ConnectSection } from '@/components/connect/ConnectSection';
+import { HOME_NAV_EVENT } from '@/lib/constants/navigation';
 
 export default function Home() {
   const { isDark, toggleTheme, mounted } = useTheme();
   const { activeSection, registerSection } = useIntersectionObserver();
   const introOverlay = useIntroOverlay();
   const shouldShowNavigation = activeSection !== '' && activeSection !== 'intro';
+  const mainTopPadding = shouldShowNavigation ? 'pt-28' : 'pt-16';
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    window.dispatchEvent(
+      new CustomEvent(HOME_NAV_EVENT, {
+        detail: shouldShowNavigation,
+      })
+    );
+
+    return undefined;
+  }, [shouldShowNavigation]);
 
   if (!mounted) {
     return (
@@ -48,16 +66,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative ">
-      <IntroOverlay
-        title="Sabi of Vibe"
-        subtitle="Dev Portfolio"
-        description="Code with passion, design with purpose, chill with style is portfolio unfolds."
-        controller={introOverlay}
-      />
 
       <SectionNavigation activeSection={activeSection} isVisible={shouldShowNavigation} />
 
-      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-28">
+      <main className={`max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 ${mainTopPadding}`}>
         <IntroSection sectionRef={registerSection('intro')} />
 
         <WorkSection activeSection={activeSection} sectionRef={registerSection('work')} />

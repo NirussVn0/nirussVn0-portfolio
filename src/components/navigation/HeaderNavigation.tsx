@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 import { HOME_NAV_EVENT } from '@/lib/constants/navigation';
+import { HOME_NAV_EVENT } from '@/lib/constants/navigation';
 
 interface NavItem {
   label: string;
@@ -37,13 +38,15 @@ export function HeaderNavigation() {
   const [isVisible, setIsVisible] = useState(!isHome);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
     if (!isHome) {
       setIsVisible(true);
-      return;
+      return undefined;
+    }
+
+    setIsVisible(false);
+
+    if (typeof window === 'undefined') {
+      return undefined;
     }
 
     const handler = (event: Event) => {

@@ -18,7 +18,7 @@ export default function Home() {
   const { activeSection, registerSection } = useIntersectionObserver();
   const introOverlay = useIntroOverlay();
   const shouldShowNavigation = activeSection !== '' && activeSection !== 'intro';
-  const mainTopPadding = shouldShowNavigation ? 'pt-28' : 'pt-16';
+  const mainTopPadding = shouldShowNavigation ? 'pt-28' : 'pt-10';
 
   useEffect(() => {
     if (typeof window === 'undefined') {

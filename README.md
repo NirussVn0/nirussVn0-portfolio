@@ -19,7 +19,7 @@
 Hi, I'm **Niruss**, a passionate student, fullstack developer and learning a web3 enginering. This is my portfolio website showcasing my journey in development, featuring modern technologies and clean, performant code.
 
 
-- Showcase **🔗 [Visit Portfolio](https://visualniruss.xyz/)**
+- Showcase **🔗 [Visit Portfolio](https://sabicoder.xyz/)**
 
 ## 🛠️ Tech Stack
 

@@ -2,7 +2,10 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { IntroDiagnosticsWindow, type WindowPhase } from '@/components/intro/IntroDiagnosticsWindow';
+import {
+  IntroDiagnosticsWindow,
+  type WindowPhase,
+} from '@/components/intro/IntroDiagnosticsWindow';
 import type { IntroOverlayController } from '@/hooks/useIntroOverlay';
 import { IntroDiagnosticsController } from '@/modules/intro/controllers/IntroDiagnosticsController';
 import { BrowserUserDiagnosticsService } from '@/application/system/BrowserUserDiagnosticsService';
@@ -18,7 +21,13 @@ import {
   INTRO_OVERLAY_FADE_MS,
 } from '@/lib/constants';
 
-type IntroPhase = 'boot' | 'windowIntro' | 'typing' | 'windowOutro' | 'hero' | 'fadeOut';
+type IntroPhase =
+  | 'boot'
+  | 'windowIntro'
+  | 'typing'
+  | 'windowOutro'
+  | 'hero'
+  | 'fadeOut';
 
 interface IntroOverlayProps {
   title: string;
@@ -39,7 +48,7 @@ export function IntroOverlay({ title, controller }: IntroOverlayProps) {
     const service = new BrowserUserDiagnosticsService(
       new IpifyIpAddressProvider(),
       new NavigatorBrowserInspector(),
-      new SystemClockAdapter(),
+      new SystemClockAdapter()
     );
 
     return new IntroDiagnosticsController(service);
@@ -87,7 +96,10 @@ export function IntroOverlay({ title, controller }: IntroOverlayProps) {
     };
   }, [controller.shouldRender, controllerInstance]);
 
-  const displayLines = useMemo(() => diagnostics?.toDisplayLines() ?? [], [diagnostics]);
+  const displayLines = useMemo(
+    () => diagnostics?.toDisplayLines() ?? [],
+    [diagnostics]
+  );
 
   useEffect(() => {
     if (phase === 'windowIntro' && diagnostics) {
@@ -206,8 +218,12 @@ export function IntroOverlay({ title, controller }: IntroOverlayProps) {
     return null;
   }
 
-  const overlayOpacityClass = controller.isVisible && isOverlayOpaque ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none';
-  const showWindow = phase === 'windowIntro' || phase === 'typing' || phase === 'windowOutro';
+  const overlayOpacityClass =
+    controller.isVisible && isOverlayOpaque
+      ? 'opacity-100 pointer-events-auto'
+      : 'opacity-0 pointer-events-none';
+  const showWindow =
+    phase === 'windowIntro' || phase === 'typing' || phase === 'windowOutro';
 
   return (
     <div
@@ -243,7 +259,8 @@ export function IntroOverlay({ title, controller }: IntroOverlayProps) {
 
       <style jsx>{`
         @keyframes matrixFloat {
-          0%, 100% {
+          0%,
+          100% {
             transform: translateY(0);
           }
           50% {

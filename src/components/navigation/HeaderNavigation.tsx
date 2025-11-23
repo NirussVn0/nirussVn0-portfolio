@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 import { HOME_NAV_EVENT } from '@/lib/constants/navigation';
-import { HOME_NAV_EVENT } from '@/lib/constants/navigation';
-
 interface NavItem {
   label: string;
   href: string;
@@ -40,33 +38,27 @@ export function HeaderNavigation() {
   useEffect(() => {
     if (!isHome) {
       setIsVisible(true);
-      return undefined;
+      return;
     }
 
-    setIsVisible(false);
-
-    if (typeof window === 'undefined') {
-      return undefined;
-    }
-
-    const handler = (event: Event) => {
-      if (!(event instanceof CustomEvent)) {
-        return;
-      }
-      if (typeof event.detail === 'boolean') {
-        setIsVisible(event.detail);
-      }
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      // Show navbar if scrolled down more than 100px
+      setIsVisible(scrollY > 100);
     };
 
-    window.addEventListener(HOME_NAV_EVENT, handler as EventListener);
-    return () => {
-      window.removeEventListener(HOME_NAV_EVENT, handler as EventListener);
-    };
+    // Initial check
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [isHome]);
 
   const visibilityClasses = cn(
     'transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
-    isVisible ? 'translate-y-0 opacity-100' : '-translate-y-8 opacity-0 pointer-events-none'
+    isVisible
+      ? 'translate-y-0 opacity-100'
+      : '-translate-y-8 opacity-0 pointer-events-none'
   );
 
   return (

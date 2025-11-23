@@ -21,7 +21,9 @@ export function ToolStackShowcase({ groups }: ToolStackShowcaseProps) {
           Matrix Arsenal
         </h2>
         <p className="text-sm text-muted-foreground max-w-2xl">
-          Explore the core tools powering each build. Hover to reveal micro-notes and see how the stack flexes across frontend, backend, data, and daily drivers.
+          Explore the core tools powering each build. Hover to reveal
+          micro-notes and see how the stack flexes across frontend, backend,
+          data, and daily drivers.
         </p>
       </header>
 

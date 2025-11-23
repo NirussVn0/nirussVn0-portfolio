@@ -6,11 +6,17 @@ import type { ProjectCatalogDto } from '@/application/projects/ProjectCatalogSer
 import { ProjectFilterState } from '@/modules/projects/state/ProjectFilterState';
 import { ProjectFilterPanel } from '@/components/projects/ProjectFilterPanel';
 import { ProjectShowcaseCard } from '@/components/projects/ProjectShowcaseCard';
-import { ToolPaletteService, type ToolPaletteDto } from '@/application/tools/ToolPaletteService';
+import {
+  ToolPaletteService,
+  type ToolPaletteDto,
+} from '@/application/tools/ToolPaletteService';
 import { StaticToolRepository } from '@/infrastructure/tools/StaticToolRepository';
 import { ToolPaletteController } from '@/modules/tools/controllers/ToolPaletteController';
 import { ToolStackShowcase } from '@/components/tools/ToolStackShowcase';
-import { createProjectControllers, createProjectPreferenceController } from '@/modules/projects/ProjectModule';
+import {
+  createProjectControllers,
+  createProjectPreferenceController,
+} from '@/modules/projects/ProjectModule';
 
 export function ProjectExplorer() {
   const { catalog: projectController, refresh: refreshController } = useMemo(
@@ -63,7 +69,9 @@ export function ProjectExplorer() {
       })
       .catch((err: unknown) => {
         if (isMounted) {
-          setError(err instanceof Error ? err.message : 'Failed to load projects.');
+          setError(
+            err instanceof Error ? err.message : 'Failed to load projects.'
+          );
           setIsReady(true);
         }
       });
@@ -111,7 +119,9 @@ export function ProjectExplorer() {
         })
         .catch((err: unknown) => {
           if (requestId === requestIdRef.current) {
-            setError(err instanceof Error ? err.message : 'Failed to filter projects.');
+            setError(
+              err instanceof Error ? err.message : 'Failed to filter projects.'
+            );
           }
         });
     },
@@ -160,7 +170,9 @@ export function ProjectExplorer() {
       })
       .catch((err: unknown) => {
         if (requestId === requestIdRef.current) {
-          setError(err instanceof Error ? err.message : 'Failed to refresh projects.');
+          setError(
+            err instanceof Error ? err.message : 'Failed to refresh projects.'
+          );
         }
       })
       .finally(() => {
@@ -179,7 +191,10 @@ export function ProjectExplorer() {
           setError(null);
         })
         .catch((err: unknown) => {
-          const message = err instanceof Error ? err.message : 'Unable to update featured projects.';
+          const message =
+            err instanceof Error
+              ? err.message
+              : 'Unable to update featured projects.';
           setError(message);
         });
     },
@@ -202,8 +217,13 @@ export function ProjectExplorer() {
   if (!catalog) {
     return (
       <div className="space-y-8 rounded-2xl border border-dashed border-border/70 bg-muted/20 p-12 text-center">
-        <h2 className="text-lg font-semibold uppercase tracking-[0.3em]">Unable to load projects</h2>
-        <p className="text-sm text-muted-foreground">{error ?? 'Please verify the configured GitHub or Hugging Face profile and try again.'}</p>
+        <h2 className="text-lg font-semibold uppercase tracking-[0.3em]">
+          Unable to load projects
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          {error ??
+            'Please verify the configured GitHub or Hugging Face profile and try again.'}
+        </p>
         <button
           type="button"
           onClick={handleRefresh}
@@ -252,13 +272,11 @@ export function ProjectExplorer() {
           Project Hypergrid
         </h1>
         <p className="max-w-3xl text-base text-muted-foreground">
-          Filter by vibe, stack, and mission to discover each build in the matrix. Every project couples thoughtful design with high-signal engineering narratives.
+          Filter by vibe, stack, and mission to discover each build in the
+          matrix. Every project couples thoughtful design with high-signal
+          engineering narratives.
         </p>
-        {error ? (
-          <p className="text-sm text-destructive">
-            {error}
-          </p>
-        ) : null}
+        {error ? <p className="text-sm text-destructive">{error}</p> : null}
       </header>
 
       <ToolStackShowcase groups={toolGroups} />
@@ -281,7 +299,8 @@ export function ProjectExplorer() {
             </span>
             {activeCategories.length + activeLanguages.length > 0 ? (
               <span className="text-xs uppercase tracking-[0.3em] text-foreground">
-                Active filters: {activeCategories.length + activeLanguages.length}
+                Active filters:{' '}
+                {activeCategories.length + activeLanguages.length}
               </span>
             ) : (
               <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
@@ -292,7 +311,8 @@ export function ProjectExplorer() {
 
           {projects.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-border/70 bg-muted/20 p-12 text-center text-sm text-muted-foreground">
-              No projects match the current tags. Flip a different combination to reveal a new dimension.
+              No projects match the current tags. Flip a different combination
+              to reveal a new dimension.
             </div>
           ) : (
             <div className="grid gap-6 md:grid-cols-2">

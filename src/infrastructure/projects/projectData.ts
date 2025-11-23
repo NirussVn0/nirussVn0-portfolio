@@ -7,6 +7,8 @@ export interface ProjectRecord {
   readonly languages: string[];
   readonly link?: string;
   readonly image: string;
+  readonly featured?: boolean;
+  readonly demoImages?: string[];
 }
 
 export const PROJECT_DATA: ProjectRecord[] = [
@@ -20,6 +22,8 @@ export const PROJECT_DATA: ProjectRecord[] = [
     languages: ['React', 'Next.js', 'TailwindCSS', 'TypeScript'],
     link: 'https://sabicoder.xyz/',
     image: '/projects/portfolio-website.svg',
+    featured: true,
+    demoImages: ['/projects/portfolio-website.svg'],
   },
   {
     id: 'pomodoro-peak',
@@ -31,6 +35,8 @@ export const PROJECT_DATA: ProjectRecord[] = [
     languages: ['React', 'Next.js', 'TailwindCSS', 'TypeScript'],
     link: 'https://pp.sabicoder.xyz/',
     image: '/projects/pomodoro-peak.svg',
+    featured: true,
+    demoImages: ['/projects/pomodoro-peak.svg'],
   },
   {
     id: 'linking-bio-homepage',
@@ -42,6 +48,8 @@ export const PROJECT_DATA: ProjectRecord[] = [
     languages: ['React', 'Next.js', 'TailwindCSS', 'TypeScript'],
     link: 'https://github.com/NirussVn0/linking-bio-homepage',
     image: '/projects/linking-bio.svg',
+    featured: false,
+    demoImages: [],
   },
   {
     id: 'token-discord-checker',
@@ -53,6 +61,8 @@ export const PROJECT_DATA: ProjectRecord[] = [
     languages: ['Node.js', 'TypeScript'],
     link: 'https://github.com/NirussVn0/token-discord-checker',
     image: '/projects/discord-token.svg',
+    featured: false,
+    demoImages: [],
   },
   {
     id: 'gmail-automation-tool',
@@ -64,6 +74,8 @@ export const PROJECT_DATA: ProjectRecord[] = [
     languages: ['Python', 'FastAPI', 'Docker'],
     link: 'https://github.com/NirussVn0/Gmail-Automation-Tool',
     image: '/projects/gmail-automation.svg',
+    featured: false,
+    demoImages: [],
   },
   {
     id: 'selfbot',
@@ -75,6 +87,8 @@ export const PROJECT_DATA: ProjectRecord[] = [
     languages: ['Python', 'Discord.py'],
     link: 'https://github.com/NirussVn0/Python-Hikari-SelfBot',
     image: '/projects/selfbot.svg',
+    featured: false,
+    demoImages: [],
   },
   {
     id: 'thptqg-countdown',
@@ -86,6 +100,8 @@ export const PROJECT_DATA: ProjectRecord[] = [
     languages: ['React', 'Next.js', 'TailwindCSS', 'TypeScript'],
     link: 'https://project.sabicoder.xyz/',
     image: '/projects/thptqg-countdown.svg',
+    featured: true,
+    demoImages: ['/projects/thptqg-countdown.svg'],
   },
   {
     id: 'animated-404',
@@ -97,5 +113,7 @@ export const PROJECT_DATA: ProjectRecord[] = [
     languages: ['HTML', 'CSS', 'JavaScript'],
     link: 'https://github.com/NirussVn0/404-animation',
     image: '/projects/animated-404.svg',
+    featured: false,
+    demoImages: [],
   },
 ];

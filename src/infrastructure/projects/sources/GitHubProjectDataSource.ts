@@ -46,9 +46,16 @@ export class GitHubProjectDataSource implements ProjectDataSource {
     const username = profile.getGitHubUser()!;
     const repositories = await this.requestRepositories(username);
 
-    return repositories
-      .filter((repo) => !repo.fork && !repo.archived)
-      .map((repo) => this.toProjectRecord(repo));
+    const projects = await Promise.all(
+      repositories
+        .filter((repo) => !repo.fork && !repo.archived)
+        .map(async (repo) => {
+          const languages = await this.fetchLanguages(repo.owner.login, repo.name);
+          return this.toProjectRecord(repo, languages);
+        })
+    );
+
+    return projects;
   }
 
   private async requestRepositories(username: string): Promise<GitHubRepository[]> {
@@ -75,9 +82,33 @@ export class GitHubProjectDataSource implements ProjectDataSource {
     );
   }
 
-  private toProjectRecord(repo: GitHubRepository): ExternalProjectRecord {
+  private async fetchLanguages(owner: string, repo: string): Promise<string[]> {
+    const headers: Record<string, string> = {
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+      'User-Agent': 'PortfolioProjectFetcher',
+    };
+
+    if (this.authToken) {
+      headers.Authorization = `Bearer ${this.authToken}`;
+    }
+
+    try {
+      const languagesMap = await this.httpClient.get<Record<string, number>>(
+        `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/languages`,
+        { headers }
+      );
+      return Object.keys(languagesMap);
+    } catch (error) {
+      console.warn(`Failed to fetch languages for ${owner}/${repo}`, error);
+      return [];
+    }
+  }
+
+  private toProjectRecord(repo: GitHubRepository, languages: string[]): ExternalProjectRecord {
     const updated = repo.updated_at ?? repo.pushed_at;
     const topics = repo.topics ?? [];
+    const isFeatured = topics.includes('featured') || topics.includes('portfolio');
 
     return {
       id: `github:${repo.full_name}`,
@@ -86,21 +117,24 @@ export class GitHubProjectDataSource implements ProjectDataSource {
       date: formatMonthYear(repo.pushed_at ?? repo.updated_at),
       updatedAt: updated,
       categories: ['GitHub Repository', ...topics.map(normalizeLabel)],
-      languages: repo.language ? [repo.language] : [],
+      languages: languages.length > 0 ? languages : (repo.language ? [repo.language] : []),
       link: repo.html_url,
       image: `https://opengraph.githubassets.com/1/${repo.full_name}`,
+      featured: isFeatured,
+      demoImages: [],
     };
   }
 }
 
-function normalizeLabel(value: string): string {
-  if (!value) {
-    return value;
-  }
-
-  return value
-    .split('-')
-    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
-    .join(' ');
-}
+const normalizeLabel = (value: string): string =>
+  value
+    ? value
+        .split('-')                                        
+        .map(segment =>                                    
+          segment.length === 0 
+            ? '' 
+            : segment.charAt(0).toUpperCase() + segment.slice(1)
+        )
+        .join(' ')                                         
+    : value;        
 

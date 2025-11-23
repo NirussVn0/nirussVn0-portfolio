@@ -4,6 +4,8 @@ import Script from 'next/script';
 import { Geist } from 'next/font/google';
 import './globals.css';
 import { HeaderNavigation } from '@/components/navigation/HeaderNavigation';
+import { ThemeProvider } from '@/components/theme-provider';
+import { Background } from '@/components/ui/background';
 
 export const runtime = 'edge';
 
@@ -30,9 +32,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geist.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased" suppressHydrationWarning>
-        <HeaderNavigation />
-        <Script id="remove-bis-skin" strategy="beforeInteractive">{`(() => {
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Background />
+          <HeaderNavigation />
+          <Script id="remove-bis-skin" strategy="beforeInteractive">{`(() => {
         try {
           const clean = (root) => {
             if (!root) return;
@@ -71,7 +80,8 @@ export default function RootLayout({
           console.warn('Failed to clean bis_skin_checked attributes', error);
         }
       })();`}</Script>
-        {children}
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

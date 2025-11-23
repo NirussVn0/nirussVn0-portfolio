@@ -10,6 +10,8 @@ export interface ProjectProps {
   readonly languages: Array<Tag | string>;
   readonly link?: string;
   readonly image: string;
+  readonly featured?: boolean;
+  readonly demoImages?: string[];
 }
 
 export interface ProjectTagSnapshot {
@@ -26,6 +28,8 @@ export interface ProjectSnapshot {
   languages: ProjectTagSnapshot[];
   link?: string;
   image: string;
+  featured: boolean;
+  demoImages: string[];
 }
 
 export class Project {
@@ -37,6 +41,8 @@ export class Project {
   private readonly languages: TagSet;
   private readonly link?: string;
   private readonly image: string;
+  private readonly featured: boolean;
+  private readonly demoImages: string[];
 
   constructor(props: ProjectProps) {
     this.id = props.id.trim();
@@ -47,6 +53,8 @@ export class Project {
     this.languages = new TagSet(props.languages);
     this.link = props.link?.trim() ?? undefined;
     this.image = props.image.trim();
+    this.featured = props.featured ?? false;
+    this.demoImages = props.demoImages ?? [];
 
     this.ensureInvariants();
   }
@@ -105,6 +113,14 @@ export class Project {
     return this.image;
   }
 
+  isFeatured(): boolean {
+    return this.featured;
+  }
+
+  getDemoImages(): string[] {
+    return this.demoImages;
+  }
+
   createSnapshot(): ProjectSnapshot {
     return {
       id: this.id,
@@ -121,6 +137,8 @@ export class Project {
       })),
       link: this.link,
       image: this.image,
+      featured: this.featured,
+      demoImages: this.demoImages,
     };
   }
 }

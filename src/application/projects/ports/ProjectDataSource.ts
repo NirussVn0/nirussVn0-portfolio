@@ -5,11 +5,13 @@ export interface ExternalProjectRecord {
   title: string;
   summary: string;
   date: string;
-  updatedAt: string;
+  updatedAt?: string;
   categories: string[];
   languages: string[];
   link?: string;
   image: string;
+  featured?: boolean;
+  demoImages?: string[];
 }
 
 export interface ProjectDataSource {
